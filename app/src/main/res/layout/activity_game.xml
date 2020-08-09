@@ -10,7 +10,7 @@
         android:id="@+id/editTextPlayer1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:enabled="false"
@@ -78,13 +78,46 @@
 
     <ImageView
         android:id="@+id/imageViewAtut"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonToggle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Przełącz"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonPlan0"
+        app:layout_constraintEnd_toStartOf="@+id/buttonClear"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonClear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Kasuj"
+        app:layout_constraintBottom_toTopOf="@+id/buttonPlan2"
+        app:layout_constraintEnd_toStartOf="@+id/buttonNextRound"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonToggle" />
+
+    <Button
+        android:id="@+id/buttonNextRound"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Następna"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonPlan5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonClear" />
 
     <Button
         android:id="@+id/buttonPlan3"
@@ -254,12 +287,13 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@+id/buttonPlan3"
+        app:layout_constraintBottom_toTopOf="@+id/buttonClear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPlayer2"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewAtut"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -1385,6 +1419,7 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textViewRound16Player3"
                 app:layout_constraintTop_toBottomOf="@+id/textViewRound15Player4" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
