@@ -1,5 +1,6 @@
 package com.example.planowanie
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
@@ -27,6 +28,10 @@ class MainActivity : AppCompatActivity() {
                     editTextPlayer4Name.visibility = View.VISIBLE
                 }
             }
+        }
+
+        buttonPlay.setOnClickListener {
+            startActivity(Intent(this, GameActivity::class.java))
         }
     }
 }
