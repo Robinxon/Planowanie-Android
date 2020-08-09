@@ -29,7 +29,7 @@
                 android:ems="10"
                 android:hint="Gracz 3"
                 android:inputType="textPersonName"
-                android:maxLength="8"
+                android:maxLength="3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextPlayer2Name" />
 
@@ -42,7 +42,7 @@
                 android:ems="10"
                 android:hint="Gracz 1"
                 android:inputType="textPersonName"
-                android:maxLength="8"
+                android:maxLength="3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewPlayerNames" />
 
@@ -116,7 +116,7 @@
                 android:ems="10"
                 android:hint="Gracz 2"
                 android:inputType="textPersonName"
-                android:maxLength="8"
+                android:maxLength="3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextPlayer1Name" />
 
@@ -140,7 +140,7 @@
                 android:ems="10"
                 android:hint="Gracz 4"
                 android:inputType="textPersonName"
-                android:maxLength="8"
+                android:maxLength="3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextPlayer3Name" />
 
