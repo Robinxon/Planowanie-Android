@@ -8,5 +8,6 @@ class Game: Serializable {
     lateinit var player3: Player
     lateinit var player4: Player
 
-    var round: Int = 1
+    var currentRound: Int = 1
+    var currentPlayer: Int = 0
 }
