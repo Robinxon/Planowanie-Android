@@ -1,6 +1,7 @@
 package com.example.planowanie
 
 import android.content.DialogInterface
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -9,13 +10,15 @@ import kotlinx.android.synthetic.main.activity_game.*
 
 
 class GameActivity: AppCompatActivity() {
+    private lateinit var match: Match
+    private lateinit var currentGameObject: Game
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
         //przygotowanie gry
-        val match = intent.getSerializableExtra("Match") as Match
-
+        match = intent.getSerializableExtra("Match") as Match
         imageViewAtut.setBackgroundResource(R.drawable.none)
 
         editTextPlayer1.setText(match.player1Name)
@@ -46,11 +49,31 @@ class GameActivity: AppCompatActivity() {
             textViewRound16Player3.visibility = View.GONE
             textViewRound16Player4.visibility = View.GONE
         }
-        //textViewRound1Player1.setBackgroundColor(Color.BLACK)
-        //textViewRound1Player1.setTextColor(Color.RED)
+
+        buttonToggle.setOnClickListener {
+            if(++currentGameObject.currentPlayer > match.settingPlayers) {
+                currentGameObject.currentPlayer = 1
+            }
+            markActivePlayer()
+        }
+
+        gameStart()
     }
 
-    fun randomAtut() {
+    private fun gameStart() {
+        currentGameObject = when(match.currentGame) {
+            1 -> match.game1
+            2 -> match.game2
+            3 -> match.game3
+            4 -> match.game4
+            else -> TODO() //gra zakończona lub błędna
+        }
+
+        currentGameObject.currentPlayer = match.currentGame
+        markActivePlayer()
+    }
+
+    private fun randomAtut() {
         when((1..4).random()) {
             1 -> imageViewAtut.setBackgroundResource(R.drawable.karo)
             2 -> imageViewAtut.setBackgroundResource(R.drawable.kier)
@@ -59,9 +82,25 @@ class GameActivity: AppCompatActivity() {
         }
     }
 
+    private fun markActivePlayer() {
+        val resID = resources.getIdentifier("textViewRound" + currentGameObject.currentRound.toString() + "Player" + currentGameObject.currentPlayer.toString(), "id", packageName)
+        val textView: TextView = findViewById(resID)
+        textView.setBackgroundColor(Color.BLACK)
+        textView.setTextColor(Color.RED)
+
+        var previousPlayer = currentGameObject.currentPlayer - 1
+        if(previousPlayer <= 0) {
+            previousPlayer = match.settingPlayers
+        }
+        val previousResID = resources.getIdentifier("textViewRound" + currentGameObject.currentRound.toString() + "Player" + previousPlayer.toString(), "id", packageName)
+        val previousTextView: TextView = findViewById(previousResID)
+        previousTextView.setBackgroundColor(Color.TRANSPARENT)
+        previousTextView.setTextColor(Color.BLACK)
+    }
+
     fun updateText(round: Int, player: Int, text: String) {
         val resID = resources.getIdentifier("textViewRound" + round.toString() + "Player" + player.toString(), "id", packageName)
-        val textView: TextView = findViewById<TextView>(resID)
+        val textView: TextView = findViewById(resID)
         textView.text = text
     }
 }
