@@ -13,6 +13,10 @@ import kotlinx.android.synthetic.main.activity_game.*
 class GameActivity: AppCompatActivity() {
     private lateinit var match: Match
     private lateinit var currentGameObject: Game
+    private var currentPlanned = 0
+    private var currentCards = 13
+    private var plannedCount = 0
+    private var toDisabling = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +79,13 @@ class GameActivity: AppCompatActivity() {
                     else -> TODO() //currentplayer błędny
                 }
 
+                //sprawdź czy zablokowany i odblokuj
+                if(toDisabling != -1) {
+                    val resID = resources.getIdentifier("buttonPlan$toDisabling", "id", packageName)
+                    val button: Button = findViewById(resID)
+                    button.isEnabled = true
+                }
+
                 if(planned == 0) {
                     setPlanned(tag.toInt())
                 } else if(taken == 0) {
@@ -125,14 +136,29 @@ class GameActivity: AppCompatActivity() {
             3 -> currentGameObject.player3.planned[currentGameObject.currentRound] = plan
             4 -> currentGameObject.player4.planned[currentGameObject.currentRound] = plan
         }
+
+        currentPlanned += plan
+        plannedCount++
+        checkNeedForDisabling()
     }
 
-    private fun setTaken(plan: Int) {
+    private fun checkNeedForDisabling() {
+        if(plannedCount == match.settingPlayers - 1) {
+            toDisabling = currentCards - currentPlanned
+            if(toDisabling >= 0) {
+                val resID = resources.getIdentifier("buttonPlan$toDisabling", "id", packageName)
+                val button: Button = findViewById(resID)
+                button.isEnabled = false
+            }
+        }
+    }
+
+    private fun setTaken(take: Int) {
         when(currentGameObject.currentPlayer) {
-            1 -> currentGameObject.player1.taken[currentGameObject.currentRound] = plan
-            2 -> currentGameObject.player2.taken[currentGameObject.currentRound] = plan
-            3 -> currentGameObject.player3.taken[currentGameObject.currentRound] = plan
-            4 -> currentGameObject.player4.taken[currentGameObject.currentRound] = plan
+            1 -> currentGameObject.player1.taken[currentGameObject.currentRound] = take
+            2 -> currentGameObject.player2.taken[currentGameObject.currentRound] = take
+            3 -> currentGameObject.player3.taken[currentGameObject.currentRound] = take
+            4 -> currentGameObject.player4.taken[currentGameObject.currentRound] = take
         }
     }
 
