@@ -60,7 +60,27 @@ class GameActivity: AppCompatActivity() {
             val button: Button = findViewById(resID)
             button.setOnClickListener {
                 val tag = it.tag as String
-                setPlanned(tag.toInt())
+                val planned = when(currentGameObject.currentPlayer) {
+                    1 -> currentGameObject.player1.planned[currentGameObject.currentRound]
+                    2 -> currentGameObject.player2.planned[currentGameObject.currentRound]
+                    3 -> currentGameObject.player3.planned[currentGameObject.currentRound]
+                    4 -> currentGameObject.player4.planned[currentGameObject.currentRound]
+                    else -> TODO() //currentplayer błędny
+                }
+                val taken = when(currentGameObject.currentPlayer) {
+                    1 -> currentGameObject.player1.taken[currentGameObject.currentRound]
+                    2 -> currentGameObject.player2.taken[currentGameObject.currentRound]
+                    3 -> currentGameObject.player3.taken[currentGameObject.currentRound]
+                    4 -> currentGameObject.player4.taken[currentGameObject.currentRound]
+                    else -> TODO() //currentplayer błędny
+                }
+
+                if(planned == 0) {
+                    setPlanned(tag.toInt())
+                } else if(taken == 0) {
+                    setTaken(tag.toInt())
+                }
+
                 updateText()
                 nextPlayer()
             }
@@ -104,6 +124,15 @@ class GameActivity: AppCompatActivity() {
             2 -> currentGameObject.player2.planned[currentGameObject.currentRound] = plan
             3 -> currentGameObject.player3.planned[currentGameObject.currentRound] = plan
             4 -> currentGameObject.player4.planned[currentGameObject.currentRound] = plan
+        }
+    }
+
+    private fun setTaken(plan: Int) {
+        when(currentGameObject.currentPlayer) {
+            1 -> currentGameObject.player1.taken[currentGameObject.currentRound] = plan
+            2 -> currentGameObject.player2.taken[currentGameObject.currentRound] = plan
+            3 -> currentGameObject.player3.taken[currentGameObject.currentRound] = plan
+            4 -> currentGameObject.player4.taken[currentGameObject.currentRound] = plan
         }
     }
 
