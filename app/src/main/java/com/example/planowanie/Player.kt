@@ -4,6 +4,6 @@ import java.io.Serializable
 
 class Player: Serializable {
     var points: Int = 0
-    lateinit var planned: Array<Int>
-    lateinit var taken: Array<Int>
+    var planned = IntArray(15) {0}
+    var taken = IntArray(15) {0}
 }
