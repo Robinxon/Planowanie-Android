@@ -1,9 +1,11 @@
 package com.example.planowanie
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_game.*
+
 
 class GameActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,8 +13,16 @@ class GameActivity: AppCompatActivity() {
         setContentView(R.layout.activity_game)
 
         imageViewAtut.setBackgroundResource(R.drawable.none)
+
+        //textViewRound1Player1.setBackgroundColor(Color.BLACK)
+        //textViewRound1Player1.setTextColor(Color.RED)
+        val match = intent.getSerializableExtra("Match") as Match
+        editTextPlayer1.setText(match.player1Name)
+        editTextPlayer2.setText(match.player2Name)
+        editTextPlayer3.setText(match.player3Name)
+        editTextPlayer4.setText(match.player4Name)
     }
-    
+
     fun randomAtut() {
         when((1..4).random()) {
             1 -> imageViewAtut.setBackgroundResource(R.drawable.karo)
