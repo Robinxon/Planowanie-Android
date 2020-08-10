@@ -92,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Przełącz"
-        android:textSize="14sp"
+        android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonPlan0"
         app:layout_constraintEnd_toStartOf="@+id/buttonClear"
         app:layout_constraintHorizontal_bias="0.5"
@@ -103,10 +103,22 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Kasuj"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonPlan2"
+        app:layout_constraintEnd_toStartOf="@+id/buttonPreviousRound"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonToggle" />
+
+    <Button
+        android:id="@+id/buttonPreviousRound"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Poprzednia"
+        android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonPlan2"
         app:layout_constraintEnd_toStartOf="@+id/buttonNextRound"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/buttonToggle" />
+        app:layout_constraintStart_toEndOf="@+id/buttonClear" />
 
     <Button
         android:id="@+id/buttonNextRound"
@@ -114,10 +126,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="Następna"
-        android:textSize="14sp"
+        android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonPlan5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonClear" />
+        app:layout_constraintStart_toEndOf="@+id/buttonPreviousRound" />
 
     <Button
         android:id="@+id/buttonPlan3"
