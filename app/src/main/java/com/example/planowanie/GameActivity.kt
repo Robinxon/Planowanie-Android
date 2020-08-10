@@ -257,11 +257,13 @@ class GameActivity: AppCompatActivity() {
                 currentGameObject.player4.planned[currentGameObject.currentRound] = -1
             }
         }
+
+        calculatePlanned()
     }
 
     private fun calculatePlanned() {
         if(currentGameObject.toDisabling != -1) {
-            val resID = resources.getIdentifier("buttonPlan$currentGameObject.toDisabling", "id", packageName)
+            val resID = resources.getIdentifier("buttonPlan${currentGameObject.toDisabling}", "id", packageName)
             val button: Button = findViewById(resID)
             button.isEnabled = true
         }
@@ -290,7 +292,7 @@ class GameActivity: AppCompatActivity() {
         if(plannedCount == match.settingPlayers - 1) {
             currentGameObject.toDisabling = currentGameObject.currentCards - currentPlanned
             if(currentGameObject.toDisabling >= 0) {
-                val resID = resources.getIdentifier("buttonPlan$currentGameObject.toDisabling", "id", packageName)
+                val resID = resources.getIdentifier("buttonPlan${currentGameObject.toDisabling}", "id", packageName)
                 val button: Button = findViewById(resID)
                 button.isEnabled = false
             }
