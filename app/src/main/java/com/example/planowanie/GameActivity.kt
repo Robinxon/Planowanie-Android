@@ -13,10 +13,6 @@ import kotlinx.android.synthetic.main.activity_game.*
 class GameActivity: AppCompatActivity() {
     private lateinit var match: Match
     private lateinit var currentGameObject: Game
-    private var currentPlanned = 0
-    private var currentCards = 13
-    private var plannedCount = 0
-    private var toDisabling = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +55,10 @@ class GameActivity: AppCompatActivity() {
             nextPlayer()
         }
 
+        buttonClear.setOnClickListener() {
+            clearPlayer()
+        }
+
         for(i in 0..13) {
             val resID = resources.getIdentifier("buttonPlan$i", "id", packageName)
             val button: Button = findViewById(resID)
@@ -77,13 +77,6 @@ class GameActivity: AppCompatActivity() {
                     3 -> currentGameObject.player3.taken[currentGameObject.currentRound]
                     4 -> currentGameObject.player4.taken[currentGameObject.currentRound]
                     else -> TODO() //currentplayer błędny
-                }
-
-                //sprawdź czy zablokowany i odblokuj
-                if(toDisabling != -1) {
-                    val resID = resources.getIdentifier("buttonPlan$toDisabling", "id", packageName)
-                    val button: Button = findViewById(resID)
-                    button.isEnabled = true
                 }
 
                 if(planned == -1) {
@@ -137,9 +130,7 @@ class GameActivity: AppCompatActivity() {
             4 -> currentGameObject.player4.planned[currentGameObject.currentRound] = plan
         }
 
-        currentPlanned += plan
-        plannedCount++
-        checkNeedForDisabling()
+        calculatePlanned()
     }
 
     private fun setTaken(take: Int) {
@@ -151,17 +142,6 @@ class GameActivity: AppCompatActivity() {
         }
 
         markAsGoodOrBad()
-    }
-
-    private fun checkNeedForDisabling() {
-        if(plannedCount == match.settingPlayers - 1) {
-            toDisabling = currentCards - currentPlanned
-            if(toDisabling >= 0) {
-                val resID = resources.getIdentifier("buttonPlan$toDisabling", "id", packageName)
-                val button: Button = findViewById(resID)
-                button.isEnabled = false
-            }
-        }
     }
 
     private fun markActivePlayer() {
@@ -250,6 +230,69 @@ class GameActivity: AppCompatActivity() {
                 } else {
                     textView.text = currentGameObject.player4.taken[currentGameObject.currentRound].toString() + "/" +  currentGameObject.player4.planned[currentGameObject.currentRound].toString()
                 }
+            }
+        }
+    }
+
+    private fun clearPlayer() {
+        val resID = resources.getIdentifier("textViewRound" + currentGameObject.currentRound.toString() + "Player" + currentGameObject.currentPlayer.toString(), "id", packageName)
+        val textView: TextView = findViewById(resID)
+        textView.text = ""
+
+        when(currentGameObject.currentPlayer) {
+            1 -> {
+                currentGameObject.player1.taken[currentGameObject.currentRound] = -1
+                currentGameObject.player1.planned[currentGameObject.currentRound] = -1
+            }
+            2 -> {
+                currentGameObject.player2.taken[currentGameObject.currentRound] = -1
+                currentGameObject.player2.planned[currentGameObject.currentRound] = -1
+            }
+            3 -> {
+                currentGameObject.player3.taken[currentGameObject.currentRound] = -1
+                currentGameObject.player3.planned[currentGameObject.currentRound] = -1
+            }
+            4 -> {
+                currentGameObject.player4.taken[currentGameObject.currentRound] = -1
+                currentGameObject.player4.planned[currentGameObject.currentRound] = -1
+            }
+        }
+    }
+
+    private fun calculatePlanned() {
+        if(currentGameObject.toDisabling != -1) {
+            val resID = resources.getIdentifier("buttonPlan$currentGameObject.toDisabling", "id", packageName)
+            val button: Button = findViewById(resID)
+            button.isEnabled = true
+        }
+
+        var plannedCount = 0
+        var currentPlanned = 0
+        if(currentGameObject.player1.planned[currentGameObject.currentRound] != -1) {
+            currentPlanned += currentGameObject.player1.planned[currentGameObject.currentRound]
+            plannedCount++
+        }
+        if(currentGameObject.player2.planned[currentGameObject.currentRound] != -1) {
+            currentPlanned += currentGameObject.player2.planned[currentGameObject.currentRound]
+            plannedCount++
+        }
+        if(match.settingPlayers == 4) {
+            if(currentGameObject.player3.planned[currentGameObject.currentRound] != -1) {
+                currentPlanned += currentGameObject.player3.planned[currentGameObject.currentRound]
+                plannedCount++
+            }
+            if(currentGameObject.player4.planned[currentGameObject.currentRound] != -1) {
+                currentPlanned += currentGameObject.player4.planned[currentGameObject.currentRound]
+                plannedCount++
+            }
+        }
+
+        if(plannedCount == match.settingPlayers - 1) {
+            currentGameObject.toDisabling = currentGameObject.currentCards - currentPlanned
+            if(currentGameObject.toDisabling >= 0) {
+                val resID = resources.getIdentifier("buttonPlan$currentGameObject.toDisabling", "id", packageName)
+                val button: Button = findViewById(resID)
+                button.isEnabled = false
             }
         }
     }

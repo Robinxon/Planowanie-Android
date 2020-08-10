@@ -10,4 +10,6 @@ class Game: Serializable {
 
     var currentRound: Int = 1
     var currentPlayer: Int = 0
+    var currentCards: Int = 13
+    var toDisabling: Int = -1
 }
