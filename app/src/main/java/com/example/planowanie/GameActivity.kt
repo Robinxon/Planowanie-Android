@@ -103,7 +103,25 @@ class GameActivity: AppCompatActivity() {
         }
 
         buttonPreviousRound.setOnClickListener {
-
+            markRoundInactive()
+            currentGameObject.currentRound--
+            currentGameObject.currentCards++
+            if(currentGameObject.player1.planned[currentGameObject.currentRound] == currentGameObject.player1.taken[currentGameObject.currentRound]) {
+                currentGameObject.player1.points -= (10 + currentGameObject.player1.planned[currentGameObject.currentRound])
+            }
+            if(currentGameObject.player2.planned[currentGameObject.currentRound] == currentGameObject.player2.taken[currentGameObject.currentRound]) {
+                currentGameObject.player2.points -= (10 + currentGameObject.player2.planned[currentGameObject.currentRound])
+            }
+            if(match.settingPlayers == 4) {
+                if (currentGameObject.player3.planned[currentGameObject.currentRound] == currentGameObject.player3.taken[currentGameObject.currentRound]) {
+                    currentGameObject.player3.points -= (10 + currentGameObject.player3.planned[currentGameObject.currentRound])
+                }
+                if (currentGameObject.player4.planned[currentGameObject.currentRound] == currentGameObject.player4.taken[currentGameObject.currentRound]) {
+                    currentGameObject.player4.points -= (10 + currentGameObject.player4.planned[currentGameObject.currentRound])
+                }
+            }
+            updatePoints()
+            markActivePlayer()
         }
 
         for(i in 0..13) {
@@ -336,7 +354,7 @@ class GameActivity: AppCompatActivity() {
     }
 
     private fun calculatePlanned() {
-        if(currentGameObject.toDisabling != -1) {
+        if(currentGameObject.toDisabling >= 0) {
             val resID = resources.getIdentifier("buttonPlan${currentGameObject.toDisabling}", "id", packageName)
             val button: Button = findViewById(resID)
             button.isEnabled = true
