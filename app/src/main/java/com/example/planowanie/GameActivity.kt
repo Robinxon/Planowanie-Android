@@ -22,11 +22,19 @@ class GameActivity: AppCompatActivity() {
         match = intent.getSerializableExtra("Match") as Match
         imageViewAtut.setBackgroundResource(R.drawable.none)
 
-        editTextPlayer1.setText(match.player1Name + " | " + 0)
-        editTextPlayer2.setText(match.player2Name + " | " + 0)
+        currentGameObject = when(match.currentGame) {
+            1 -> match.game1
+            2 -> match.game2
+            3 -> match.game3
+            4 -> match.game4
+            else -> TODO() //gra zakończona lub błędna
+        }
+
+        editTextPlayer1.setText(getString(R.string.playerNameAndPoints, match.player1Name, 0))
+        editTextPlayer2.setText(getString(R.string.playerNameAndPoints, match.player2Name, 0))
         if(match.settingPlayers == 4) {
-            editTextPlayer3.setText(match.player3Name + " | " + 0)
-            editTextPlayer4.setText(match.player4Name + " | " + 0)
+            editTextPlayer3.setText(getString(R.string.playerNameAndPoints, match.player3Name, 0))
+            editTextPlayer4.setText(getString(R.string.playerNameAndPoints, match.player4Name, 0))
         }
         else {
             editTextPlayer3.visibility = View.INVISIBLE
@@ -166,14 +174,6 @@ class GameActivity: AppCompatActivity() {
     }
 
     private fun gameStart() {
-        currentGameObject = when(match.currentGame) {
-            1 -> match.game1
-            2 -> match.game2
-            3 -> match.game3
-            4 -> match.game4
-            else -> TODO() //gra zakończona lub błędna
-        }
-
         currentGameObject.currentPlayer = match.currentGame
         markActivePlayer()
     }
@@ -318,11 +318,11 @@ class GameActivity: AppCompatActivity() {
     }
 
     private fun updatePoints() {
-        editTextPlayer1.setText(match.player1Name + " | " + currentGameObject.player1.points)
-        editTextPlayer2.setText(match.player2Name + " | " + currentGameObject.player2.points)
+        editTextPlayer1.setText(getString(R.string.playerNameAndPoints, match.player1Name, currentGameObject.player1.points))
+        editTextPlayer2.setText(getString(R.string.playerNameAndPoints, match.player2Name, currentGameObject.player2.points))
         if(match.settingPlayers == 4) {
-            editTextPlayer3.setText(match.player3Name + " | " + currentGameObject.player3.points)
-            editTextPlayer4.setText(match.player4Name + " | " + currentGameObject.player4.points)
+            editTextPlayer3.setText(getString(R.string.playerNameAndPoints, match.player3Name, currentGameObject.player3.points))
+            editTextPlayer4.setText(getString(R.string.playerNameAndPoints, match.player4Name, currentGameObject.player4.points))
         }
     }
 

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Planowanie</string>
+    <string name="playerNameAndPoints">%s | %d</string>
 </resources>
