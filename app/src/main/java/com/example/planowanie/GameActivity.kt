@@ -309,30 +309,30 @@ class GameActivity: AppCompatActivity() {
         when(currentGameObject.currentPlayer) {
             1 -> {
                 if(currentGameObject.player1.taken[currentGameObject.currentRound] == -1) {
-                    textView.text = "/" +  currentGameObject.player1.planned[currentGameObject.currentRound].toString()
+                    textView.text = getString(R.string.playerPlannedAndTaken, "", currentGameObject.player1.planned[currentGameObject.currentRound].toString())
                 } else {
-                    textView.text = currentGameObject.player1.taken[currentGameObject.currentRound].toString() + "/" +  currentGameObject.player1.planned[currentGameObject.currentRound].toString()
+                    textView.text = getString(R.string.playerPlannedAndTaken, currentGameObject.player1.taken[currentGameObject.currentRound].toString(), currentGameObject.player1.planned[currentGameObject.currentRound].toString())
                 }
             }
             2 -> {
                 if(currentGameObject.player2.taken[currentGameObject.currentRound] == -1) {
-                    textView.text = "/" +  currentGameObject.player2.planned[currentGameObject.currentRound].toString()
+                    textView.text = getString(R.string.playerPlannedAndTaken, "", currentGameObject.player2.planned[currentGameObject.currentRound].toString())
                 } else {
-                    textView.text = currentGameObject.player2.taken[currentGameObject.currentRound].toString() + "/" +  currentGameObject.player2.planned[currentGameObject.currentRound].toString()
+                    textView.text = getString(R.string.playerPlannedAndTaken, currentGameObject.player2.taken[currentGameObject.currentRound].toString(), currentGameObject.player2.planned[currentGameObject.currentRound].toString())
                 }
             }
             3 -> {
                 if(currentGameObject.player3.taken[currentGameObject.currentRound] == -1) {
-                    textView.text = "/" +  currentGameObject.player3.planned[currentGameObject.currentRound].toString()
+                    textView.text = getString(R.string.playerPlannedAndTaken, "", currentGameObject.player3.planned[currentGameObject.currentRound].toString())
                 } else {
-                    textView.text = currentGameObject.player3.taken[currentGameObject.currentRound].toString() + "/" +  currentGameObject.player3.planned[currentGameObject.currentRound].toString()
+                    textView.text = getString(R.string.playerPlannedAndTaken, currentGameObject.player3.taken[currentGameObject.currentRound].toString(), currentGameObject.player3.planned[currentGameObject.currentRound].toString())
                 }
             }
             4 -> {
                 if(currentGameObject.player4.taken[currentGameObject.currentRound] == -1) {
-                    textView.text = "/" +  currentGameObject.player4.planned[currentGameObject.currentRound].toString()
+                    textView.text = getString(R.string.playerPlannedAndTaken, "", currentGameObject.player4.planned[currentGameObject.currentRound].toString())
                 } else {
-                    textView.text = currentGameObject.player4.taken[currentGameObject.currentRound].toString() + "/" +  currentGameObject.player4.planned[currentGameObject.currentRound].toString()
+                    textView.text = getString(R.string.playerPlannedAndTaken, currentGameObject.player4.taken[currentGameObject.currentRound].toString(), currentGameObject.player4.planned[currentGameObject.currentRound].toString())
                 }
             }
         }
