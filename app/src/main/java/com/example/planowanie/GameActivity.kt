@@ -68,66 +68,30 @@ class GameActivity: AppCompatActivity() {
 
         buttonToggle.setOnClickListener {
             nextPlayer()
+            saveIntoLocal()
         }
 
         buttonClear.setOnClickListener {
             clearPlayer()
+            saveIntoLocal()
         }
 
         buttonNextRound.setOnClickListener {
             nextRound()
+            saveIntoLocal()
         }
 
         buttonPreviousRound.setOnClickListener {
-            markRoundInactive()
-            currentGameObject.currentRound--
-            currentGameObject.currentCards++
-            if(currentGameObject.player1.planned[currentGameObject.currentRound] == currentGameObject.player1.taken[currentGameObject.currentRound]) {
-                currentGameObject.player1.points -= (10 + currentGameObject.player1.planned[currentGameObject.currentRound])
-            }
-            if(currentGameObject.player2.planned[currentGameObject.currentRound] == currentGameObject.player2.taken[currentGameObject.currentRound]) {
-                currentGameObject.player2.points -= (10 + currentGameObject.player2.planned[currentGameObject.currentRound])
-            }
-            if(match.settingPlayers == 4) {
-                if (currentGameObject.player3.planned[currentGameObject.currentRound] == currentGameObject.player3.taken[currentGameObject.currentRound]) {
-                    currentGameObject.player3.points -= (10 + currentGameObject.player3.planned[currentGameObject.currentRound])
-                }
-                if (currentGameObject.player4.planned[currentGameObject.currentRound] == currentGameObject.player4.taken[currentGameObject.currentRound]) {
-                    currentGameObject.player4.points -= (10 + currentGameObject.player4.planned[currentGameObject.currentRound])
-                }
-            }
-            updatePoints()
-            markActivePlayer()
+            previousRound()
+            saveIntoLocal()
         }
 
         for(i in 0..13) {
             val resID = resources.getIdentifier("buttonPlan$i", "id", packageName)
             val button: Button = findViewById(resID)
             button.setOnClickListener {
-                val tag = it.tag as String
-                val planned = when(currentGameObject.currentPlayer) {
-                    1 -> currentGameObject.player1.planned[currentGameObject.currentRound]
-                    2 -> currentGameObject.player2.planned[currentGameObject.currentRound]
-                    3 -> currentGameObject.player3.planned[currentGameObject.currentRound]
-                    4 -> currentGameObject.player4.planned[currentGameObject.currentRound]
-                    else -> TODO() //currentplayer błędny
-                }
-                val taken = when(currentGameObject.currentPlayer) {
-                    1 -> currentGameObject.player1.taken[currentGameObject.currentRound]
-                    2 -> currentGameObject.player2.taken[currentGameObject.currentRound]
-                    3 -> currentGameObject.player3.taken[currentGameObject.currentRound]
-                    4 -> currentGameObject.player4.taken[currentGameObject.currentRound]
-                    else -> TODO() //currentplayer błędny
-                }
-
-                if(planned == -1) {
-                    setPlanned(tag.toInt())
-                } else if(taken == -1) {
-                    setTaken(tag.toInt())
-                }
-
-                updateText()
-                nextPlayer()
+                buttonClick(it)
+                saveIntoLocal()
             }
         }
 
@@ -186,10 +150,63 @@ class GameActivity: AppCompatActivity() {
         }
     }
 
+    private fun previousRound() {
+        markRoundInactive()
+        currentGameObject.currentRound--
+        currentGameObject.currentCards++
+        if(currentGameObject.player1.planned[currentGameObject.currentRound] == currentGameObject.player1.taken[currentGameObject.currentRound]) {
+            currentGameObject.player1.points -= (10 + currentGameObject.player1.planned[currentGameObject.currentRound])
+        }
+        if(currentGameObject.player2.planned[currentGameObject.currentRound] == currentGameObject.player2.taken[currentGameObject.currentRound]) {
+            currentGameObject.player2.points -= (10 + currentGameObject.player2.planned[currentGameObject.currentRound])
+        }
+        if(match.settingPlayers == 4) {
+            if (currentGameObject.player3.planned[currentGameObject.currentRound] == currentGameObject.player3.taken[currentGameObject.currentRound]) {
+                currentGameObject.player3.points -= (10 + currentGameObject.player3.planned[currentGameObject.currentRound])
+            }
+            if (currentGameObject.player4.planned[currentGameObject.currentRound] == currentGameObject.player4.taken[currentGameObject.currentRound]) {
+                currentGameObject.player4.points -= (10 + currentGameObject.player4.planned[currentGameObject.currentRound])
+            }
+        }
+        updatePoints()
+        markActivePlayer()
+    }
+
     private fun gameStart() {
         currentGameObject.currentPlayer = match.currentGame
         markActivePlayer()
+        calculatePoints()
+        calculatePlanned()
         updateText()
+        updatePoints()
+        saveIntoLocal()
+    }
+
+    private fun buttonClick(it: View) {
+        val tag = it.tag as String
+        val planned = when(currentGameObject.currentPlayer) {
+            1 -> currentGameObject.player1.planned[currentGameObject.currentRound]
+            2 -> currentGameObject.player2.planned[currentGameObject.currentRound]
+            3 -> currentGameObject.player3.planned[currentGameObject.currentRound]
+            4 -> currentGameObject.player4.planned[currentGameObject.currentRound]
+            else -> TODO() //currentplayer błędny
+        }
+        val taken = when(currentGameObject.currentPlayer) {
+            1 -> currentGameObject.player1.taken[currentGameObject.currentRound]
+            2 -> currentGameObject.player2.taken[currentGameObject.currentRound]
+            3 -> currentGameObject.player3.taken[currentGameObject.currentRound]
+            4 -> currentGameObject.player4.taken[currentGameObject.currentRound]
+            else -> TODO() //currentplayer błędny
+        }
+
+        if(planned == -1) {
+            setPlanned(tag.toInt())
+        } else if(taken == -1) {
+            setTaken(tag.toInt())
+        }
+
+        updateText()
+        nextPlayer()
     }
 
     private fun randomAtut() {
