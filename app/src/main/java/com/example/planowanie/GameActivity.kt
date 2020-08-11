@@ -174,7 +174,6 @@ class GameActivity: AppCompatActivity() {
     }
 
     private fun gameStart() {
-        currentGameObject.currentPlayer = match.currentGame
         markActivePlayer()
         markAsGoodOrBad()
         calculatePoints()
@@ -466,8 +465,10 @@ class GameActivity: AppCompatActivity() {
     private fun calculatePoints() {
         currentGameObject.player1.points = 0
         currentGameObject.player2.points = 0
-        currentGameObject.player3.points = 0
-        currentGameObject.player4.points = 0
+        if(match.settingPlayers == 4) {
+            currentGameObject.player3.points = 0
+            currentGameObject.player4.points = 0
+        }
         for (i in 1..currentGameObject.currentRound) {
             if((currentGameObject.player1.planned[i] == currentGameObject.player1.taken[i]) && (currentGameObject.player1.taken[i] != -1)) {
                 currentGameObject.player1.points += (10 + currentGameObject.player1.planned[i])

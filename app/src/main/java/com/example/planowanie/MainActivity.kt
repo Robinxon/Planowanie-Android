@@ -130,6 +130,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        match.game1.currentPlayer = 1
+
         val intent = Intent(this, GameActivity::class.java)
         intent.putExtra("Match", match)
         startActivity(intent)
