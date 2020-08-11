@@ -22,7 +22,7 @@ class GameActivity: AppCompatActivity() {
 
         //przygotowanie gry
         if(intent.getSerializableExtra("loadedMatch") != null) {
-            match = intent.getSerializableExtra("loadedMatch"
+            match = intent.getSerializableExtra("loadedMatch") as Match
         } else {
             match = intent.getSerializableExtra("Match") as Match
         }
