@@ -105,8 +105,22 @@ class GameActivity: AppCompatActivity() {
                 updatePoints()
                 markRoundInactive()
                 currentGameObject.currentRound++
-                currentGameObject.currentCards--
-                markActivePlayer()
+                if(match.settingGames == 1) {
+                    if(currentGameObject.currentRound >= 17) {
+                        endGame()
+                    } else {
+                        nextPlayer()
+                    }
+                } else if (match.settingGames == 4) {
+                    if(currentGameObject.currentRound >= 14) {
+                        endGame()
+                    } else {
+                        nextPlayer()
+                    }
+                }
+                if(currentGameObject.currentCards > 1) {
+                    currentGameObject.currentCards--
+                }
             }
         }
 
@@ -388,6 +402,20 @@ class GameActivity: AppCompatActivity() {
                 val button: Button = findViewById(resID)
                 button.isEnabled = false
             }
+        }
+    }
+
+    private fun endGame() {
+        val t = Toast.makeText(this, "Gra zakończona", Toast.LENGTH_SHORT)
+        t.setGravity(Gravity.BOTTOM, 0, 0)
+        t.show()
+
+        buttonToggle.visibility = View.GONE
+        buttonClear.visibility = View.GONE
+        for(i in 0..13) {
+            val resID = resources.getIdentifier("buttonPlan$i", "id", packageName)
+            val button: Button = findViewById(resID)
+            button.visibility = View.GONE
         }
     }
 }
