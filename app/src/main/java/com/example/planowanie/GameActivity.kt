@@ -75,60 +75,7 @@ class GameActivity: AppCompatActivity() {
         }
 
         buttonNextRound.setOnClickListener {
-            var warning = false
-            if(match.settingPlayers == 2) {
-                if( currentGameObject.player1.planned[currentGameObject.currentRound] == -1 || currentGameObject.player1.taken[currentGameObject.currentRound] == -1 ||
-                    currentGameObject.player2.planned[currentGameObject.currentRound] == -1 || currentGameObject.player2.taken[currentGameObject.currentRound] == -1) {
-                    warning = true
-                }
-            }
-            if(match.settingPlayers == 4) {
-                if( currentGameObject.player1.planned[currentGameObject.currentRound] == -1 || currentGameObject.player1.taken[currentGameObject.currentRound] == -1 ||
-                    currentGameObject.player2.planned[currentGameObject.currentRound] == -1 || currentGameObject.player2.taken[currentGameObject.currentRound] == -1 ||
-                    currentGameObject.player3.planned[currentGameObject.currentRound] == -1 || currentGameObject.player3.taken[currentGameObject.currentRound] == -1 ||
-                    currentGameObject.player4.planned[currentGameObject.currentRound] == -1 || currentGameObject.player4.taken[currentGameObject.currentRound] == -1 ) {
-                    warning = true
-                }
-            }
-            if(warning) {
-                val t = Toast.makeText(this, "Dane rundy niekompletne", Toast.LENGTH_SHORT)
-                t.setGravity(Gravity.BOTTOM, 0, 0)
-                t.show()
-            } else {
-                if(currentGameObject.player1.planned[currentGameObject.currentRound] == currentGameObject.player1.taken[currentGameObject.currentRound]) {
-                    currentGameObject.player1.points += (10 + currentGameObject.player1.planned[currentGameObject.currentRound])
-                }
-                if(currentGameObject.player2.planned[currentGameObject.currentRound] == currentGameObject.player2.taken[currentGameObject.currentRound]) {
-                    currentGameObject.player2.points += (10 + currentGameObject.player2.planned[currentGameObject.currentRound])
-                }
-                if(match.settingPlayers == 4) {
-                    if(currentGameObject.player3.planned[currentGameObject.currentRound] == currentGameObject.player3.taken[currentGameObject.currentRound]) {
-                        currentGameObject.player3.points += (10 + currentGameObject.player3.planned[currentGameObject.currentRound])
-                    }
-                    if(currentGameObject.player4.planned[currentGameObject.currentRound] == currentGameObject.player4.taken[currentGameObject.currentRound]) {
-                        currentGameObject.player4.points += (10 + currentGameObject.player4.planned[currentGameObject.currentRound])
-                    }
-                }
-                updatePoints()
-                markRoundInactive()
-                currentGameObject.currentRound++
-                if(match.settingGames == 1) {
-                    if(currentGameObject.currentRound >= 17) {
-                        endGame()
-                    } else {
-                        nextPlayer()
-                    }
-                } else if (match.settingGames == 4) {
-                    if(currentGameObject.currentRound >= 14) {
-                        endGame()
-                    } else {
-                        nextPlayer()
-                    }
-                }
-                if(currentGameObject.currentCards > 1) {
-                    currentGameObject.currentCards--
-                }
-            }
+            nextRound()
         }
 
         buttonPreviousRound.setOnClickListener {
@@ -192,11 +139,70 @@ class GameActivity: AppCompatActivity() {
             currentGameObject.currentPlayer = 1
         }
         markActivePlayer()
+        updateText()
+    }
+
+    private fun nextRound() {
+        var warning = false
+        if(match.settingPlayers == 2) {
+            if( currentGameObject.player1.planned[currentGameObject.currentRound] == -1 || currentGameObject.player1.taken[currentGameObject.currentRound] == -1 ||
+                currentGameObject.player2.planned[currentGameObject.currentRound] == -1 || currentGameObject.player2.taken[currentGameObject.currentRound] == -1) {
+                warning = true
+            }
+        }
+        if(match.settingPlayers == 4) {
+            if( currentGameObject.player1.planned[currentGameObject.currentRound] == -1 || currentGameObject.player1.taken[currentGameObject.currentRound] == -1 ||
+                currentGameObject.player2.planned[currentGameObject.currentRound] == -1 || currentGameObject.player2.taken[currentGameObject.currentRound] == -1 ||
+                currentGameObject.player3.planned[currentGameObject.currentRound] == -1 || currentGameObject.player3.taken[currentGameObject.currentRound] == -1 ||
+                currentGameObject.player4.planned[currentGameObject.currentRound] == -1 || currentGameObject.player4.taken[currentGameObject.currentRound] == -1 ) {
+                warning = true
+            }
+        }
+        if(warning) {
+            val t = Toast.makeText(this, "Dane rundy niekompletne", Toast.LENGTH_SHORT)
+            t.setGravity(Gravity.BOTTOM, 0, 0)
+            t.show()
+        } else {
+            if(currentGameObject.player1.planned[currentGameObject.currentRound] == currentGameObject.player1.taken[currentGameObject.currentRound]) {
+                currentGameObject.player1.points += (10 + currentGameObject.player1.planned[currentGameObject.currentRound])
+            }
+            if(currentGameObject.player2.planned[currentGameObject.currentRound] == currentGameObject.player2.taken[currentGameObject.currentRound]) {
+                currentGameObject.player2.points += (10 + currentGameObject.player2.planned[currentGameObject.currentRound])
+            }
+            if(match.settingPlayers == 4) {
+                if(currentGameObject.player3.planned[currentGameObject.currentRound] == currentGameObject.player3.taken[currentGameObject.currentRound]) {
+                    currentGameObject.player3.points += (10 + currentGameObject.player3.planned[currentGameObject.currentRound])
+                }
+                if(currentGameObject.player4.planned[currentGameObject.currentRound] == currentGameObject.player4.taken[currentGameObject.currentRound]) {
+                    currentGameObject.player4.points += (10 + currentGameObject.player4.planned[currentGameObject.currentRound])
+                }
+            }
+            updatePoints()
+            markRoundInactive()
+            currentGameObject.currentRound++
+            if(match.settingGames == 1) {
+                if(currentGameObject.currentRound >= 17) {
+                    endGame()
+                } else {
+                    nextPlayer()
+                }
+            } else if (match.settingGames == 4) {
+                if(currentGameObject.currentRound >= 14) {
+                    endGame()
+                } else {
+                    nextPlayer()
+                }
+            }
+            if(currentGameObject.currentCards > 1) {
+                currentGameObject.currentCards--
+            }
+        }
     }
 
     private fun gameStart() {
         currentGameObject.currentPlayer = match.currentGame
         markActivePlayer()
+        updateText()
     }
 
     private fun randomAtut() {
@@ -304,36 +310,43 @@ class GameActivity: AppCompatActivity() {
     }
 
     private fun updateText() {
-        val resID = resources.getIdentifier("textViewRound" + currentGameObject.currentRound.toString() + "Player" + currentGameObject.currentPlayer.toString(), "id", packageName)
-        val textView: TextView = findViewById(resID)
-        when(currentGameObject.currentPlayer) {
-            1 -> {
-                if(currentGameObject.player1.taken[currentGameObject.currentRound] == -1) {
-                    textView.text = getString(R.string.playerPlannedAndTaken, "", currentGameObject.player1.planned[currentGameObject.currentRound].toString())
-                } else {
-                    textView.text = getString(R.string.playerPlannedAndTaken, currentGameObject.player1.taken[currentGameObject.currentRound].toString(), currentGameObject.player1.planned[currentGameObject.currentRound].toString())
-                }
-            }
-            2 -> {
-                if(currentGameObject.player2.taken[currentGameObject.currentRound] == -1) {
-                    textView.text = getString(R.string.playerPlannedAndTaken, "", currentGameObject.player2.planned[currentGameObject.currentRound].toString())
-                } else {
-                    textView.text = getString(R.string.playerPlannedAndTaken, currentGameObject.player2.taken[currentGameObject.currentRound].toString(), currentGameObject.player2.planned[currentGameObject.currentRound].toString())
-                }
-            }
-            3 -> {
-                if(currentGameObject.player3.taken[currentGameObject.currentRound] == -1) {
-                    textView.text = getString(R.string.playerPlannedAndTaken, "", currentGameObject.player3.planned[currentGameObject.currentRound].toString())
-                } else {
-                    textView.text = getString(R.string.playerPlannedAndTaken, currentGameObject.player3.taken[currentGameObject.currentRound].toString(), currentGameObject.player3.planned[currentGameObject.currentRound].toString())
-                }
-            }
-            4 -> {
-                if(currentGameObject.player4.taken[currentGameObject.currentRound] == -1) {
-                    textView.text = getString(R.string.playerPlannedAndTaken, "", currentGameObject.player4.planned[currentGameObject.currentRound].toString())
-                } else {
-                    textView.text = getString(R.string.playerPlannedAndTaken, currentGameObject.player4.taken[currentGameObject.currentRound].toString(), currentGameObject.player4.planned[currentGameObject.currentRound].toString())
-                }
+        for (i in 1..currentGameObject.currentRound) {
+            //player 1
+            val resID1 = resources.getIdentifier("textViewRound" + i.toString() + "Player1", "id", packageName)
+            val textView1: TextView = findViewById(resID1)
+            var player1Planned = currentGameObject.player1.planned[i].toString()
+            if(currentGameObject.player1.planned[i] == -1) {player1Planned = ""}
+            var player1Taken = currentGameObject.player1.taken[i].toString()
+            if(currentGameObject.player1.taken[i] == -1) {player1Taken = ""}
+            textView1.text = getString(R.string.playerPlannedAndTaken, player1Taken, player1Planned)
+
+            //player 2
+            val resID2 = resources.getIdentifier("textViewRound" + i.toString() + "Player2", "id", packageName)
+            val textView2: TextView = findViewById(resID2)
+            var player2Planned = currentGameObject.player2.planned[i].toString()
+            if(currentGameObject.player2.planned[i] == -1) {player2Planned = ""}
+            var player2Taken = currentGameObject.player2.taken[i].toString()
+            if(currentGameObject.player2.taken[i] == -1) {player2Taken = ""}
+            textView2.text = getString(R.string.playerPlannedAndTaken, player2Taken, player2Planned)
+
+            if(match.settingPlayers == 4) {
+                //player 3
+                val resID3 = resources.getIdentifier("textViewRound" + i.toString() + "Player3", "id", packageName)
+                val textView3: TextView = findViewById(resID3)
+                var player3Planned = currentGameObject.player3.planned[i].toString()
+                if(currentGameObject.player3.planned[i] == -1) {player3Planned = ""}
+                var player3Taken = currentGameObject.player3.taken[i].toString()
+                if(currentGameObject.player3.taken[i] == -1) {player3Taken = ""}
+                textView3.text = getString(R.string.playerPlannedAndTaken, player3Taken, player3Planned)
+
+                //player 4
+                val resID4 = resources.getIdentifier("textViewRound" + i.toString() + "Player4", "id", packageName)
+                val textView4: TextView = findViewById(resID4)
+                var player4Planned = currentGameObject.player4.planned[i].toString()
+                if(currentGameObject.player4.planned[i] == -1) {player4Planned = ""}
+                var player4Taken = currentGameObject.player4.taken[i].toString()
+                if(currentGameObject.player4.taken[i] == -1) {player4Taken = ""}
+                textView4.text = getString(R.string.playerPlannedAndTaken, player4Taken, player4Planned)
             }
         }
     }
