@@ -104,6 +104,7 @@ class GameActivity: AppCompatActivity() {
         }
         markActivePlayer()
         updateText()
+        saveIntoLocal()
     }
 
     private fun nextRound() {
