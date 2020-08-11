@@ -1,5 +1,6 @@
 package com.example.planowanie
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
@@ -8,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_game.*
 
 class GameActivity: AppCompatActivity() {
@@ -19,7 +21,12 @@ class GameActivity: AppCompatActivity() {
         setContentView(R.layout.activity_game)
 
         //przygotowanie gry
-        match = intent.getSerializableExtra("Match") as Match
+        if(intent.getSerializableExtra("loadedMatch") != null) {
+            match = intent.getSerializableExtra("loadedMatch"
+        } else {
+            match = intent.getSerializableExtra("Match") as Match
+        }
+
         imageViewAtut.setBackgroundResource(R.drawable.none)
 
         currentGameObject = when(match.currentGame) {
@@ -417,5 +424,23 @@ class GameActivity: AppCompatActivity() {
             val button: Button = findViewById(resID)
             button.visibility = View.GONE
         }
+    }
+
+    private fun saveIntoLocal() {
+        val gson = GsonBuilder().create()
+        val database = getSharedPreferences("database", Context.MODE_PRIVATE)
+
+        when(match.currentGame) {
+            1 -> match.game1 = currentGameObject
+            2 -> match.game2 = currentGameObject
+            3 -> match.game3 = currentGameObject
+            4 -> match.game4 = currentGameObject
+        }
+
+        val json = gson.toJson(match)
+
+        database.edit().apply {
+            putString("matchJson", json)
+        }.apply()
     }
 }

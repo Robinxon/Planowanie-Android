@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
                 builder.setPositiveButton("Tak") { _, _ -> //kontynuacja starej gry
                     val intent = Intent(this, GameActivity::class.java)
-                    intent.putExtra("Game", loadedMatch)
+                    intent.putExtra("loadedMatch", loadedMatch)
                     startActivity(intent)
                 }
 
@@ -129,11 +129,6 @@ class MainActivity : AppCompatActivity() {
                 match.game4.player4 = Player()
             }
         }
-
-        val json = gson.toJson(match)
-        database.edit().apply {
-            putString("matchJson", json)
-        }.apply()
 
         val intent = Intent(this, GameActivity::class.java)
         intent.putExtra("Match", match)
