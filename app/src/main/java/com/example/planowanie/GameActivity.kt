@@ -163,20 +163,7 @@ class GameActivity: AppCompatActivity() {
             t.setGravity(Gravity.BOTTOM, 0, 0)
             t.show()
         } else {
-            if(currentGameObject.player1.planned[currentGameObject.currentRound] == currentGameObject.player1.taken[currentGameObject.currentRound]) {
-                currentGameObject.player1.points += (10 + currentGameObject.player1.planned[currentGameObject.currentRound])
-            }
-            if(currentGameObject.player2.planned[currentGameObject.currentRound] == currentGameObject.player2.taken[currentGameObject.currentRound]) {
-                currentGameObject.player2.points += (10 + currentGameObject.player2.planned[currentGameObject.currentRound])
-            }
-            if(match.settingPlayers == 4) {
-                if(currentGameObject.player3.planned[currentGameObject.currentRound] == currentGameObject.player3.taken[currentGameObject.currentRound]) {
-                    currentGameObject.player3.points += (10 + currentGameObject.player3.planned[currentGameObject.currentRound])
-                }
-                if(currentGameObject.player4.planned[currentGameObject.currentRound] == currentGameObject.player4.taken[currentGameObject.currentRound]) {
-                    currentGameObject.player4.points += (10 + currentGameObject.player4.planned[currentGameObject.currentRound])
-                }
-            }
+            calculatePoints()
             updatePoints()
             markRoundInactive()
             currentGameObject.currentRound++
@@ -299,7 +286,7 @@ class GameActivity: AppCompatActivity() {
             2 -> currentGameObject.player2.taken[currentGameObject.currentRound] - currentGameObject.player2.planned[currentGameObject.currentRound]
             3 -> currentGameObject.player3.taken[currentGameObject.currentRound] - currentGameObject.player3.planned[currentGameObject.currentRound]
             4 -> currentGameObject.player4.taken[currentGameObject.currentRound] - currentGameObject.player4.planned[currentGameObject.currentRound]
-            else -> 14
+            else -> 1
         }
 
         if(result == 0) {
@@ -385,6 +372,7 @@ class GameActivity: AppCompatActivity() {
         }
 
         calculatePlanned()
+        updateText()
     }
 
     private fun calculatePlanned() {
@@ -423,6 +411,30 @@ class GameActivity: AppCompatActivity() {
                 button.isEnabled = false
             }
         }
+    }
+
+    private fun calculatePoints() {
+        currentGameObject.player1.points = 0
+        currentGameObject.player2.points = 0
+        currentGameObject.player3.points = 0
+        currentGameObject.player4.points = 0
+        for (i in 1..currentGameObject.currentRound) {
+            if((currentGameObject.player1.planned[i] == currentGameObject.player1.taken[i]) && (currentGameObject.player1.taken[i] != -1)) {
+                currentGameObject.player1.points += (10 + currentGameObject.player1.planned[i])
+            }
+            if((currentGameObject.player2.planned[i] == currentGameObject.player2.taken[i]) && (currentGameObject.player1.taken[i] != -1)) {
+                currentGameObject.player2.points += (10 + currentGameObject.player2.planned[i])
+            }
+            if(match.settingPlayers == 4) {
+                if((currentGameObject.player3.planned[i] == currentGameObject.player3.taken[i]) && (currentGameObject.player1.taken[i] != -1)) {
+                    currentGameObject.player3.points += (10 + currentGameObject.player3.planned[i])
+                }
+                if((currentGameObject.player4.planned[i] == currentGameObject.player4.taken[i]) && (currentGameObject.player1.taken[i] != -1)) {
+                    currentGameObject.player4.points += (10 + currentGameObject.player4.planned[i])
+                }
+            }
+        }
+        updatePoints()
     }
 
     private fun endGame() {
