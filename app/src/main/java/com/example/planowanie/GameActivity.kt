@@ -199,6 +199,8 @@ class GameActivity: AppCompatActivity() {
     }
 
     private fun gameStart() {
+        title = getString(R.string.gameActivityTitle, match.currentGame)
+
         markActivePlayer()
         markAsGoodOrBad()
         calculatePoints()
