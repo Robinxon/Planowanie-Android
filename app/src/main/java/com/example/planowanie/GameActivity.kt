@@ -35,9 +35,6 @@ class GameActivity: AppCompatActivity() {
             else -> TODO() //gra zakończona lub błędna
         }
 
-        imageViewAtut.setBackgroundResource(R.drawable.none)
-        currentGameObject.atuts[currentGameObject.currentRound] = 0
-
         editTextPlayer1.setText(getString(R.string.playerNameAndPoints, match.player1Name, 0))
         editTextPlayer2.setText(getString(R.string.playerNameAndPoints, match.player2Name, 0))
         if(match.settingPlayers == 4) {
@@ -197,6 +194,7 @@ class GameActivity: AppCompatActivity() {
         calculatePlanned()
         updateText()
         updatePoints()
+        setAtut()
         saveIntoLocal()
     }
 
@@ -228,35 +226,39 @@ class GameActivity: AppCompatActivity() {
     }
 
     private fun setAtut() {
-        if(currentGameObject.atuts[currentGameObject.currentRound] == -1) {
-            when((1..4).random()) {
-                1 -> {
-                    imageViewAtut.setBackgroundResource(R.drawable.karo)
-                    currentGameObject.atuts[currentGameObject.currentRound] = 1
-                }
-                2 -> {
-                    imageViewAtut.setBackgroundResource(R.drawable.kier)
-                    currentGameObject.atuts[currentGameObject.currentRound] = 2
-                }
-                3 -> {
-                    imageViewAtut.setBackgroundResource(R.drawable.pik)
-                    currentGameObject.atuts[currentGameObject.currentRound] = 3
-                }
-                4 -> {
-                    imageViewAtut.setBackgroundResource(R.drawable.trefl)
-                    currentGameObject.atuts[currentGameObject.currentRound] = 4
-                }
-            }
+        if(currentGameObject.currentRound == 1) {
+            imageViewAtut.setBackgroundResource(R.drawable.none)
+            currentGameObject.atuts[currentGameObject.currentRound] = 0
         } else {
-            when(currentGameObject.atuts[currentGameObject.currentRound]) {
-                0 -> imageViewAtut.setBackgroundResource(R.drawable.none)
-                1 -> imageViewAtut.setBackgroundResource(R.drawable.karo)
-                2 -> imageViewAtut.setBackgroundResource(R.drawable.kier)
-                3 -> imageViewAtut.setBackgroundResource(R.drawable.pik)
-                4 -> imageViewAtut.setBackgroundResource(R.drawable.trefl)
+            if(currentGameObject.atuts[currentGameObject.currentRound] == -1) {
+                when((1..4).random()) {
+                    1 -> {
+                        imageViewAtut.setBackgroundResource(R.drawable.karo)
+                        currentGameObject.atuts[currentGameObject.currentRound] = 1
+                    }
+                    2 -> {
+                        imageViewAtut.setBackgroundResource(R.drawable.kier)
+                        currentGameObject.atuts[currentGameObject.currentRound] = 2
+                    }
+                    3 -> {
+                        imageViewAtut.setBackgroundResource(R.drawable.pik)
+                        currentGameObject.atuts[currentGameObject.currentRound] = 3
+                    }
+                    4 -> {
+                        imageViewAtut.setBackgroundResource(R.drawable.trefl)
+                        currentGameObject.atuts[currentGameObject.currentRound] = 4
+                    }
+                }
+            } else {
+                when(currentGameObject.atuts[currentGameObject.currentRound]) {
+                    0 -> imageViewAtut.setBackgroundResource(R.drawable.none)
+                    1 -> imageViewAtut.setBackgroundResource(R.drawable.karo)
+                    2 -> imageViewAtut.setBackgroundResource(R.drawable.kier)
+                    3 -> imageViewAtut.setBackgroundResource(R.drawable.pik)
+                    4 -> imageViewAtut.setBackgroundResource(R.drawable.trefl)
+                }
             }
         }
-
     }
 
     private fun setPlanned(plan: Int) {
