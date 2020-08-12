@@ -341,7 +341,7 @@ class GameActivity: AppCompatActivity() {
             val resID1 = resources.getIdentifier("textViewRound" + i.toString() + "Player1", "id", packageName)
             val textView1: TextView = findViewById(resID1)
             if(currentGameObject.player1.taken[i] == -1) {
-                textView1.setTextColor(Color.WHITE)
+                textView1.setTextColor(Color.BLACK)
             } else if(currentGameObject.player1.taken[i] - currentGameObject.player1.planned[i] == 0) {
                 textView1.setTextColor(Color.GREEN)
             } else {
@@ -352,7 +352,7 @@ class GameActivity: AppCompatActivity() {
             val resID2 = resources.getIdentifier("textViewRound" + i.toString() + "Player2", "id", packageName)
             val textView2: TextView = findViewById(resID2)
             if(currentGameObject.player2.taken[i] == -1) {
-                textView2.setTextColor(Color.WHITE)
+                textView2.setTextColor(Color.BLACK)
             } else if(currentGameObject.player2.taken[i] - currentGameObject.player2.planned[i] == 0) {
                 textView2.setTextColor(Color.GREEN)
             } else {
@@ -364,7 +364,7 @@ class GameActivity: AppCompatActivity() {
                 val resID3 = resources.getIdentifier("textViewRound" + i.toString() + "Player3", "id", packageName)
                 val textView3: TextView = findViewById(resID3)
                 if(currentGameObject.player3.taken[i] == -1) {
-                    textView3.setTextColor(Color.WHITE)
+                    textView3.setTextColor(Color.BLACK)
                 } else if(currentGameObject.player3.taken[i] - currentGameObject.player3.planned[i] == 0) {
                     textView3.setTextColor(Color.GREEN)
                 } else {
@@ -375,7 +375,7 @@ class GameActivity: AppCompatActivity() {
                 val resID4 = resources.getIdentifier("textViewRound" + i.toString() + "Player4", "id", packageName)
                 val textView4: TextView = findViewById(resID4)
                 if(currentGameObject.player4.taken[i] == -1) {
-                    textView4.setTextColor(Color.WHITE)
+                    textView4.setTextColor(Color.BLACK)
                 } else if(currentGameObject.player4.taken[i] - currentGameObject.player4.planned[i] == 0) {
                     textView4.setTextColor(Color.GREEN)
                 } else {
