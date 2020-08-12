@@ -474,6 +474,7 @@ class GameActivity: AppCompatActivity() {
         }
 
         calculatePlanned()
+        markActivePlayer()
         updateText()
     }
 
