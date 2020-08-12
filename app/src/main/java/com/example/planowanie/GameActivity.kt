@@ -108,6 +108,19 @@ class GameActivity: AppCompatActivity() {
         saveIntoLocal()
     }
 
+    private fun setPlayer() {
+        if(match.settingPlayers == 4 && currentGameObject.currentRound < 5) {
+            currentGameObject.currentPlayer = currentGameObject.currentRound
+        } else if (match.settingPlayers == 2 && currentGameObject.currentRound < 3) {
+            currentGameObject.currentPlayer = currentGameObject.currentRound
+        }else {
+            currentGameObject.currentPlayer = currentGameObject.currentRound % match.settingPlayers
+        }
+        markActivePlayer()
+        updateText()
+        saveIntoLocal()
+    }
+
     private fun nextRound() {
         var warning = false
         if(match.settingPlayers == 2) {
@@ -138,14 +151,14 @@ class GameActivity: AppCompatActivity() {
                     endGame()
                 } else {
                     setAtut()
-                    nextPlayer()
+                    setPlayer()
                 }
             } else if (match.settingGames == 4) {
                 if(currentGameObject.currentRound >= 14) {
                     endGame()
                 } else {
                     setAtut()
-                    nextPlayer()
+                    setPlayer()
                 }
             }
             if(currentGameObject.currentCards > 1) {
@@ -174,7 +187,7 @@ class GameActivity: AppCompatActivity() {
         }
         setAtut()
         updatePoints()
-        markActivePlayer()
+        setPlayer()
     }
 
     private fun gameStart() {
