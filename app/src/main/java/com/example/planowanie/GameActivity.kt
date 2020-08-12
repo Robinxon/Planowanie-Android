@@ -106,12 +106,21 @@ class GameActivity: AppCompatActivity() {
     }
 
     private fun setPlayer() {
-        if(match.settingPlayers == 4 && currentGameObject.currentRound < 5) {
-            currentGameObject.currentPlayer = currentGameObject.currentRound
-        } else if (match.settingPlayers == 2 && currentGameObject.currentRound < 3) {
-            currentGameObject.currentPlayer = currentGameObject.currentRound
-        }else {
-            currentGameObject.currentPlayer = currentGameObject.currentRound % match.settingPlayers
+        if(match.settingPlayers == 2) {
+            currentGameObject.currentPlayer = when(currentGameObject.currentRound % 2) {
+                0 -> 2
+                1 -> 1
+                else -> 1
+            }
+        }
+        if(match.settingPlayers == 4) {
+            currentGameObject.currentPlayer = when(currentGameObject.currentRound % 4) {
+                0 -> 4
+                1 -> 1
+                2 -> 2
+                3 -> 3
+                else -> 1
+            }
         }
         markActivePlayer()
         updateText()
@@ -535,13 +544,15 @@ class GameActivity: AppCompatActivity() {
         t.setGravity(Gravity.BOTTOM, 0, 0)
         t.show()
 
-        buttonToggle.visibility = View.GONE
+        markRoundInactive()
+
+        /*buttonToggle.visibility = View.GONE
         buttonClear.visibility = View.GONE
         for(i in 0..13) {
             val resID = resources.getIdentifier("buttonPlan$i", "id", packageName)
             val button: Button = findViewById(resID)
             button.visibility = View.GONE
-        }
+        }*/
     }
 
     private fun saveIntoLocal() {
