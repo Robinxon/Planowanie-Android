@@ -153,5 +153,6 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, GameActivity::class.java)
         intent.putExtra("Match", match)
         startActivity(intent)
+        finish()
     }
 }
