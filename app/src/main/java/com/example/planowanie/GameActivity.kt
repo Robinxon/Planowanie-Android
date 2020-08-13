@@ -341,7 +341,7 @@ class GameActivity: AppCompatActivity() {
     private fun markActivePlayer() {
         val resID = resources.getIdentifier("textViewRound" + currentGameObject.currentRound.toString() + "Player" + currentGameObject.currentPlayer.toString(), "id", packageName)
         val textView: TextView = findViewById(resID)
-        textView.setBackgroundColor(Color.BLACK)
+        textView.setBackgroundResource(R.drawable.tv_border)
 
         var isTaken = when(currentGameObject.currentPlayer) {
             1 -> currentGameObject.player1.taken[currentGameObject.currentRound]
@@ -349,10 +349,6 @@ class GameActivity: AppCompatActivity() {
             3 -> currentGameObject.player3.taken[currentGameObject.currentRound]
             4 -> currentGameObject.player4.taken[currentGameObject.currentRound]
             else -> -1
-        }
-
-        if(isTaken == -1) {
-            textView.setTextColor(Color.WHITE)
         }
 
         var previousPlayer = currentGameObject.currentPlayer - 1
@@ -368,7 +364,7 @@ class GameActivity: AppCompatActivity() {
         }
         val previousResID = resources.getIdentifier("textViewRound" + currentGameObject.currentRound.toString() + "Player" + previousPlayer.toString(), "id", packageName)
         val previousTextView: TextView = findViewById(previousResID)
-        previousTextView.setBackgroundColor(Color.TRANSPARENT)
+        previousTextView.setBackgroundResource(0)
         if(isTakenPrevious == -1) {
             previousTextView.setTextColor(Color.BLACK)
         }
