@@ -27,7 +27,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:ems="10"
-                android:hint="Gracz 3"
+                android:hint="@string/player3Hint"
                 android:inputType="textPersonName"
                 android:maxLength="3"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:ems="10"
-                android:hint="Gracz 1"
+                android:hint="@string/player1Hint"
                 android:inputType="textPersonName"
                 android:maxLength="3"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Liczba graczy:"
+                android:text="@string/playersCountText"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -71,14 +71,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="2 graczy"
+                    android:text="@string/twoPlayersRadio"
                     android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton4Players"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="4 graczy"
+                    android:text="@string/fourPlayersRadio"
                     android:textSize="18sp" />
             </RadioGroup>
 
@@ -96,14 +96,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="gra pojedyńcza"
+                    android:text="@string/singleGameRadio"
                     android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton4Rounds"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="gra poczwórna"
+                    android:text="@string/quadraGameRadio"
                     android:textSize="18sp" />
             </RadioGroup>
 
@@ -114,7 +114,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:ems="10"
-                android:hint="Gracz 2"
+                android:hint="@string/player2Hint"
                 android:inputType="textPersonName"
                 android:maxLength="3"
                 app:layout_constraintStart_toStartOf="parent"
@@ -126,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Nazwy graczy:"
+                android:text="@string/playersNamesText"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroupPlayerCount" />
@@ -138,7 +138,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:ems="10"
-                android:hint="Gracz 4"
+                android:hint="@string/player4Hint"
                 android:inputType="textPersonName"
                 android:maxLength="3"
                 app:layout_constraintStart_toStartOf="parent"
@@ -150,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Typ gry:"
+                android:text="@string/gameTypeText"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextPlayer4Name" />
@@ -162,7 +162,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:text="Graj"
+        android:text="@string/playButtonText"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

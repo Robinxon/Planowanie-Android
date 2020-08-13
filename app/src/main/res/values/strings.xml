@@ -3,4 +3,16 @@
     <string name="playerNameAndPoints">%s | %d</string>
     <string name="playerPlannedAndTaken">%s / %s</string>
     <string name="gameActivityTitle">Gra %d</string>
+    <string name="player3Hint">Gracz 3</string>
+    <string name="player1Hint">Gracz 1</string>
+    <string name="playersCountText">Liczba graczy:</string>
+    <string name="twoPlayersRadio">2 graczy</string>
+    <string name="fourPlayersRadio">4 graczy</string>
+    <string name="singleGameRadio">gra pojedyńcza</string>
+    <string name="quadraGameRadio">gra poczwórna</string>
+    <string name="player2Hint">Gracz 2</string>
+    <string name="playersNamesText">Nazwy graczy:</string>
+    <string name="player4Hint">Gracz 4</string>
+    <string name="gameTypeText">Typ gry:</string>
+    <string name="playButtonText">Graj</string>
 </resources>
