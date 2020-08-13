@@ -12,7 +12,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.GsonBuilder
+import com.kaushikthedeveloper.doublebackpress.DoubleBackPress
+import com.kaushikthedeveloper.doublebackpress.helper.DoubleBackPressAction
+import com.kaushikthedeveloper.doublebackpress.helper.FirstBackPressAction
+import com.kaushikthedeveloper.doublebackpress.setup.display.ToastDisplay
 import kotlinx.android.synthetic.main.activity_game.*
+import kotlin.system.exitProcess
+
 
 class GameActivity: AppCompatActivity() {
     private lateinit var match: Match
@@ -112,6 +118,24 @@ class GameActivity: AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private var firstBackPressAction: FirstBackPressAction = FirstBackPressAction {
+        Toast.makeText(this, "Naciśnij ponownie, aby zamknąć aplikację", Toast.LENGTH_SHORT).show()
+    }
+
+    private var doubleBackPressAction = DoubleBackPressAction {
+        finish()
+        exitProcess(0)
+    }
+
+    private var doubleBackPress = DoubleBackPress()
+        .withDoublePressDuration(3000)
+        .withFirstBackPressAction(firstBackPressAction)
+        .withDoubleBackPressAction(doubleBackPressAction)
+
+    override fun onBackPressed() {
+        doubleBackPress.onBackPressed()
     }
 
     private fun nextPlayer() {
