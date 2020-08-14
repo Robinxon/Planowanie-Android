@@ -4,8 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.basicactivity.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/game_menu_game1"
         android:orderInCategory="100"
-        android:title="placeholder game"
+        android:title="@string/game1"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/game_menu_game2"
+        android:orderInCategory="100"
+        android:title="@string/game2"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/game_menu_game3"
+        android:orderInCategory="100"
+        android:title="@string/game3"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/game_menu_game4"
+        android:orderInCategory="100"
+        android:title="@string/game4"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/game_menu_exit"
+        android:orderInCategory="100"
+        android:title="@string/exit_game"
         app:showAsAction="never" />
 </menu>
