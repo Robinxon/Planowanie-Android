@@ -4,27 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.basicactivity.MainActivity">
     <item
-        android:id="@+id/game_menu_game1"
+        android:id="@+id/gameMenuGame1"
         android:orderInCategory="100"
         android:title="@string/game1"
         app:showAsAction="never" />
     <item
-        android:id="@+id/game_menu_game2"
+        android:id="@+id/gameMenuGame2"
         android:orderInCategory="100"
         android:title="@string/game2"
         app:showAsAction="never" />
     <item
-        android:id="@+id/game_menu_game3"
+        android:id="@+id/gameMenuGame3"
         android:orderInCategory="100"
         android:title="@string/game3"
         app:showAsAction="never" />
     <item
-        android:id="@+id/game_menu_game4"
+        android:id="@+id/gameMenuGame4"
         android:orderInCategory="100"
         android:title="@string/game4"
         app:showAsAction="never" />
     <item
-        android:id="@+id/game_menu_exit"
+        android:id="@+id/gameMenuExit"
         android:orderInCategory="100"
         android:title="@string/exit_game"
         app:showAsAction="never" />
