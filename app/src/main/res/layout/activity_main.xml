@@ -30,6 +30,7 @@
                 android:hint="@string/player3Hint"
                 android:inputType="textPersonName"
                 android:maxLength="3"
+                android:importantForAutofill="no"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextPlayer2Name" />
 
@@ -43,6 +44,7 @@
                 android:hint="@string/player1Hint"
                 android:inputType="textPersonName"
                 android:maxLength="3"
+                android:importantForAutofill="no"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewPlayerNames" />
 
@@ -117,6 +119,7 @@
                 android:hint="@string/player2Hint"
                 android:inputType="textPersonName"
                 android:maxLength="3"
+                android:importantForAutofill="no"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextPlayer1Name" />
 
@@ -141,6 +144,7 @@
                 android:hint="@string/player4Hint"
                 android:inputType="textPersonName"
                 android:maxLength="3"
+                android:importantForAutofill="no"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextPlayer3Name" />
 
