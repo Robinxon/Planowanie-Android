@@ -193,18 +193,19 @@ class GameActivity: AppCompatActivity() {
             calculatePoints()
             updatePoints()
             markRoundInactive()
-            currentGameObject.currentRound++
             if(match.settingGames == 1) {
-                if(currentGameObject.currentRound >= 17) {
+                if(currentGameObject.currentRound >= 16) {
                     endGame()
                 } else {
+                    currentGameObject.currentRound++
                     setAtut()
                     setPlayer()
                 }
             } else if (match.settingGames == 4) {
-                if(currentGameObject.currentRound >= 14) {
+                if(currentGameObject.currentRound >= 13) {
                     endGame()
                 } else {
+                    currentGameObject.currentRound++
                     setAtut()
                     setPlayer()
                 }
@@ -218,7 +219,8 @@ class GameActivity: AppCompatActivity() {
     private fun previousRound() {
         if(currentGameObject.currentRound != 1) {
             markRoundInactive()
-            currentGameObject.currentRound--
+            if(!currentGameObject.ended) {currentGameObject.currentRound--}
+            currentGameObject.ended = false
             currentGameObject.currentCards++
             if(currentGameObject.player1.planned[currentGameObject.currentRound] == currentGameObject.player1.taken[currentGameObject.currentRound]) {
                 currentGameObject.player1.points -= (10 + currentGameObject.player1.planned[currentGameObject.currentRound])
@@ -371,21 +373,23 @@ class GameActivity: AppCompatActivity() {
     }
 
     private fun markRoundInactive() {
-        var resID1 = resources.getIdentifier("textViewRound" + currentGameObject.currentRound.toString() + "Player1", "id", packageName)
-        var textView1: TextView = findViewById(resID1)
-        textView1.setBackgroundColor(Color.TRANSPARENT)
+        for (i in 1..currentGameObject.currentRound) {
+            var resID1 = resources.getIdentifier("textViewRound" + i.toString() + "Player1", "id", packageName)
+            var textView1: TextView = findViewById(resID1)
+            textView1.setBackgroundResource(0)
 
-        var resID2 = resources.getIdentifier("textViewRound" + currentGameObject.currentRound.toString() + "Player2", "id", packageName)
-        var textView2: TextView = findViewById(resID2)
-        textView2.setBackgroundColor(Color.TRANSPARENT)
+            var resID2 = resources.getIdentifier("textViewRound" + i.toString() + "Player2", "id", packageName)
+            var textView2: TextView = findViewById(resID2)
+            textView2.setBackgroundResource(0)
 
-        var resID3 = resources.getIdentifier("textViewRound" + currentGameObject.currentRound.toString() + "Player3", "id", packageName)
-        var textView3: TextView = findViewById(resID3)
-        textView3.setBackgroundColor(Color.TRANSPARENT)
+            var resID3 = resources.getIdentifier("textViewRound" + i.toString() + "Player3", "id", packageName)
+            var textView3: TextView = findViewById(resID3)
+            textView3.setBackgroundResource(0)
 
-        var resID4 = resources.getIdentifier("textViewRound" + currentGameObject.currentRound.toString() + "Player4", "id", packageName)
-        var textView4: TextView = findViewById(resID4)
-        textView4.setBackgroundColor(Color.TRANSPARENT)
+            var resID4 = resources.getIdentifier("textViewRound" + i.toString() + "Player4", "id", packageName)
+            var textView4: TextView = findViewById(resID4)
+            textView4.setBackgroundResource(0)
+        }
     }
 
     private fun markAsGoodOrBad() {
@@ -587,15 +591,9 @@ class GameActivity: AppCompatActivity() {
         t.setGravity(Gravity.BOTTOM, 0, 0)
         t.show()
 
-        markRoundInactive()
+        currentGameObject.ended = true
 
-        /*buttonToggle.visibility = View.GONE
-        buttonClear.visibility = View.GONE
-        for(i in 0..13) {
-            val resID = resources.getIdentifier("buttonPlan$i", "id", packageName)
-            val button: Button = findViewById(resID)
-            button.visibility = View.GONE
-        }*/
+        saveIntoLocal()
     }
 
     private fun saveIntoLocal() {

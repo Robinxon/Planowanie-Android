@@ -12,5 +12,6 @@ class Game: Serializable {
     var currentPlayer: Int = 0
     var currentCards: Int = 13
     var toDisabling: Int = -1
+    var ended: Boolean = false
     var atuts = IntArray(20) {-1}
 }
