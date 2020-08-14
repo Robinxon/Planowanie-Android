@@ -24,6 +24,11 @@
         android:title="@string/game4"
         app:showAsAction="never" />
     <item
+        android:id="@+id/gameSummary"
+        android:orderInCategory="100"
+        android:title="@string/summary"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/gameMenuExit"
         android:orderInCategory="100"
         android:title="@string/exit_game"

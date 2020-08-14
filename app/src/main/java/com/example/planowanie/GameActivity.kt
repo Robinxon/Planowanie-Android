@@ -147,6 +147,14 @@ class GameActivity: AppCompatActivity() {
             true
         }
 
+        R.id.gameSummary -> {
+            saveIntoLocal()
+            val intent = Intent(this, SummaryActivity::class.java)
+            intent.putExtra("currentGame", match.currentGame)
+            startActivity(intent)
+            true
+        }
+
         R.id.gameMenuExit -> {
             saveIntoLocal()
             val intent = Intent(this, MainActivity::class.java)
