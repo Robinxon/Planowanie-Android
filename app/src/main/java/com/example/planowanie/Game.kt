@@ -9,7 +9,7 @@ class Game: Serializable {
     lateinit var player4: Player
 
     var currentRound: Int = 1
-    var currentPlayer: Int = 0
+    var currentPlayer: Int = 1
     var currentCards: Int = 13
     var toDisabling: Int = -1
     var ended: Boolean = false

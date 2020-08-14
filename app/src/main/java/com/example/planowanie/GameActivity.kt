@@ -1,6 +1,8 @@
 package com.example.planowanie
 
+import android.content.ClipData
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
@@ -23,16 +25,17 @@ import kotlin.system.exitProcess
 class GameActivity: AppCompatActivity() {
     private lateinit var match: Match
     private lateinit var currentGameObject: Game
+    private lateinit var menu: Menu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
         //przygotowanie gry
-        if(intent.getSerializableExtra("loadedMatch") != null) {
-            match = intent.getSerializableExtra("loadedMatch") as Match
+        match = if(intent.getSerializableExtra("loadedMatch") != null) {
+            intent.getSerializableExtra("loadedMatch") as Match
         } else {
-            match = intent.getSerializableExtra("Match") as Match
+            intent.getSerializableExtra("Match") as Match
         }
 
         currentGameObject = when(match.currentGame) {
@@ -107,16 +110,55 @@ class GameActivity: AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.game_menu, menu)
+        if(match.settingGames == 1) {
+            menu.findItem(R.id.gameMenuGame2).isVisible = false
+            menu.findItem(R.id.gameMenuGame3).isVisible = false
+            menu.findItem(R.id.gameMenuGame4).isVisible = false
+        }
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.gameMenuGame1 -> {
+            saveIntoLocal()
+            match.currentGame = 1
+            gameStart()
+            true
+        }
+
+        R.id.gameMenuGame2 -> {
+            saveIntoLocal()
+            match.currentGame = 2
+            gameStart()
+            true
+        }
+
+        R.id.gameMenuGame3 -> {
+            saveIntoLocal()
+            match.currentGame = 3
+            gameStart()
+            true
+        }
+
+        R.id.gameMenuGame4 -> {
+            saveIntoLocal()
+            match.currentGame = 4
+            gameStart()
+            true
+        }
+
+        R.id.gameMenuExit -> {
+            saveIntoLocal()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+            true
+        }
+
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
         }
     }
 
@@ -245,7 +287,16 @@ class GameActivity: AppCompatActivity() {
     private fun gameStart() {
         title = getString(R.string.gameActivityTitle, match.currentGame)
 
-        markActivePlayer()
+        currentGameObject = when(match.currentGame) {
+            1 -> match.game1
+            2 -> match.game2
+            3 -> match.game3
+            4 -> match.game4
+            else -> TODO() //gra zakończona lub błędna
+        }
+
+        clearText()
+        setPlayer()
         markAsGoodOrBad()
         calculatePoints()
         calculatePlanned()
@@ -438,6 +489,39 @@ class GameActivity: AppCompatActivity() {
                 } else {
                     textView4.setTextColor(Color.RED)
                 }
+            }
+        }
+    }
+
+    private fun clearText() {
+        var roundsToClear: Int = 13
+        if(match.settingGames == 1)  {roundsToClear = 16}
+        if(match.settingGames == 4)  {roundsToClear = 13}
+        for (i in 1..roundsToClear) {
+            //player 1
+            val resID1 = resources.getIdentifier("textViewRound" + i.toString() + "Player1", "id", packageName)
+            val textView1: TextView = findViewById(resID1)
+            textView1.text = ""
+            textView1.setBackgroundResource(0)
+
+            //player 2
+            val resID2 = resources.getIdentifier("textViewRound" + i.toString() + "Player2", "id", packageName)
+            val textView2: TextView = findViewById(resID2)
+            textView2.text = ""
+            textView2.setBackgroundResource(0)
+
+            if(match.settingPlayers == 4) {
+                //player 3
+                val resID3 = resources.getIdentifier("textViewRound" + i.toString() + "Player3", "id", packageName)
+                val textView3: TextView = findViewById(resID3)
+                textView3.text = ""
+                textView3.setBackgroundResource(0)
+
+                //player 4
+                val resID4 = resources.getIdentifier("textViewRound" + i.toString() + "Player4", "id", packageName)
+                val textView4: TextView = findViewById(resID4)
+                textView4.text = ""
+                textView4.setBackgroundResource(0)
             }
         }
     }
