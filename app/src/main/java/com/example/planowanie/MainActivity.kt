@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
+import java.time.LocalDateTime
 
 
 class MainActivity : AppCompatActivity() {
@@ -149,6 +150,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         match.game1.currentPlayer = 1
+        match.date = java.util.Calendar.getInstance()
 
         val intent = Intent(this, GameActivity::class.java)
         intent.putExtra("Match", match)

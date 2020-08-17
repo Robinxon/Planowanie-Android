@@ -1,7 +1,12 @@
 package com.example.planowanie
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_summary.*
 
 class SummaryActivity: AppCompatActivity() {
@@ -40,10 +45,43 @@ class SummaryActivity: AppCompatActivity() {
                 }
             }
         }
+
+        //listener
+        buttonEndGame.setOnClickListener {
+            saveAndEndGame()
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    private fun saveAndEndGame() {
+        val gson = GsonBuilder().create()
+        val database = getSharedPreferences("database", Context.MODE_PRIVATE)
+
+        var listMatch = listOf<Match>()
+        val listMatchString = database.getString("historyJson", null)
+        val matchType = object : TypeToken<List<Match>>() {}.type
+        if(listMatchString != null) {
+            listMatch = gson.fromJson<List<Match>>(listMatchString, matchType)
+        }
+
+        listMatch = listMatch + match
+
+        val json = gson.toJson(listMatch)
+
+        database.edit().apply {
+            putString("historyJson", json)
+        }.apply()
+
+        database.edit().remove("matchJson").apply()
+        Toast.makeText(this, "Gra zapisana pomyślnie!", Toast.LENGTH_SHORT).show()
+        val intentToClose = Intent("finish_activity")
+        sendBroadcast(intentToClose)
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

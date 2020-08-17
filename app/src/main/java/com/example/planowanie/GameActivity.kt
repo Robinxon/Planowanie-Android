@@ -1,8 +1,6 @@
 package com.example.planowanie
 
-import android.content.ClipData
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
@@ -17,7 +15,6 @@ import com.google.gson.GsonBuilder
 import com.kaushikthedeveloper.doublebackpress.DoubleBackPress
 import com.kaushikthedeveloper.doublebackpress.helper.DoubleBackPressAction
 import com.kaushikthedeveloper.doublebackpress.helper.FirstBackPressAction
-import com.kaushikthedeveloper.doublebackpress.setup.display.ToastDisplay
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlin.system.exitProcess
 
@@ -103,6 +100,19 @@ class GameActivity: AppCompatActivity() {
                 saveIntoLocal()
             }
         }
+
+        //nasłuchiwanie na zakończenie aktywności
+        val broadcastReceiver = object : BroadcastReceiver() {
+
+            override fun onReceive(arg0: Context, intent: Intent) {
+                val action = intent.action
+                if (action == "finish_activity") {
+                    finish()
+                    // DO WHATEVER YOU WANT.
+                }
+            }
+        }
+        registerReceiver(broadcastReceiver, IntentFilter("finish_activity"))
 
         gameStart()
     }

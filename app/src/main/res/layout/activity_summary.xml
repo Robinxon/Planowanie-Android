@@ -58,7 +58,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -93,7 +94,18 @@
             android:gravity="center"
             tools:text="145"/>
 
-
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/buttonEndGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="@string/endGame"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
 </LinearLayout>

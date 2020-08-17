@@ -2,6 +2,8 @@ package com.example.planowanie
 
 import java.io.Serializable
 import java.text.DateFormat
+import java.time.LocalDateTime
+import java.util.*
 
 class Match: Serializable {
     lateinit var game1: Game
@@ -19,5 +21,5 @@ class Match: Serializable {
     var settingPlayers: Int = 0
     var settingGames: Int = 0
 
-    lateinit var date: DateFormat
+    lateinit var date: Calendar
 }
