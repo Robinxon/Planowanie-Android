@@ -76,6 +76,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             true
         }
+        else -> super.onOptionsItemSelected(item)
     }
 
     private fun startNewGame() {
