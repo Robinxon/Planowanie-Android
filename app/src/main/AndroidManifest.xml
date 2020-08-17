@@ -23,6 +23,7 @@
             android:name=".SummaryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:parentActivityName="com.example.planowanie.GameActivity"/>
+        <activity android:name=".StatsActivity" />
     </application>
 
 </manifest>
