@@ -2,20 +2,15 @@ package com.example.planowanie
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log.d
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.RadioButton
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
-import java.time.LocalDateTime
-
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
