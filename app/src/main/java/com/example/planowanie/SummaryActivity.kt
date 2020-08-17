@@ -13,16 +13,37 @@ class SummaryActivity: AppCompatActivity() {
         actionBar?.setDisplayHomeAsUpEnabled(true);
         match = intent.getSerializableExtra("currentGame") as Match
 
-        calculatePoints()
+        //wypełnij nazwy graczy
+        playerName1.setText(match.player1Name)
+        playerName2.setText(match.player2Name)
+        if(match.settingPlayers == 4) {
+            playerName3.setText(match.player3Name)
+            playerName4.setText(match.player4Name)
+        }
+
+        //wypełnij punkty
+        when(match.settingGames) {
+            1 -> {
+                tvSummaryPoints1.text = match.game1.player1.points.toString()
+                tvSummaryPoints2.text = match.game1.player2.points.toString()
+                if(match.settingPlayers == 4) {
+                    tvSummaryPoints3.text = match.game1.player3.points.toString()
+                    tvSummaryPoints4.text = match.game1.player4.points.toString()
+                }
+            }
+            4 -> {
+                tvSummaryPoints1.text = (match.game1.player1.points + match.game2.player1.points + match.game3.player1.points + match.game4.player1.points).toString()
+                tvSummaryPoints2.text = (match.game1.player2.points + match.game2.player2.points + match.game3.player2.points + match.game4.player2.points).toString()
+                if(match.settingPlayers == 4) {
+                    tvSummaryPoints3.text = (match.game1.player3.points + match.game2.player3.points + match.game3.player3.points + match.game4.player3.points).toString()
+                    tvSummaryPoints4.text = (match.game1.player4.points + match.game2.player4.points + match.game3.player4.points + match.game4.player4.points).toString()
+                }
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
-    }
-
-    private fun calculatePoints() {
-        //var playerPoints1 = match.game1.player1.points + match.game2.player1.points + match.game3?.player1.points + match.game4?.player1.points
-        //tvSummaryPoints1.text = playerPoints1.toString()
     }
 }
