@@ -150,7 +150,7 @@ class GameActivity: AppCompatActivity() {
         R.id.gameSummary -> {
             saveIntoLocal()
             val intent = Intent(this, SummaryActivity::class.java)
-            intent.putExtra("currentGame", match.currentGame)
+            intent.putExtra("currentGame", match)
             startActivity(intent)
             true
         }

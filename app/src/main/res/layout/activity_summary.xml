@@ -53,6 +53,47 @@
             android:singleLine="true"
             android:inputType="none"
             tools:text="MMMMMMMM"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSummaryPoints1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="145"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSummaryPoints2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="145"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSummaryPoints3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="145"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSummaryPoints4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="145"/>
+
+
     </LinearLayout>
 
 </LinearLayout>
