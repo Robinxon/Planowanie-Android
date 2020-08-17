@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.basicactivity.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/mainMenuStats"
         android:orderInCategory="100"
-        android:title="placeholder main"
+        android:title="@string/stats"
         app:showAsAction="never" />
 </menu>
