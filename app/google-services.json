@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "404932373779",
+    "firebase_url": "https://planowanie-49c48.firebaseio.com",
+    "project_id": "planowanie-49c48",
+    "storage_bucket": "planowanie-49c48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404932373779:android:3562aa87af207486d3fee6",
+        "android_client_info": {
+          "package_name": "pl.robinxon.planowanie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "404932373779-387oqt4o43hm8kd0fg1rsncrvja6t8en.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRrR4iu4v_pgWeDyUX8ks03xksovE0_nU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "404932373779-387oqt4o43hm8kd0fg1rsncrvja6t8en.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
