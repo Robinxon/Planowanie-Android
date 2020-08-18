@@ -4,18 +4,54 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log.d
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var database: DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        //test firebase database
+        //database = Firebase.database.reference
+        //database.child("users").child("user1").setValue("pass12345")
+
+        val fireDatabase = Firebase.database
+        val myRef = fireDatabase.getReference("message")
+
+        myRef.setValue("Hello, World!")
+
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                val value = dataSnapshot
+                    .getValue<String>()
+                d("database_test", "Value is: $value")
+                buttonPlay.text = value
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                d("database_test", "Failed to read value.", error.toException())
+            }
+        })
 
         editTextPlayer3Name.visibility = View.GONE
         editTextPlayer4Name.visibility = View.GONE
@@ -35,6 +71,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonPlay.setOnClickListener {
+            //test bazy
+            myRef.setValue(editTextPlayer1Name.text.toString())
+
             //inicjacja parsera GSON, bazy danych
             val gson = GsonBuilder().create()
             val database = getSharedPreferences("database", Context.MODE_PRIVATE)
