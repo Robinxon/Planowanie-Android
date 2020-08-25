@@ -66,4 +66,5 @@
     <string name="game_history">Historia gier</string>
     <string name="error_connecting_to_database">Błąd połączenia z bazą danych</string>
     <string name="loading_from_database">Wczytywanie z bazy danych...</string>
+    <string name="input_all_player_names">Podaj nazwy wszystkich graczy!</string>
 </resources>

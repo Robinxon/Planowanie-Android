@@ -3,6 +3,7 @@ package pl.robinxon.planowanie
 import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import pl.robinxon.planowanie.R
 import com.google.firebase.database.DatabaseReference
@@ -53,29 +54,38 @@ class NewGameActivity : AppCompatActivity() {
 
     //region Funkcje przycisków
     private fun startNewGame() {
+        //sprawdzenie poprawności
+        if(
+            editTextPlayer1Name.text.toString() == ""
+            || editTextPlayer2Name.text.toString() == ""
+            || (editTextPlayer3Name.visibility == View.VISIBLE && editTextPlayer3Name.text.toString() == "")
+            || (editTextPlayer4Name.visibility == View.VISIBLE && editTextPlayer4Name.text.toString() == "")
+        ) {
+            Toast.makeText(this, resources.getString(R.string.input_all_player_names), Toast.LENGTH_SHORT ).show()
+            return
+        }
         //utworzenie klasy meczu
         val match = Match()
 
-        /*val radioPlayer: RadioButton = findViewById(radioGroupPlayerCount.checkedRadioButtonId)
-        when (radioPlayer.text) {
-            "2 graczy" -> match.settingPlayers = 2
-            "4 graczy" -> match.settingPlayers = 4
-            else -> match.settingPlayers = 111
-        }*/
+        //zapisanie liczby graczy
+        val radioPlayer: RadioButton = findViewById(radioGroupPlayerCount.checkedRadioButtonId)
+        when (resources.getResourceEntryName(radioPlayer.id)) {
+            "radioButton2Players" -> match.settingPlayers = 2
+            "radioButton4Players" -> match.settingPlayers = 4
+        }
 
-        /*val radioGame: RadioButton = findViewById(radioGroupGameType.checkedRadioButtonId)
-        when (radioGame.text) {
-            "gra pojedyńcza" -> match.settingGames = 1
-            "gra poczwórna" -> match.settingGames = 4
-        }*/
+        //zapisanie liczby gier
+        val radioGame: RadioButton = findViewById(radioGroupGameType.checkedRadioButtonId)
+        when (resources.getResourceEntryName(radioGame.id)) {
+            "radioButton1Round" -> match.settingGames = 1
+            "radioButton4Rounds" -> match.settingGames = 4
+        }
 
         //zapisanie nazw graczy
-        /*match.player1Name = editTextPlayer1Name.text.toString()
-        match.player2Name = editTextPlayer2Name.text.toString()
-        if(match.settingPlayers == 4) {
-            match.player3Name = editTextPlayer3Name.text.toString()
-            match.player4Name = editTextPlayer4Name.text.toString()
-        }*/
+        match.player1Name = editTextPlayer1Name.text?.toString()
+        match.player2Name = editTextPlayer2Name.text?.toString()
+        match.player3Name = editTextPlayer3Name.text?.toString()
+        match.player4Name = editTextPlayer4Name.text?.toString()
 
         //utworzenie gier
         /*match.game1 = Game()
