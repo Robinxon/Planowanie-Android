@@ -77,14 +77,14 @@ class MenuActivity: AppCompatActivity() {
     private fun menuNew() {
         if(loadedMatch != null){
             val builder = AlertDialog.Builder(this)
-            builder.setTitle("Wykryto zapisaną grę!")
-            builder.setMessage("Na tym urządzeniu zapisana jest niezakończona gra. Czy napewno chcesz ją nadpisać?")
+            builder.setTitle(resources.getString(R.string.do_you_really_want_to_overwrite_game))
+            builder.setMessage(resources.getString(R.string.overwritting_confirmation_text))
 
-            builder.setPositiveButton("Tak") { _, _ -> //nadpisanie starej gry
+            builder.setPositiveButton(resources.getString(R.string.yes)) { _, _ -> //nadpisanie starej gry
                 startActivity(Intent(this, NewGameActivity::class.java))
             }
 
-            builder.setNegativeButton("Nie") { _, _ -> //kontynuowanie starej gry
+            builder.setNegativeButton(resources.getString(R.string.no)) { _, _ -> //kontynuowanie starej gry
                 startActivity(Intent(this, GameActivity::class.java))
             }
 
