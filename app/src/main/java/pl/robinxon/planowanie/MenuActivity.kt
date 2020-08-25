@@ -35,10 +35,10 @@ class MenuActivity: AppCompatActivity() {
         fireMatch = fireDatabase.getReference("match")
 
         //testowe dane do bazy
-        val gson = GsonBuilder().create()
+        /*val gson = GsonBuilder().create()
         var match = Match()
         val json = gson.toJson(match)
-        fireMatch.setValue(json)
+        fireMatch.setValue(json)*/
 
         //dodanie obrysów do przycisków
         menuContinue.setBackgroundResource(R.drawable.tv_border)
