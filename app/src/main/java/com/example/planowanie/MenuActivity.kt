@@ -1,5 +1,7 @@
 package com.example.planowanie
 
+import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,15 +14,17 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_menu.*
 import kotlinx.android.synthetic.main.activity_new_game.*
 
 class MenuActivity: AppCompatActivity() {
-    //inizjalizacja bazy danych firebase
+    //inicjalizacja bazy danych firebase i jej zmiennych
     private val fireDatabase = Firebase.database
-
-    //przypisanie wartości z bazy do zmiennych
     private lateinit var fireMatch: DatabaseReference
+
+    //incjalizacja zmiennych globalnych
+    private var loadedMatch: Match? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //inicjalizacja widoku
@@ -30,6 +34,12 @@ class MenuActivity: AppCompatActivity() {
         //opcje bazy danych
         Firebase.database.setPersistenceEnabled(true)
         fireMatch = fireDatabase.getReference("match")
+
+        //testowe dane do bazy
+        val gson = GsonBuilder().create()
+        var match = Match()
+        val json = gson.toJson(match)
+        fireMatch.setValue(json)
 
         //dodanie obrysów do przycisków
         menuContinue.setBackgroundResource(R.drawable.tv_border)
@@ -50,33 +60,47 @@ class MenuActivity: AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val value = dataSnapshot
                     .getValue<String>()
-                Log.d("database_test", "Value is: $value")
+                Log.d("database_test", "Match is: $value")
                 if(value.isNullOrEmpty()) {
                     menuContinueDescription.text = R.string.no_saved_game.toString()
                 } else {
-                    menuContinueDescription.text = value.toString()
+                    loadMatchFromDatabase(value)
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
-                Log.d("database_test", "Failed to read value.", error.toException())
+                Log.d("database_test", "Failed to read value Match.", error.toException())
             }
         })
     }
 
+    //region Funkcje przycisków
     private fun menuContinue() {
-        fireMatch.setValue("continue")
         Toast.makeText(this, "ok cont", Toast.LENGTH_SHORT ).show()
     }
 
     private fun menuNew() {
-        val intent = Intent(this, NewGameActivity::class.java)
-        startActivity(intent)
+        if(loadedMatch != null){
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Wykryto zapisaną grę!")
+            builder.setMessage("Na tym urządzeniu zapisana jest niezakończona gra. Czy napewno chcesz ją nadpisać?")
+
+            builder.setPositiveButton("Tak") { _, _ -> //nadpisanie starej gry
+                startActivity(Intent(this, NewGameActivity::class.java))
+            }
+
+            builder.setNegativeButton("Nie") { _, _ -> //kontynuowanie starej gry
+                startActivity(Intent(this, GameActivity::class.java))
+            }
+
+            builder.show()
+        } else {
+            startActivity(Intent(this, NewGameActivity::class.java))
+        }
     }
 
     private fun menuPlayers() {
-        fireMatch.setValue("players")
         Toast.makeText(this, "ok players", Toast.LENGTH_SHORT ).show()
     }
 
@@ -86,5 +110,13 @@ class MenuActivity: AppCompatActivity() {
 
     private fun menuHistory() {
         Toast.makeText(this, "ok history", Toast.LENGTH_SHORT ).show()
+    }
+    //endregion
+
+    private fun loadMatchFromDatabase(value: String) {
+        val gson = GsonBuilder().create()
+        loadedMatch = gson.fromJson(value, Match::class.java)
+        var text: String = loadedMatch?.player1Name ?: "none"
+        menuContinueDescription.text = text
     }
 }

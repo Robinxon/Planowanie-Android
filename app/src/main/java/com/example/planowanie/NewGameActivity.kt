@@ -147,40 +147,40 @@ class NewGameActivity : AppCompatActivity() {
 
         //utworzenie gier
         match.game1 = Game()
-        match.game1.player1 = Player()
-        match.game1.player2 = Player()
+        match.game1?.player1 = Player()
+        match.game1?.player2 = Player()
         if(match.settingPlayers == 4) {
-            match.game1.player3 = Player()
-            match.game1.player4 = Player()
+            match.game1?.player3 = Player()
+            match.game1?.player4 = Player()
         }
 
         if(match.settingGames == 4) {
             match.game2 = Game()
-            match.game2.player1 = Player()
-            match.game2.player2 = Player()
+            match.game2?.player1 = Player()
+            match.game2?.player2 = Player()
             if(match.settingPlayers == 4) {
-                match.game2.player3 = Player()
-                match.game2.player4 = Player()
+                match.game2?.player3 = Player()
+                match.game2?.player4 = Player()
             }
 
             match.game3 = Game()
-            match.game3.player1 = Player()
-            match.game3.player2 = Player()
+            match.game3?.player1 = Player()
+            match.game3?.player2 = Player()
             if(match.settingPlayers == 4) {
-                match.game3.player3 = Player()
-                match.game3.player4 = Player()
+                match.game3?.player3 = Player()
+                match.game3?.player4 = Player()
             }
 
             match.game4 = Game()
-            match.game4.player1 = Player()
-            match.game4.player2 = Player()
+            match.game4?.player1 = Player()
+            match.game4?.player2 = Player()
             if(match.settingPlayers == 4) {
-                match.game4.player3 = Player()
-                match.game4.player4 = Player()
+                match.game4?.player3 = Player()
+                match.game4?.player4 = Player()
             }
         }
 
-        match.game1.currentPlayer = 1
+        match.game1?.currentPlayer = 1
         match.date = java.util.Calendar.getInstance()
 
         val intent = Intent(this, GameActivity::class.java)
