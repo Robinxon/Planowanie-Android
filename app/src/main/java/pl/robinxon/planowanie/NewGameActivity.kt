@@ -36,43 +36,20 @@ class NewGameActivity : AppCompatActivity() {
             }
         }
 
-        /*buttonPlay.setOnClickListener {
-            //inicjacja parsera GSON, bazy danych
-            val gson = GsonBuilder().create()
-            val database = getSharedPreferences("database", Context.MODE_PRIVATE)
-
-            //próba wczytania gry z pamięci
-            val savedGame = database.getString("matchJson", null)
-            if(savedGame != null) { //jeśli gra pobierze się z pamięci
-                val loadedMatch = gson.fromJson(savedGame, Match::class.java)
-                val builder = AlertDialog.Builder(this)
-                builder.setTitle("Wykryto zapisaną grę!")
-                builder.setMessage("Na tym urządzeniu zapisana jest niezakończona gra. Czy chcesz ją kontynuować?")
-
-                builder.setPositiveButton("Tak") { _, _ -> //kontynuacja starej gry
-                    val intent = Intent(this, GameActivity::class.java)
-                    intent.putExtra("loadedMatch", loadedMatch)
-                    startActivity(intent)
-                }
-
-                builder.setNegativeButton("Nie") { _, _ -> //rozpoczęcie nowej gry
-                    startNewGame()
-                }
-                builder.show()
-            }
-            else {
-                startNewGame()
-            }
-        }*/
+        //dodanie listenerów do przycisków
+        buttonPlay.setOnClickListener { startNewGame()}
     }
 
+    //region Overridy funkcji
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
     }
+    //endregion
 
-    /*private fun startNewGame() {
-        //inicjacja parsera GSON, bazy danych
+    //region Funkcje przycisków
+    private fun startNewGame() {
+        /*//inicjacja parsera GSON, bazy danych
         val gson = GsonBuilder().create()
         val database = getSharedPreferences("database", Context.MODE_PRIVATE)
 
@@ -141,6 +118,7 @@ class NewGameActivity : AppCompatActivity() {
         val intent = Intent(this, GameActivity::class.java)
         intent.putExtra("Match", match)
         startActivity(intent)
-        finish()
-    }*/
+        finish()*/
+    }
+    //endregion
 }
