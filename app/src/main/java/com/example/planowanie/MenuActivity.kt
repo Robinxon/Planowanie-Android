@@ -61,11 +61,12 @@ class MenuActivity: AppCompatActivity() {
                 val value = dataSnapshot
                     .getValue<String>()
                 Log.d("database_test", "Match is: $value")
-                if(value.isNullOrEmpty()) {
-                    menuContinueDescription.text = R.string.no_saved_game.toString()
-                } else {
+                if(!value.isNullOrEmpty()) {
                     loadedMatch = decodeJsonToMatch(value)
                     menuContinueDescription.text = loadedMatch?.player1Name ?: "none"
+                } else {
+                    menuContinueDescription.text = R.string.no_saved_game.toString()
+
                 }
             }
 
