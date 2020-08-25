@@ -58,4 +58,10 @@
     <string name="summary">Podsumowanie</string>
     <string name="endGame">Zakończ grę</string>
     <string name="stats">Statystyki</string>
+    <string name="continue_previous_game">Kontynuuj poprzednią grę</string>
+    <string name="no_saved_game">Brak zapisanej gry.</string>
+    <string name="start_new_game">Rozpocznij nową grę</string>
+    <string name="list_of_registered_players">Lista zarejestrowanych graczy</string>
+    <string name="game_stats">Statystyki gier</string>
+    <string name="game_history">Historia gier</string>
 </resources>
