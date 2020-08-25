@@ -1,6 +1,5 @@
 package com.example.planowanie
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -16,7 +15,6 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_menu.*
-import kotlinx.android.synthetic.main.activity_new_game.*
 
 class MenuActivity: AppCompatActivity() {
     //inicjalizacja bazy danych firebase i jej zmiennych
