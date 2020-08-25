@@ -64,7 +64,7 @@ class MenuActivity: AppCompatActivity() {
                 if(value.isNullOrEmpty()) {
                     menuContinueDescription.text = R.string.no_saved_game.toString()
                 } else {
-                    loadedMatch = loadMatchFromDatabase(value)
+                    loadedMatch = decodeJsonToMatch(value)
                     menuContinueDescription.text = loadedMatch?.player1Name ?: "none"
                 }
             }
@@ -114,7 +114,7 @@ class MenuActivity: AppCompatActivity() {
     }
     //endregion
 
-    private fun loadMatchFromDatabase(value: String): Match {
+    private fun decodeJsonToMatch(value: String): Match {
         val gson = GsonBuilder().create()
         return gson.fromJson(value, Match::class.java)
     }
