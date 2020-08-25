@@ -8,6 +8,7 @@ import pl.robinxon.planowanie.R
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_new_game.*
 
 class NewGameActivity : AppCompatActivity() {
@@ -20,6 +21,9 @@ class NewGameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_game)
         actionBar?.setDisplayHomeAsUpEnabled(true);
+
+        //opcje bazy danych
+        fireMatch = fireDatabase.getReference("match")
 
         //ustawienie listenera dla radio buttonów
         radioGroupPlayerCount.setOnCheckedChangeListener { _, checkedId ->
@@ -49,36 +53,32 @@ class NewGameActivity : AppCompatActivity() {
 
     //region Funkcje przycisków
     private fun startNewGame() {
-        /*//inicjacja parsera GSON, bazy danych
-        val gson = GsonBuilder().create()
-        val database = getSharedPreferences("database", Context.MODE_PRIVATE)
-
-        //utworzenie meczu
+        //utworzenie klasy meczu
         val match = Match()
 
-        val radioPlayer: RadioButton = findViewById(radioGroupPlayerCount.checkedRadioButtonId)
+        /*val radioPlayer: RadioButton = findViewById(radioGroupPlayerCount.checkedRadioButtonId)
         when (radioPlayer.text) {
             "2 graczy" -> match.settingPlayers = 2
             "4 graczy" -> match.settingPlayers = 4
             else -> match.settingPlayers = 111
-        }
+        }*/
 
-        val radioGame: RadioButton = findViewById(radioGroupGameType.checkedRadioButtonId)
+        /*val radioGame: RadioButton = findViewById(radioGroupGameType.checkedRadioButtonId)
         when (radioGame.text) {
             "gra pojedyńcza" -> match.settingGames = 1
             "gra poczwórna" -> match.settingGames = 4
-        }
+        }*/
 
         //zapisanie nazw graczy
-        match.player1Name = editTextPlayer1Name.text.toString()
+        /*match.player1Name = editTextPlayer1Name.text.toString()
         match.player2Name = editTextPlayer2Name.text.toString()
         if(match.settingPlayers == 4) {
             match.player3Name = editTextPlayer3Name.text.toString()
             match.player4Name = editTextPlayer4Name.text.toString()
-        }
+        }*/
 
         //utworzenie gier
-        match.game1 = Game()
+        /*match.game1 = Game()
         match.game1?.player1 = Player()
         match.game1?.player2 = Player()
         if(match.settingPlayers == 4) {
@@ -119,6 +119,10 @@ class NewGameActivity : AppCompatActivity() {
         intent.putExtra("Match", match)
         startActivity(intent)
         finish()*/
+
+        //przekonwertowanie meczu do json i zapisanie w bazie
+        val gson = GsonBuilder().create()
+        fireMatch.setValue(gson.toJson(match))
     }
     //endregion
 }
