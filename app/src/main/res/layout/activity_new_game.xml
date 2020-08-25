@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,33 +20,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/editTextPlayer3Name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:hint="@string/player3Hint"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextPlayer2Name" />
-
-            <EditText
-                android:id="@+id/editTextPlayer1Name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:hint="@string/player1Hint"
-                android:inputType="textPersonName"
-                android:importantForAutofill="no"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewPlayerNames" />
 
             <TextView
                 android:id="@+id/textViewPlayerCount"
@@ -83,30 +57,29 @@
                     android:textSize="18sp" />
             </RadioGroup>
 
-            <RadioGroup
-                android:id="@+id/radioGroupGameType"
+            <TextView
+                android:id="@+id/textViewPlayerNames"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/playersNamesText"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroupPlayerCount" />
+
+            <EditText
+                android:id="@+id/editTextPlayer1Name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="@string/player1Hint"
+                android:inputType="textPersonName"
+                android:importantForAutofill="no"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewGameType">
-
-                <RadioButton
-                    android:id="@+id/radioButton1Round"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="@string/singleGameRadio"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/radioButton4Rounds"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/quadraGameRadio"
-                    android:textSize="18sp" />
-            </RadioGroup>
+                app:layout_constraintTop_toBottomOf="@+id/textViewPlayerNames" />
 
             <EditText
                 android:id="@+id/editTextPlayer2Name"
@@ -121,16 +94,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextPlayer1Name" />
 
-            <TextView
-                android:id="@+id/textViewPlayerNames"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/editTextPlayer3Name"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/playersNamesText"
-                android:textSize="18sp"
+                android:ems="10"
+                android:hint="@string/player3Hint"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroupPlayerCount" />
+                app:layout_constraintTop_toBottomOf="@+id/editTextPlayer2Name" />
 
             <EditText
                 android:id="@+id/editTextPlayer4Name"
@@ -156,6 +132,31 @@
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextPlayer4Name" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupGameType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewGameType">
+
+                <RadioButton
+                    android:id="@+id/radioButton1Round"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/singleGameRadio"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton4Rounds"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/quadraGameRadio"
+                    android:textSize="18sp" />
+            </RadioGroup>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
