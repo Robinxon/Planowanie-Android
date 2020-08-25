@@ -28,9 +28,10 @@
                 android:layout_marginTop="8dp"
                 android:ems="10"
                 android:hint="@string/player3Hint"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 android:maxLength="3"
-                android:importantForAutofill="no"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextPlayer2Name" />
 
@@ -142,9 +143,10 @@
                 android:layout_marginTop="8dp"
                 android:ems="10"
                 android:hint="@string/player4Hint"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 android:maxLength="3"
-                android:importantForAutofill="no"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextPlayer3Name" />
 
