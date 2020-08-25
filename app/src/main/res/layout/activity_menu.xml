@@ -1,104 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="8dp">
-
+    android:layout_height="match_parent">
     <LinearLayout
-        android:id="@+id/menuContinue"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:layout_marginBottom="8dp">
-        <TextView
-            android:id="@+id/menuContinueTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:text="@string/continue_previous_game"/>
-        <TextView
-            android:id="@+id/menuContinueDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="@string/no_saved_game"/>
+        android:padding="8dp">
 
+        <LinearLayout
+            android:id="@+id/menuContinue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:id="@+id/menuContinueTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="@string/continue_previous_game"/>
+            <TextView
+                android:id="@+id/menuContinueDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/no_saved_game"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/menuNew"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:id="@+id/menuNewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="@string/start_new_game"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/menuPlayers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:id="@+id/menuPlayersTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="@string/list_of_registered_players"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/menuStats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:id="@+id/menuStatsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="@string/game_stats"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/menuHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:id="@+id/menuHistoryTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="@string/game_history"/>
+
+        </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/menuNew"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:layout_marginBottom="8dp">
-        <TextView
-            android:id="@+id/menuNewTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:text="@string/start_new_game"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/menuPlayers"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:layout_marginBottom="8dp">
-        <TextView
-            android:id="@+id/menuPlayersTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:text="@string/list_of_registered_players"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/menuStats"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:layout_marginBottom="8dp">
-        <TextView
-            android:id="@+id/menuStatsTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:text="@string/game_stats"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/menuHistory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:layout_marginBottom="8dp">
-        <TextView
-            android:id="@+id/menuHistoryTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:text="@string/game_history"/>
-
-    </LinearLayout>
-</LinearLayout>
+</ScrollView>
