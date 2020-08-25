@@ -27,6 +27,7 @@ class NewGameActivity : AppCompatActivity() {
         //inicjalizacja widoku
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_game)
+        actionBar?.setDisplayHomeAsUpEnabled(true);
 
         //ustawienie listenera dla radio buttonów
         radioGroupPlayerCount.setOnCheckedChangeListener { _, checkedId ->
@@ -73,20 +74,10 @@ class NewGameActivity : AppCompatActivity() {
         }*/
     }
 
-    /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main_menu, menu)
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
         return true
     }
-
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.mainMenuStats -> {
-            val intent = Intent(this, StatsActivity::class.java)
-            startActivity(intent)
-            true
-        }
-        else -> super.onOptionsItemSelected(item)
-    }*/
 
     /*private fun startNewGame() {
         //inicjacja parsera GSON, bazy danych
