@@ -64,7 +64,8 @@ class MenuActivity: AppCompatActivity() {
                 if(value.isNullOrEmpty()) {
                     menuContinueDescription.text = R.string.no_saved_game.toString()
                 } else {
-                    loadMatchFromDatabase(value)
+                    loadedMatch = loadMatchFromDatabase(value)
+                    menuContinueDescription.text = loadedMatch?.player1Name ?: "none"
                 }
             }
 
@@ -101,22 +102,20 @@ class MenuActivity: AppCompatActivity() {
     }
 
     private fun menuPlayers() {
-        Toast.makeText(this, "ok players", Toast.LENGTH_SHORT ).show()
+        //startActivity(Intent(this, PlayersActivity::class.java))
     }
 
     private fun menuStats() {
-        Toast.makeText(this, "ok stats", Toast.LENGTH_SHORT ).show()
+        //startActivity(Intent(this, StatsActivity::class.java))
     }
 
     private fun menuHistory() {
-        Toast.makeText(this, "ok history", Toast.LENGTH_SHORT ).show()
+        //startActivity(Intent(this, HistoryActivity::class.java))
     }
     //endregion
 
-    private fun loadMatchFromDatabase(value: String) {
+    private fun loadMatchFromDatabase(value: String): Match {
         val gson = GsonBuilder().create()
-        loadedMatch = gson.fromJson(value, Match::class.java)
-        var text: String = loadedMatch?.player1Name ?: "none"
-        menuContinueDescription.text = text
+        return gson.fromJson(value, Match::class.java)
     }
 }
