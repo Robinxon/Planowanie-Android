@@ -17,6 +17,7 @@
             android:id="@+id/menuContinueTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:textSize="16sp"
             android:textColor="@color/black"
             android:text="Kontynuuj poprzednią grę"/>
@@ -40,9 +41,64 @@
             android:id="@+id/menuNewTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:textSize="16sp"
             android:textColor="@color/black"
             android:text="Rozpocznij nową grę"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menuPlayers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_marginBottom="8dp">
+        <TextView
+            android:id="@+id/menuPlayersTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="Lista zarejestrowanych graczy"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menuStats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_marginBottom="8dp">
+        <TextView
+            android:id="@+id/menuStatsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="Statystyki gier"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menuHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_marginBottom="8dp">
+        <TextView
+            android:id="@+id/menuHistoryTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="Historia gier"/>
 
     </LinearLayout>
 </LinearLayout>
