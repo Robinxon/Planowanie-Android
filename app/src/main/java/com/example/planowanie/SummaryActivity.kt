@@ -16,15 +16,15 @@ class SummaryActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_summary)
         actionBar?.setDisplayHomeAsUpEnabled(true);
-        match = intent.getSerializableExtra("currentGame") as Match
+        //match = intent.getSerializableExtra("currentGame") as Match
 
         //wypełnij nazwy graczy
-        playerName1.setText(match.player1Name)
+        /*playerName1.setText(match.player1Name)
         playerName2.setText(match.player2Name)
         if(match.settingPlayers == 4) {
             playerName3.setText(match.player3Name)
             playerName4.setText(match.player4Name)
-        }
+        }*/
 
         //wypełnij punkty
         /*when(match.settingGames) {
