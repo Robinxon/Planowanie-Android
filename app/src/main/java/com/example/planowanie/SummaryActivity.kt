@@ -80,7 +80,7 @@ class SummaryActivity: AppCompatActivity() {
         Toast.makeText(this, "Gra zapisana pomyślnie!", Toast.LENGTH_SHORT).show()
         val intentToClose = Intent("finish_activity")
         sendBroadcast(intentToClose)
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, NewGameActivity::class.java)
         startActivity(intent)
         finish()
     }

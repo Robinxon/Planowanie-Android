@@ -167,7 +167,7 @@ class GameActivity: AppCompatActivity() {
 
         R.id.gameMenuExit -> {
             saveIntoLocal()
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, NewGameActivity::class.java)
             startActivity(intent)
             finish()
             true

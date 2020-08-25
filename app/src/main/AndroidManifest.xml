@@ -9,13 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MenuActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".NewGameActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".GameActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
@@ -26,7 +30,7 @@
         <activity
             android:name=".StatsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:parentActivityName="com.example.planowanie.MainActivity"/>
+            android:parentActivityName="com.example.planowanie.NewGameActivity"/>
     </application>
 
 </manifest>

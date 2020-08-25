@@ -5,8 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log.d
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
@@ -18,14 +16,14 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.gson.GsonBuilder
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_new_game.*
 
-class MainActivity : AppCompatActivity() {
+class NewGameActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_new_game)
 
 
         //test firebase database
