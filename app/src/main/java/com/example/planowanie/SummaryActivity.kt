@@ -27,7 +27,7 @@ class SummaryActivity: AppCompatActivity() {
         }
 
         //wypełnij punkty
-        when(match.settingGames) {
+        /*when(match.settingGames) {
             1 -> {
                 tvSummaryPoints1.text = match.game1.player1.points.toString()
                 tvSummaryPoints2.text = match.game1.player2.points.toString()
@@ -44,7 +44,7 @@ class SummaryActivity: AppCompatActivity() {
                     tvSummaryPoints4.text = (match.game1.player4.points + match.game2.player4.points + match.game3.player4.points + match.game4.player4.points).toString()
                 }
             }
-        }
+        }*/
 
         //listener
         buttonEndGame.setOnClickListener {
