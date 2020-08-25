@@ -19,59 +19,31 @@ import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_new_game.*
 
 class NewGameActivity : AppCompatActivity() {
-    private lateinit var database: DatabaseReference
+    //inicjalizacja bazy danych firebase i jej zmiennych
+    private val fireDatabase = Firebase.database
+    private lateinit var fireMatch: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //inicjalizacja widoku
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_game)
 
-
-        //test firebase database
-        //database = Firebase.database.reference
-        //database.child("users").child("user1").setValue("pass12345")
-
-        val fireDatabase = Firebase.database
-        val myRef = fireDatabase.getReference("message")
-
-        myRef.setValue("Hello, World!")
-
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                val value = dataSnapshot
-                    .getValue<String>()
-                d("database_test", "Value is: $value")
-                buttonPlay.text = value
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                d("database_test", "Failed to read value.", error.toException())
-            }
-        })
-
-        editTextPlayer3Name.visibility = View.GONE
-        editTextPlayer4Name.visibility = View.GONE
-
+        //ustawienie listenera dla radio buttonów
         radioGroupPlayerCount.setOnCheckedChangeListener { _, checkedId ->
             val radio: RadioButton = findViewById(checkedId)
-            when(radio.text) {
-                "2 graczy" -> {
+            when(resources.getResourceEntryName(radio.id)) {
+                "radioButton2Players" -> {
                     editTextPlayer3Name.visibility = View.GONE
                     editTextPlayer4Name.visibility = View.GONE
                 }
-                "4 graczy" -> {
+                "radioButton4Players" -> {
                     editTextPlayer3Name.visibility = View.VISIBLE
                     editTextPlayer4Name.visibility = View.VISIBLE
                 }
             }
         }
 
-        buttonPlay.setOnClickListener {
-            //test bazy
-            myRef.setValue(editTextPlayer1Name.text.toString())
-
+        /*buttonPlay.setOnClickListener {
             //inicjacja parsera GSON, bazy danych
             val gson = GsonBuilder().create()
             val database = getSharedPreferences("database", Context.MODE_PRIVATE)
@@ -98,7 +70,7 @@ class NewGameActivity : AppCompatActivity() {
             else {
                 startNewGame()
             }
-        }
+        }*/
     }
 
     /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -116,7 +88,7 @@ class NewGameActivity : AppCompatActivity() {
         else -> super.onOptionsItemSelected(item)
     }*/
 
-    private fun startNewGame() {
+    /*private fun startNewGame() {
         //inicjacja parsera GSON, bazy danych
         val gson = GsonBuilder().create()
         val database = getSharedPreferences("database", Context.MODE_PRIVATE)
@@ -187,5 +159,5 @@ class NewGameActivity : AppCompatActivity() {
         intent.putExtra("Match", match)
         startActivity(intent)
         finish()
-    }
+    }*/
 }
