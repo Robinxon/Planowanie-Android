@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import pl.robinxon.planowanie.R
@@ -61,11 +62,9 @@ class MenuActivity: AppCompatActivity() {
                     .getValue<String>()
                 Log.d("database_test", "Match is: $value")
                 if(!value.isNullOrEmpty()) {
+                    menuContinue.visibility = View.VISIBLE
                     loadedMatch = decodeJsonToMatch(value)
                     menuContinueDescription.text = loadedMatch?.player1Name ?: "none"
-                } else {
-                    menuContinueDescription.text = R.string.no_saved_game.toString()
-
                 }
             }
 
