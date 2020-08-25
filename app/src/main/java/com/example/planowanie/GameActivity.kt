@@ -35,13 +35,13 @@ class GameActivity: AppCompatActivity() {
             intent.getSerializableExtra("Match") as Match
         }
 
-        currentGameObject = when(match.currentGame) {
+        /*currentGameObject = when(match.currentGame) {
             1 -> match.game1
             2 -> match.game2
             3 -> match.game3
             4 -> match.game4
             else -> TODO() //gra zakończona lub błędna
-        }
+        }*/
 
         editTextPlayer1.setText(getString(R.string.playerNameAndPoints, match.player1Name, 0))
         editTextPlayer2.setText(getString(R.string.playerNameAndPoints, match.player2Name, 0))
@@ -72,7 +72,7 @@ class GameActivity: AppCompatActivity() {
             textViewRound16Player4.visibility = View.GONE
         }
 
-        buttonToggle.setOnClickListener {
+        /*buttonToggle.setOnClickListener {
             nextPlayer()
             saveIntoLocal()
         }
@@ -90,18 +90,18 @@ class GameActivity: AppCompatActivity() {
         buttonPreviousRound.setOnClickListener {
             previousRound()
             saveIntoLocal()
-        }
+        }*/
 
-        for(i in 0..13) {
+        /*for(i in 0..13) {
             val resID = resources.getIdentifier("buttonPlan$i", "id", packageName)
             val button: Button = findViewById(resID)
             button.setOnClickListener {
                 buttonClick(it)
                 saveIntoLocal()
             }
-        }
+        }*/
 
-        //nasłuchiwanie na zakończenie aktywności
+        /*//nasłuchiwanie na zakończenie aktywności
         val broadcastReceiver = object : BroadcastReceiver() {
 
             override fun onReceive(arg0: Context, intent: Intent) {
@@ -114,7 +114,7 @@ class GameActivity: AppCompatActivity() {
         }
         registerReceiver(broadcastReceiver, IntentFilter("finish_activity"))
 
-        gameStart()
+        gameStart()*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -128,7 +128,7 @@ class GameActivity: AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+    /*override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.gameMenuGame1 -> {
             saveIntoLocal()
             match.currentGame = 1
@@ -178,7 +178,7 @@ class GameActivity: AppCompatActivity() {
             // Invoke the superclass to handle it.
             super.onOptionsItemSelected(item)
         }
-    }
+    }*/
 
     private var firstBackPressAction: FirstBackPressAction = FirstBackPressAction {
         Toast.makeText(this, "Naciśnij ponownie, aby zamknąć aplikację", Toast.LENGTH_SHORT).show()
@@ -198,16 +198,16 @@ class GameActivity: AppCompatActivity() {
         doubleBackPress.onBackPressed()
     }
 
-    private fun nextPlayer() {
+    /*private fun nextPlayer() {
         if(++currentGameObject.currentPlayer > match.settingPlayers) {
             currentGameObject.currentPlayer = 1
         }
         markActivePlayer()
         updateText()
         saveIntoLocal()
-    }
+    }*/
 
-    private fun setPlayer() {
+    /*private fun setPlayer() {
         if(match.settingPlayers == 2) {
             currentGameObject.currentPlayer = when(currentGameObject.currentRound % 2) {
                 0 -> 2
@@ -227,9 +227,9 @@ class GameActivity: AppCompatActivity() {
         markActivePlayer()
         updateText()
         saveIntoLocal()
-    }
+    }*/
 
-    private fun nextRound() {
+    /*private fun nextRound() {
         var warning = false
         if(match.settingPlayers == 2) {
             if( currentGameObject.player1.planned[currentGameObject.currentRound] == -1 || currentGameObject.player1.taken[currentGameObject.currentRound] == -1 ||
@@ -274,9 +274,9 @@ class GameActivity: AppCompatActivity() {
                 currentGameObject.currentCards--
             }
         }
-    }
+    }*/
 
-    private fun previousRound() {
+    /*private fun previousRound() {
         if(currentGameObject.currentRound != 1) {
             markRoundInactive()
             if(!currentGameObject.ended) {currentGameObject.currentRound--}
@@ -300,9 +300,9 @@ class GameActivity: AppCompatActivity() {
             updatePoints()
             setPlayer()
         }
-    }
+    }*/
 
-    private fun gameStart() {
+    /*private fun gameStart() {
         title = getString(R.string.gameActivityTitle, match.currentGame)
 
         currentGameObject = when(match.currentGame) {
@@ -322,9 +322,9 @@ class GameActivity: AppCompatActivity() {
         updatePoints()
         setAtut()
         saveIntoLocal()
-    }
+    }*/
 
-    private fun buttonClick(it: View) {
+    /*private fun buttonClick(it: View) {
         val tag = it.tag as String
         val planned = when(currentGameObject.currentPlayer) {
             1 -> currentGameObject.player1.planned[currentGameObject.currentRound]
@@ -349,7 +349,7 @@ class GameActivity: AppCompatActivity() {
 
         updateText()
         nextPlayer()
-    }
+    }*/
 
     private fun setAtut() {
         if(currentGameObject.currentRound == 1) {
@@ -387,7 +387,7 @@ class GameActivity: AppCompatActivity() {
         }
     }
 
-    private fun setPlanned(plan: Int) {
+    /*private fun setPlanned(plan: Int) {
         when(currentGameObject.currentPlayer) {
             1 -> currentGameObject.player1.planned[currentGameObject.currentRound] = plan
             2 -> currentGameObject.player2.planned[currentGameObject.currentRound] = plan
@@ -396,9 +396,9 @@ class GameActivity: AppCompatActivity() {
         }
 
         calculatePlanned()
-    }
+    }*/
 
-    private fun setTaken(take: Int) {
+    /*private fun setTaken(take: Int) {
         when(currentGameObject.currentPlayer) {
             1 -> currentGameObject.player1.taken[currentGameObject.currentRound] = take
             2 -> currentGameObject.player2.taken[currentGameObject.currentRound] = take
@@ -407,9 +407,9 @@ class GameActivity: AppCompatActivity() {
         }
 
         markAsGoodOrBad()
-    }
+    }*/
 
-    private fun markActivePlayer() {
+    /*private fun markActivePlayer() {
         val resID = resources.getIdentifier("textViewRound" + currentGameObject.currentRound.toString() + "Player" + currentGameObject.currentPlayer.toString(), "id", packageName)
         val textView: TextView = findViewById(resID)
         textView.setBackgroundResource(R.drawable.tv_border)
@@ -439,7 +439,7 @@ class GameActivity: AppCompatActivity() {
         if(isTakenPrevious == -1) {
             previousTextView.setTextColor(Color.BLACK)
         }
-    }
+    }*/
 
     private fun markRoundInactive() {
         for (i in 1..currentGameObject.currentRound) {
@@ -461,7 +461,7 @@ class GameActivity: AppCompatActivity() {
         }
     }
 
-    private fun markAsGoodOrBad() {
+    /*private fun markAsGoodOrBad() {
         for (i in 1..currentGameObject.currentRound) {
             //player 1
             val resID1 = resources.getIdentifier("textViewRound" + i.toString() + "Player1", "id", packageName)
@@ -509,7 +509,7 @@ class GameActivity: AppCompatActivity() {
                 }
             }
         }
-    }
+    }*/
 
     private fun clearText() {
         var roundsToClear: Int = 13
@@ -544,7 +544,7 @@ class GameActivity: AppCompatActivity() {
         }
     }
 
-    private fun updateText() {
+    /*private fun updateText() {
         for (i in 1..currentGameObject.currentRound) {
             //player 1
             val resID1 = resources.getIdentifier("textViewRound" + i.toString() + "Player1", "id", packageName)
@@ -584,18 +584,18 @@ class GameActivity: AppCompatActivity() {
                 textView4.text = getString(R.string.playerPlannedAndTaken, player4Taken, player4Planned)
             }
         }
-    }
+    }*/
 
-    private fun updatePoints() {
+    /*private fun updatePoints() {
         editTextPlayer1.setText(getString(R.string.playerNameAndPoints, match.player1Name, currentGameObject.player1.points))
         editTextPlayer2.setText(getString(R.string.playerNameAndPoints, match.player2Name, currentGameObject.player2.points))
         if(match.settingPlayers == 4) {
             editTextPlayer3.setText(getString(R.string.playerNameAndPoints, match.player3Name, currentGameObject.player3.points))
             editTextPlayer4.setText(getString(R.string.playerNameAndPoints, match.player4Name, currentGameObject.player4.points))
         }
-    }
+    }*/
 
-    private fun clearPlayer() {
+    /*private fun clearPlayer() {
         val resID = resources.getIdentifier("textViewRound" + currentGameObject.currentRound.toString() + "Player" + currentGameObject.currentPlayer.toString(), "id", packageName)
         val textView: TextView = findViewById(resID)
         textView.text = ""
@@ -622,9 +622,9 @@ class GameActivity: AppCompatActivity() {
         calculatePlanned()
         markActivePlayer()
         updateText()
-    }
+    }*/
 
-    private fun calculatePlanned() {
+    /*private fun calculatePlanned() {
         if(currentGameObject.toDisabling >= 0) {
             val resID = resources.getIdentifier("buttonPlan${currentGameObject.toDisabling}", "id", packageName)
             val button: Button = findViewById(resID)
@@ -660,9 +660,9 @@ class GameActivity: AppCompatActivity() {
                 button.isEnabled = false
             }
         }
-    }
+    }*/
 
-    private fun calculatePoints() {
+    /*private fun calculatePoints() {
         currentGameObject.player1.points = 0
         currentGameObject.player2.points = 0
         if(match.settingPlayers == 4) {
@@ -686,7 +686,7 @@ class GameActivity: AppCompatActivity() {
             }
         }
         updatePoints()
-    }
+    }*/
 
     private fun endGame() {
         val t = Toast.makeText(this, "Gra zakończona", Toast.LENGTH_SHORT)
