@@ -19,5 +19,5 @@ class Match: Serializable {
     var settingPlayers: Int = 0
     var settingGames: Int = 0
 
-    lateinit var date: Calendar
+    val date: Calendar = Calendar.getInstance()
 }
