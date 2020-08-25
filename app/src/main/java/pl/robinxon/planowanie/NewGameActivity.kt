@@ -37,7 +37,7 @@ class NewGameActivity : AppCompatActivity() {
         }
 
         //dodanie listenerów do przycisków
-        buttonPlay.setOnClickListener { startNewGame()}
+        buttonPlay.setOnClickListener { startNewGame() }
     }
 
     //region Overridy funkcji
