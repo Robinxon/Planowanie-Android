@@ -1,21 +1,13 @@
-package com.example.planowanie
+package pl.robinxon.planowanie
 
-import android.app.AlertDialog
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log.d
 import android.view.View
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
+import pl.robinxon.planowanie.R
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_new_game.*
 
 class NewGameActivity : AppCompatActivity() {

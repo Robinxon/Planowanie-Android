@@ -1,4 +1,4 @@
-package com.example.planowanie
+package pl.robinxon.planowanie
 
 import java.io.Serializable
 import java.util.*

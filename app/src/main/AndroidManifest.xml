@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.planowanie">
+    package="pl.robinxon.planowanie">
 
     <application
         android:allowBackup="true"
@@ -21,18 +21,18 @@
         <activity
             android:name=".NewGameActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:parentActivityName="com.example.planowanie.MenuActivity"/>
+            android:parentActivityName=".MenuActivity"/>
         <activity
             android:name=".GameActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".SummaryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:parentActivityName="com.example.planowanie.GameActivity"/>
+            android:parentActivityName=".GameActivity"/>
         <activity
             android:name=".StatsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:parentActivityName="com.example.planowanie.NewGameActivity"/>
+            android:parentActivityName=".NewGameActivity"/>
     </application>
 
 </manifest>

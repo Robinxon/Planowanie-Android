@@ -1,4 +1,4 @@
-package com.example.planowanie
+package pl.robinxon.planowanie
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import pl.robinxon.planowanie.R
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference

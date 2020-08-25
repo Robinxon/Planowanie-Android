@@ -1,12 +1,11 @@
-package com.example.planowanie
+package pl.robinxon.planowanie
 
 import android.os.Bundle
 import android.util.TypedValue
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.marginBottom
-import androidx.core.view.updateMargins
+import pl.robinxon.planowanie.R
 import kotlinx.android.synthetic.main.activity_stats.*
 
 class StatsActivity: AppCompatActivity() {

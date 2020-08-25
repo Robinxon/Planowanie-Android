@@ -1,10 +1,11 @@
-package com.example.planowanie
+package pl.robinxon.planowanie
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import pl.robinxon.planowanie.R
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_summary.*
