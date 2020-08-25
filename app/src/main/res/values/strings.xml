@@ -64,4 +64,6 @@
     <string name="list_of_registered_players">Lista zarejestrowanych graczy</string>
     <string name="game_stats">Statystyki gier</string>
     <string name="game_history">Historia gier</string>
+    <string name="error_connecting_to_database">Błąd połączenia z bazą danych</string>
+    <string name="loading_from_database">Wczytywanie z bazy danych...</string>
 </resources>
