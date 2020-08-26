@@ -102,6 +102,9 @@ class NewGameActivity : AppCompatActivity() {
         //ustawienie pierwszego gracza
         match.games[1]!!.currentPlayer = 1
 
+        //ustawienie pierwszego atutu czyli braku
+        match.games[1]!!.atuts[1] = 0
+
         //przekonwertowanie meczu do json i zapisanie w bazie
         val gson = GsonBuilder().create()
         fireMatch.setValue(gson.toJson(match))
