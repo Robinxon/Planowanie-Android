@@ -64,25 +64,6 @@ class GameActivity: AppCompatActivity() {
 
 
         //STARY KOD
-        //przygotowanie gry
-
-        /*if(match.settingGames == 4) {
-            textViewRound14.visibility = View.GONE
-            textViewRound14Player1.visibility = View.GONE
-            textViewRound14Player2.visibility = View.GONE
-            textViewRound14Player3.visibility = View.GONE
-            textViewRound14Player4.visibility = View.GONE
-            textViewRound15.visibility = View.GONE
-            textViewRound15Player1.visibility = View.GONE
-            textViewRound15Player2.visibility = View.GONE
-            textViewRound15Player3.visibility = View.GONE
-            textViewRound15Player4.visibility = View.GONE
-            textViewRound16.visibility = View.GONE
-            textViewRound16Player1.visibility = View.GONE
-            textViewRound16Player2.visibility = View.GONE
-            textViewRound16Player3.visibility = View.GONE
-            textViewRound16Player4.visibility = View.GONE
-        }*/
 
         /*buttonToggle.setOnClickListener {
             nextPlayer()
@@ -135,6 +116,7 @@ class GameActivity: AppCompatActivity() {
     }
 
     private fun setBoard() {
+        //wypełenie punktów i nazw graczy
         editTextPlayer1.setText(getString(R.string.player_name_and_points,0, match.playerNames[1]))
         editTextPlayer2.setText(getString(R.string.player_name_and_points,0, match.playerNames[2]))
         if(match.settingPlayers == 4) {
@@ -144,6 +126,25 @@ class GameActivity: AppCompatActivity() {
         else {
             editTextPlayer3.visibility = View.INVISIBLE
             editTextPlayer4.visibility = View.INVISIBLE
+        }
+
+        //ukrycie zbędnych rund w razie czwórmeczu
+        if(match.settingGames == 4) {
+            textViewRound14.visibility = View.GONE
+            textViewRound14Player1.visibility = View.GONE
+            textViewRound14Player2.visibility = View.GONE
+            textViewRound14Player3.visibility = View.GONE
+            textViewRound14Player4.visibility = View.GONE
+            textViewRound15.visibility = View.GONE
+            textViewRound15Player1.visibility = View.GONE
+            textViewRound15Player2.visibility = View.GONE
+            textViewRound15Player3.visibility = View.GONE
+            textViewRound15Player4.visibility = View.GONE
+            textViewRound16.visibility = View.GONE
+            textViewRound16Player1.visibility = View.GONE
+            textViewRound16Player2.visibility = View.GONE
+            textViewRound16Player3.visibility = View.GONE
+            textViewRound16Player4.visibility = View.GONE
         }
     }
 
