@@ -170,8 +170,8 @@ class GameActivity: AppCompatActivity() {
                 4 -> 4
                 else -> 0
             }
+            saveToFire()
         }
-        saveToFire()
 
         //wyświetl atut
         when(match.games[match.currentGame]!!.atuts[match.games[match.currentGame]!!.currentRound]) {
