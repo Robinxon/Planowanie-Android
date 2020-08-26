@@ -8,6 +8,9 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import pl.robinxon.planowanie.R
 import com.google.gson.GsonBuilder
 import com.kaushikthedeveloper.doublebackpress.DoubleBackPress
@@ -18,8 +21,11 @@ import kotlin.system.exitProcess
 
 
 class GameActivity: AppCompatActivity() {
+    //inicjalizacja bazy danych firebase i jej zmiennych
+    private val fireDatabase = Firebase.database
+    private lateinit var fireMatch: DatabaseReference
+
     private lateinit var match: Match
-    private lateinit var currentGameObject: Game
     private lateinit var menu: Menu
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,19 +33,7 @@ class GameActivity: AppCompatActivity() {
         setContentView(R.layout.activity_game)
 
         //przygotowanie gry
-        match = if(intent.getSerializableExtra("loadedMatch") != null) {
-            intent.getSerializableExtra("loadedMatch") as Match
-        } else {
-            intent.getSerializableExtra("Match") as Match
-        }
 
-        /*currentGameObject = when(match.currentGame) {
-            1 -> match.game1
-            2 -> match.game2
-            3 -> match.game3
-            4 -> match.game4
-            else -> TODO() //gra zakończona lub błędna
-        }*/
 
         editTextPlayer1.setText(getString(R.string.playerNameAndPoints, match.player1Name, 0))
         editTextPlayer2.setText(getString(R.string.playerNameAndPoints, match.player2Name, 0))
@@ -115,7 +109,7 @@ class GameActivity: AppCompatActivity() {
         gameStart()*/
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.game_menu, menu)
         if(match.settingGames == 1) {
@@ -124,7 +118,7 @@ class GameActivity: AppCompatActivity() {
             menu.findItem(R.id.gameMenuGame4).isVisible = false
         }
         return true
-    }
+    }*/
 
     /*override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.gameMenuGame1 -> {
@@ -178,7 +172,7 @@ class GameActivity: AppCompatActivity() {
         }
     }*/
 
-    private var firstBackPressAction: FirstBackPressAction = FirstBackPressAction {
+    /*private var firstBackPressAction: FirstBackPressAction = FirstBackPressAction {
         Toast.makeText(this, "Naciśnij ponownie, aby zamknąć aplikację", Toast.LENGTH_SHORT).show()
     }
 
@@ -194,7 +188,7 @@ class GameActivity: AppCompatActivity() {
 
     override fun onBackPressed() {
         doubleBackPress.onBackPressed()
-    }
+    }*/
 
     /*private fun nextPlayer() {
         if(++currentGameObject.currentPlayer > match.settingPlayers) {
@@ -349,7 +343,7 @@ class GameActivity: AppCompatActivity() {
         nextPlayer()
     }*/
 
-    private fun setAtut() {
+    /*private fun setAtut() {
         if(currentGameObject.currentRound == 1) {
             imageViewAtut.setBackgroundResource(R.drawable.none)
             currentGameObject.atuts[currentGameObject.currentRound] = 0
@@ -383,7 +377,7 @@ class GameActivity: AppCompatActivity() {
                 }
             }
         }
-    }
+    }*/
 
     /*private fun setPlanned(plan: Int) {
         when(currentGameObject.currentPlayer) {
@@ -439,7 +433,7 @@ class GameActivity: AppCompatActivity() {
         }
     }*/
 
-    private fun markRoundInactive() {
+    /*private fun markRoundInactive() {
         for (i in 1..currentGameObject.currentRound) {
             var resID1 = resources.getIdentifier("textViewRound" + i.toString() + "Player1", "id", packageName)
             var textView1: TextView = findViewById(resID1)
@@ -457,7 +451,7 @@ class GameActivity: AppCompatActivity() {
             var textView4: TextView = findViewById(resID4)
             textView4.setBackgroundResource(0)
         }
-    }
+    }*/
 
     /*private fun markAsGoodOrBad() {
         for (i in 1..currentGameObject.currentRound) {
@@ -509,7 +503,7 @@ class GameActivity: AppCompatActivity() {
         }
     }*/
 
-    private fun clearText() {
+    /*private fun clearText() {
         var roundsToClear: Int = 13
         if(match.settingGames == 1)  {roundsToClear = 16}
         if(match.settingGames == 4)  {roundsToClear = 13}
@@ -540,7 +534,7 @@ class GameActivity: AppCompatActivity() {
                 textView4.setBackgroundResource(0)
             }
         }
-    }
+    }*/
 
     /*private fun updateText() {
         for (i in 1..currentGameObject.currentRound) {
@@ -686,7 +680,7 @@ class GameActivity: AppCompatActivity() {
         updatePoints()
     }*/
 
-    private fun endGame() {
+    /*private fun endGame() {
         val t = Toast.makeText(this, "Gra zakończona", Toast.LENGTH_SHORT)
         t.setGravity(Gravity.BOTTOM, 0, 0)
         t.show()
@@ -694,9 +688,9 @@ class GameActivity: AppCompatActivity() {
         currentGameObject.ended = true
 
         saveIntoLocal()
-    }
+    }*/
 
-    private fun saveIntoLocal() {
+    /*private fun saveIntoLocal() {
         val gson = GsonBuilder().create()
         val database = getSharedPreferences("database", Context.MODE_PRIVATE)
 
@@ -712,5 +706,5 @@ class GameActivity: AppCompatActivity() {
         database.edit().apply {
             putString("matchJson", json)
         }.apply()
-    }
+    }*/
 }
