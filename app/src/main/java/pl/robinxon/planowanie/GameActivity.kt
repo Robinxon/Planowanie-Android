@@ -40,11 +40,11 @@ class GameActivity: AppCompatActivity() {
         if(match.settingPlayers == 4) {
             editTextPlayer3.setText(getString(R.string.playerNameAndPoints, match.player3Name, 0))
             editTextPlayer4.setText(getString(R.string.playerNameAndPoints, match.player4Name, 0))
-        }*/
+        }
         else {
             editTextPlayer3.visibility = View.INVISIBLE
             editTextPlayer4.visibility = View.INVISIBLE
-        }
+        }*/
 
         if(match.settingGames == 4) {
             textViewRound14.visibility = View.GONE
