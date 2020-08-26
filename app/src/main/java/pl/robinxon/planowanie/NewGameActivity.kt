@@ -1,5 +1,6 @@
 package pl.robinxon.planowanie
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
@@ -84,55 +85,31 @@ class NewGameActivity : AppCompatActivity() {
         //zapisanie nazw graczy
         match.player1Name = editTextPlayer1Name.text?.toString()
         match.player2Name = editTextPlayer2Name.text?.toString()
-        match.player3Name = editTextPlayer3Name.text?.toString()
-        match.player4Name = editTextPlayer4Name.text?.toString()
+        if(match.settingPlayers == 4) {
+            match.player3Name = editTextPlayer3Name.text?.toString()
+            match.player4Name = editTextPlayer4Name.text?.toString()
+        }
 
         //utworzenie gier
-        /*match.game1 = Game()
-        match.game1?.player1 = Player()
-        match.game1?.player2 = Player()
+        match.game1 = Game()
+        match.game1!!.player1 = Player()
+        match.game1!!.player2 = Player()
         if(match.settingPlayers == 4) {
-            match.game1?.player3 = Player()
-            match.game1?.player4 = Player()
+            match.game1!!.player3 = Player()
+            match.game1!!.player4 = Player()
         }
 
-        if(match.settingGames == 4) {
-            match.game2 = Game()
-            match.game2?.player1 = Player()
-            match.game2?.player2 = Player()
-            if(match.settingPlayers == 4) {
-                match.game2?.player3 = Player()
-                match.game2?.player4 = Player()
-            }
-
-            match.game3 = Game()
-            match.game3?.player1 = Player()
-            match.game3?.player2 = Player()
-            if(match.settingPlayers == 4) {
-                match.game3?.player3 = Player()
-                match.game3?.player4 = Player()
-            }
-
-            match.game4 = Game()
-            match.game4?.player1 = Player()
-            match.game4?.player2 = Player()
-            if(match.settingPlayers == 4) {
-                match.game4?.player3 = Player()
-                match.game4?.player4 = Player()
-            }
-        }
-
-        match.game1?.currentPlayer = 1
-        match.date = java.util.Calendar.getInstance()
-
-        val intent = Intent(this, GameActivity::class.java)
-        intent.putExtra("Match", match)
-        startActivity(intent)
-        finish()*/
+        //ustawienie pierwszego gracza
+        match.game1!!.currentPlayer = 1
 
         //przekonwertowanie meczu do json i zapisanie w bazie
         val gson = GsonBuilder().create()
         fireMatch.setValue(gson.toJson(match))
+
+        //otwarcie aktywności gry i zamknięcie poprzednich
+        startActivity(Intent(this, GameActivity::class.java))
+        sendBroadcast(Intent("finish_activity_menu"))
+        finish()
     }
     //endregion
 }

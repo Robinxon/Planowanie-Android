@@ -1,7 +1,10 @@
 package pl.robinxon.planowanie
 
 import android.app.AlertDialog
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -67,6 +70,17 @@ class MenuActivity: AppCompatActivity() {
                 Log.d("database_test", "Failed to read value Match.", error.toException())
             }
         })
+
+        //nasłuchiwanie na zakończenie aktywności
+        val broadcastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(arg0: Context, intent: Intent) {
+                val action = intent.action
+                if (action == "finish_activity_menu") {
+                    finish()
+                }
+            }
+        }
+        registerReceiver(broadcastReceiver, IntentFilter("finish_activity_menu"))
     }
 
     //region Funkcje przycisków
