@@ -61,7 +61,7 @@ class MenuActivity: AppCompatActivity() {
                 if(!value.isNullOrEmpty()) {
                     menuContinue.visibility = View.VISIBLE
                     loadedMatch = decodeJsonToMatch(value)
-                    menuContinueDescription.text = loadedMatch?.player1Name ?: "none"
+                    menuContinueDescription.text = loadedMatch!!.playerNames[1] ?: "none"
                 }
             }
 

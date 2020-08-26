@@ -83,24 +83,24 @@ class NewGameActivity : AppCompatActivity() {
         }
 
         //zapisanie nazw graczy
-        match.player1Name = editTextPlayer1Name.text?.toString()
-        match.player2Name = editTextPlayer2Name.text?.toString()
+        match.playerNames[1] = editTextPlayer1Name.text?.toString()
+        match.playerNames[2] = editTextPlayer2Name.text?.toString()
         if(match.settingPlayers == 4) {
-            match.player3Name = editTextPlayer3Name.text?.toString()
-            match.player4Name = editTextPlayer4Name.text?.toString()
+            match.playerNames[3] = editTextPlayer3Name.text?.toString()
+            match.playerNames[4] = editTextPlayer4Name.text?.toString()
         }
 
         //utworzenie gier
-        match.game1 = Game()
-        match.game1!!.player1 = Player()
-        match.game1!!.player2 = Player()
+        match.games[1] = Game()
+        match.games[1]!!.players[1] = Player()
+        match.games[1]!!.players[2] = Player()
         if(match.settingPlayers == 4) {
-            match.game1!!.player3 = Player()
-            match.game1!!.player4 = Player()
+            match.games[1]!!.players[3] = Player()
+            match.games[1]!!.players[4] = Player()
         }
 
         //ustawienie pierwszego gracza
-        match.game1!!.currentPlayer = 1
+        match.games[1]!!.currentPlayer = 1
 
         //przekonwertowanie meczu do json i zapisanie w bazie
         val gson = GsonBuilder().create()

@@ -4,17 +4,11 @@ import java.io.Serializable
 import java.util.*
 
 class Match: Serializable {
-    var game1: Game? = null
-    var game2: Game? = null
-    var game3: Game? = null
-    var game4: Game? = null
+    var games = arrayOfNulls<Game>(5)
 
     var currentGame: Int = 1
 
-    var player1Name: String? = null
-    var player2Name: String? = null
-    var player3Name: String? = null
-    var player4Name: String? = null
+    var playerNames = arrayOfNulls<String>(5)
 
     var settingPlayers: Int? = null
     var settingGames: Int? = null

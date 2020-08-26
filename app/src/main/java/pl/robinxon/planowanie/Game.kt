@@ -3,11 +3,7 @@ package pl.robinxon.planowanie
 import java.io.Serializable
 
 class Game: Serializable {
-    var player1: Player? = null
-    var player2: Player? = null
-    var player3: Player? = null
-    var player4: Player? = null
-
+    var players = arrayOfNulls<Player>(5)
     var currentRound: Int = 1
     var currentPlayer: Int? = null
     var currentCards: Int = 13
