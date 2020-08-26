@@ -58,17 +58,14 @@ class GameActivity: AppCompatActivity() {
             }
         })
 
-
-
+        //ustawienie listenerów do przycisków
+        buttonToggle.setOnClickListener { buttonToggle() }
 
 
 
         //STARY KOD
 
-        /*buttonToggle.setOnClickListener {
-            match.games[match.currentGame]!!.currentPlayer++
-            markActivePlayer()
-        }*/
+
         /*
         buttonClear.setOnClickListener {
             clearPlayer()
@@ -114,6 +111,13 @@ class GameActivity: AppCompatActivity() {
         val gson = GsonBuilder().create()
         return gson.fromJson(value, Match::class.java)
     }
+
+    //region Funkcje przycisków
+    private fun buttonToggle() {
+        if(++match.games[match.currentGame]!!.currentPlayer > match.settingPlayers!!) { match.games[match.currentGame]!!.currentPlayer = 1 }
+        markActivePlayer()
+    }
+    //endregion
 
     private fun presetBoard() {
         setPlayerPointsAndNames()
