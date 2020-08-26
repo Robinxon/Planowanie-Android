@@ -49,7 +49,7 @@ class GameActivity: AppCompatActivity() {
                     .getValue<String>()
                 Log.d("database_test", "Match is: $value")
                 match = decodeJsonToMatch(value!!)
-                setBoard()
+                presetBoard()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -115,8 +115,12 @@ class GameActivity: AppCompatActivity() {
         return gson.fromJson(value, Match::class.java)
     }
 
-    private fun setBoard() {
-        //wypełenie punktów i nazw graczy
+    private fun presetBoard() {
+        setPlayerPointsAndNames()
+        hideUselessRounds()
+    }
+
+    private fun setPlayerPointsAndNames() {
         editTextPlayer1.setText(getString(R.string.player_name_and_points,0, match.playerNames[1]))
         editTextPlayer2.setText(getString(R.string.player_name_and_points,0, match.playerNames[2]))
         if(match.settingPlayers == 4) {
@@ -127,8 +131,9 @@ class GameActivity: AppCompatActivity() {
             editTextPlayer3.visibility = View.INVISIBLE
             editTextPlayer4.visibility = View.INVISIBLE
         }
+    }
 
-        //ukrycie zbędnych rund w razie czwórmeczu
+    private fun hideUselessRounds() {
         if(match.settingGames == 4) {
             textViewRound14.visibility = View.GONE
             textViewRound14Player1.visibility = View.GONE
