@@ -66,10 +66,10 @@ class GameActivity: AppCompatActivity() {
         //STARY KOD
 
         /*buttonToggle.setOnClickListener {
-            nextPlayer()
-            saveIntoLocal()
-        }
-
+            match.games[match.currentGame]!!.currentPlayer++
+            markActivePlayer()
+        }*/
+        /*
         buttonClear.setOnClickListener {
             clearPlayer()
             saveIntoLocal()
@@ -119,6 +119,7 @@ class GameActivity: AppCompatActivity() {
         setPlayerPointsAndNames()
         hideUselessRounds()
         setAtut()
+        markActivePlayer()
     }
 
     private fun setPlayerPointsAndNames() {
@@ -178,86 +179,19 @@ class GameActivity: AppCompatActivity() {
 
     }
 
-    /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.game_menu, menu)
-        if(match.settingGames == 1) {
-            menu.findItem(R.id.gameMenuGame2).isVisible = false
-            menu.findItem(R.id.gameMenuGame3).isVisible = false
-            menu.findItem(R.id.gameMenuGame4).isVisible = false
-        }
-        return true
-    }*/
+    private fun markActivePlayer() {
+        //zaznacz obecnego gracza
+       val resID = resources.getIdentifier("textViewRound" + match.games[match.currentGame]!!.currentRound.toString() + "Player" + match.games[match.currentGame]!!.currentPlayer.toString(), "id", packageName)
+       val textView: TextView = findViewById(resID)
+       textView.setBackgroundResource(R.drawable.tv_border)
 
-    /*override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.gameMenuGame1 -> {
-            saveIntoLocal()
-            match.currentGame = 1
-            gameStart()
-            true
-        }
-
-        R.id.gameMenuGame2 -> {
-            saveIntoLocal()
-            match.currentGame = 2
-            gameStart()
-            true
-        }
-
-        R.id.gameMenuGame3 -> {
-            saveIntoLocal()
-            match.currentGame = 3
-            gameStart()
-            true
-        }
-
-        R.id.gameMenuGame4 -> {
-            saveIntoLocal()
-            match.currentGame = 4
-            gameStart()
-            true
-        }
-
-        R.id.gameSummary -> {
-            saveIntoLocal()
-            val intent = Intent(this, SummaryActivity::class.java)
-            intent.putExtra("currentGame", match)
-            startActivity(intent)
-            true
-        }
-
-        R.id.gameMenuExit -> {
-            saveIntoLocal()
-            val intent = Intent(this, NewGameActivity::class.java)
-            startActivity(intent)
-            finish()
-            true
-        }
-
-        else -> {
-            // If we got here, the user's action was not recognized.
-            // Invoke the superclass to handle it.
-            super.onOptionsItemSelected(item)
-        }
-    }*/
-
-    /*private var firstBackPressAction: FirstBackPressAction = FirstBackPressAction {
-        Toast.makeText(this, "Naciśnij ponownie, aby zamknąć aplikację", Toast.LENGTH_SHORT).show()
+        //odznacz poprzedniego gracza
+       var previousPlayer = match.games[match.currentGame]!!.currentPlayer - 1
+       if(previousPlayer <= 0) { previousPlayer = match.settingPlayers!! }
+       val previousResID = resources.getIdentifier("textViewRound" + match.games[match.currentGame]!!.currentRound.toString() + "Player" + previousPlayer.toString(), "id", packageName)
+       val previousTextView: TextView = findViewById(previousResID)
+       previousTextView.setBackgroundResource(0)
     }
-
-    private var doubleBackPressAction = DoubleBackPressAction {
-        finish()
-        exitProcess(0)
-    }
-
-    private var doubleBackPress = DoubleBackPress()
-        .withDoublePressDuration(3000)
-        .withFirstBackPressAction(firstBackPressAction)
-        .withDoubleBackPressAction(doubleBackPressAction)
-
-    override fun onBackPressed() {
-        doubleBackPress.onBackPressed()
-    }*/
 
     /*private fun nextPlayer() {
         if(++currentGameObject.currentPlayer > match.settingPlayers) {
@@ -268,27 +202,7 @@ class GameActivity: AppCompatActivity() {
         saveIntoLocal()
     }*/
 
-    /*private fun setPlayer() {
-        if(match.settingPlayers == 2) {
-            currentGameObject.currentPlayer = when(currentGameObject.currentRound % 2) {
-                0 -> 2
-                1 -> 1
-                else -> 1
-            }
-        }
-        if(match.settingPlayers == 4) {
-            currentGameObject.currentPlayer = when(currentGameObject.currentRound % 4) {
-                0 -> 4
-                1 -> 1
-                2 -> 2
-                3 -> 3
-                else -> 1
-            }
-        }
-        markActivePlayer()
-        updateText()
-        saveIntoLocal()
-    }*/
+
 
     /*private fun nextRound() {
         var warning = false
@@ -436,37 +350,7 @@ class GameActivity: AppCompatActivity() {
         markAsGoodOrBad()
     }*/
 
-    /*private fun markActivePlayer() {
-        val resID = resources.getIdentifier("textViewRound" + currentGameObject.currentRound.toString() + "Player" + currentGameObject.currentPlayer.toString(), "id", packageName)
-        val textView: TextView = findViewById(resID)
-        textView.setBackgroundResource(R.drawable.tv_border)
 
-        var isTaken = when(currentGameObject.currentPlayer) {
-            1 -> currentGameObject.player1.taken[currentGameObject.currentRound]
-            2 -> currentGameObject.player2.taken[currentGameObject.currentRound]
-            3 -> currentGameObject.player3.taken[currentGameObject.currentRound]
-            4 -> currentGameObject.player4.taken[currentGameObject.currentRound]
-            else -> -1
-        }
-
-        var previousPlayer = currentGameObject.currentPlayer - 1
-        if(previousPlayer <= 0) {
-            previousPlayer = match.settingPlayers
-        }
-        var isTakenPrevious = when(previousPlayer) {
-            1 -> currentGameObject.player1.taken[currentGameObject.currentRound]
-            2 -> currentGameObject.player2.taken[currentGameObject.currentRound]
-            3 -> currentGameObject.player3.taken[currentGameObject.currentRound]
-            4 -> currentGameObject.player4.taken[currentGameObject.currentRound]
-            else -> -1
-        }
-        val previousResID = resources.getIdentifier("textViewRound" + currentGameObject.currentRound.toString() + "Player" + previousPlayer.toString(), "id", packageName)
-        val previousTextView: TextView = findViewById(previousResID)
-        previousTextView.setBackgroundResource(0)
-        if(isTakenPrevious == -1) {
-            previousTextView.setTextColor(Color.BLACK)
-        }
-    }*/
 
     /*private fun markRoundInactive() {
         for (i in 1..currentGameObject.currentRound) {
@@ -741,5 +625,89 @@ class GameActivity: AppCompatActivity() {
         database.edit().apply {
             putString("matchJson", json)
         }.apply()
+    }*/
+
+
+
+
+    /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.game_menu, menu)
+        if(match.settingGames == 1) {
+            menu.findItem(R.id.gameMenuGame2).isVisible = false
+            menu.findItem(R.id.gameMenuGame3).isVisible = false
+            menu.findItem(R.id.gameMenuGame4).isVisible = false
+        }
+        return true
+    }*/
+
+    /*override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.gameMenuGame1 -> {
+            saveIntoLocal()
+            match.currentGame = 1
+            gameStart()
+            true
+        }
+
+        R.id.gameMenuGame2 -> {
+            saveIntoLocal()
+            match.currentGame = 2
+            gameStart()
+            true
+        }
+
+        R.id.gameMenuGame3 -> {
+            saveIntoLocal()
+            match.currentGame = 3
+            gameStart()
+            true
+        }
+
+        R.id.gameMenuGame4 -> {
+            saveIntoLocal()
+            match.currentGame = 4
+            gameStart()
+            true
+        }
+
+        R.id.gameSummary -> {
+            saveIntoLocal()
+            val intent = Intent(this, SummaryActivity::class.java)
+            intent.putExtra("currentGame", match)
+            startActivity(intent)
+            true
+        }
+
+        R.id.gameMenuExit -> {
+            saveIntoLocal()
+            val intent = Intent(this, NewGameActivity::class.java)
+            startActivity(intent)
+            finish()
+            true
+        }
+
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }
+    }*/
+
+    /*private var firstBackPressAction: FirstBackPressAction = FirstBackPressAction {
+        Toast.makeText(this, "Naciśnij ponownie, aby zamknąć aplikację", Toast.LENGTH_SHORT).show()
+    }
+
+    private var doubleBackPressAction = DoubleBackPressAction {
+        finish()
+        exitProcess(0)
+    }
+
+    private var doubleBackPress = DoubleBackPress()
+        .withDoublePressDuration(3000)
+        .withFirstBackPressAction(firstBackPressAction)
+        .withDoubleBackPressAction(doubleBackPressAction)
+
+    override fun onBackPressed() {
+        doubleBackPress.onBackPressed()
     }*/
 }
