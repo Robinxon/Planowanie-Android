@@ -49,6 +49,7 @@ class GameActivity: AppCompatActivity() {
                     .getValue<String>()
                 Log.d("database_test", "Match is: $value")
                 match = decodeJsonToMatch(value!!)
+                setBoard()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -65,19 +66,7 @@ class GameActivity: AppCompatActivity() {
         //STARY KOD
         //przygotowanie gry
 
-
-        /*editTextPlayer1.setText(getString(R.string.playerNameAndPoints, match.player1Name, 0))
-        editTextPlayer2.setText(getString(R.string.playerNameAndPoints, match.player2Name, 0))
-        if(match.settingPlayers == 4) {
-            editTextPlayer3.setText(getString(R.string.playerNameAndPoints, match.player3Name, 0))
-            editTextPlayer4.setText(getString(R.string.playerNameAndPoints, match.player4Name, 0))
-        }
-        else {
-            editTextPlayer3.visibility = View.INVISIBLE
-            editTextPlayer4.visibility = View.INVISIBLE
-        }*/
-
-        if(match.settingGames == 4) {
+        /*if(match.settingGames == 4) {
             textViewRound14.visibility = View.GONE
             textViewRound14Player1.visibility = View.GONE
             textViewRound14Player2.visibility = View.GONE
@@ -93,7 +82,7 @@ class GameActivity: AppCompatActivity() {
             textViewRound16Player2.visibility = View.GONE
             textViewRound16Player3.visibility = View.GONE
             textViewRound16Player4.visibility = View.GONE
-        }
+        }*/
 
         /*buttonToggle.setOnClickListener {
             nextPlayer()
@@ -143,6 +132,19 @@ class GameActivity: AppCompatActivity() {
     private fun decodeJsonToMatch(value: String): Match {
         val gson = GsonBuilder().create()
         return gson.fromJson(value, Match::class.java)
+    }
+
+    private fun setBoard() {
+        editTextPlayer1.setText(getString(R.string.player_name_and_points,0, match.playerNames[1]))
+        editTextPlayer2.setText(getString(R.string.player_name_and_points,0, match.playerNames[2]))
+        if(match.settingPlayers == 4) {
+            editTextPlayer3.setText(getString(R.string.player_name_and_points, 0, match.playerNames[3]))
+            editTextPlayer4.setText(getString(R.string.player_name_and_points, 0, match.playerNames[4]))
+        }
+        else {
+            editTextPlayer3.visibility = View.INVISIBLE
+            editTextPlayer4.visibility = View.INVISIBLE
+        }
     }
 
     /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
