@@ -2,14 +2,19 @@ package pl.robinxon.planowanie
 
 import android.content.*
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pl.robinxon.planowanie.R
 import com.google.gson.GsonBuilder
@@ -17,6 +22,8 @@ import com.kaushikthedeveloper.doublebackpress.DoubleBackPress
 import com.kaushikthedeveloper.doublebackpress.helper.DoubleBackPressAction
 import com.kaushikthedeveloper.doublebackpress.helper.FirstBackPressAction
 import kotlinx.android.synthetic.main.activity_game.*
+import kotlinx.android.synthetic.main.activity_menu.*
+import java.util.*
 import kotlin.system.exitProcess
 
 
@@ -26,12 +33,36 @@ class GameActivity: AppCompatActivity() {
     private lateinit var fireMatch: DatabaseReference
 
     private lateinit var match: Match
-    private lateinit var menu: Menu
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //inicjalizacja widoku
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
+        //opcje bazy danych
+        fireMatch = fireDatabase.getReference("match")
+
+        //dodanie listenerów do zmiennych na serwerze
+        fireMatch.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val value = dataSnapshot
+                    .getValue<String>()
+                Log.d("database_test", "Match is: $value")
+                match = decodeJsonToMatch(value!!)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                Log.d("database_test", "Failed to read value Match.", error.toException())
+            }
+        })
+
+
+
+
+
+
+        //STARY KOD
         //przygotowanie gry
 
 
@@ -107,6 +138,11 @@ class GameActivity: AppCompatActivity() {
         registerReceiver(broadcastReceiver, IntentFilter("finish_activity"))
 
         gameStart()*/
+    }
+
+    private fun decodeJsonToMatch(value: String): Match {
+        val gson = GsonBuilder().create()
+        return gson.fromJson(value, Match::class.java)
     }
 
     /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
