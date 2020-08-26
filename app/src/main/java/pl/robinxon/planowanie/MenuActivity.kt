@@ -87,7 +87,7 @@ class MenuActivity: AppCompatActivity() {
 
     //region Funkcje przycisków
     private fun menuContinue() {
-        Toast.makeText(this, "ok cont", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, GameActivity::class.java))
     }
 
     private fun menuNew() {
