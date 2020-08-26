@@ -115,8 +115,8 @@ class GameActivity: AppCompatActivity() {
     //region Funkcje przycisków
     private fun buttonToggle() {
         if(++match.games[match.currentGame]!!.currentPlayer > match.settingPlayers!!) { match.games[match.currentGame]!!.currentPlayer = 1 }
-        markActivePlayer()
         saveToFire()
+        markActivePlayer()
     }
     //endregion
 
@@ -171,6 +171,7 @@ class GameActivity: AppCompatActivity() {
                 else -> 0
             }
         }
+        saveToFire()
 
         //wyświetl atut
         when(match.games[match.currentGame]!!.atuts[match.games[match.currentGame]!!.currentRound]) {
@@ -181,8 +182,6 @@ class GameActivity: AppCompatActivity() {
             4 -> imageViewAtut.setBackgroundResource(R.drawable.trefl)
             else -> imageViewAtut.setBackgroundResource(R.drawable.none)
         }
-
-        saveToFire()
     }
 
     private fun markActivePlayer() {
