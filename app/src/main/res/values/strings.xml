@@ -71,4 +71,5 @@
     <string name="overwritting_confirmation_text">Na tym urządzeniu zapisana jest niezakończona gra. Czy napewno chcesz ją nadpisać?</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
+    <string name="saved_game_description">%s-%s-%s %s:%s - %s %s %s %s</string>
 </resources>

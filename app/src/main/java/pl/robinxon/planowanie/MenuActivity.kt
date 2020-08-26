@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import pl.robinxon.planowanie.R
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -20,6 +19,9 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_menu.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MenuActivity: AppCompatActivity() {
     //inicjalizacja bazy danych firebase i jej zmiennych
@@ -58,10 +60,10 @@ class MenuActivity: AppCompatActivity() {
                 val value = dataSnapshot
                     .getValue<String>()
                 Log.d("database_test", "Match is: $value")
-                if(!value.isNullOrEmpty()) {
+                if (!value.isNullOrEmpty()) {
                     menuContinue.visibility = View.VISIBLE
                     loadedMatch = decodeJsonToMatch(value)
-                    menuContinueDescription.text = loadedMatch!!.playerNames[1] ?: "none"
+                    menuContinueDescription.text = getString(R.string.saved_game_description, loadedMatch!!.date.get(Calendar.DAY_OF_MONTH).toString(), loadedMatch!!.date.get(Calendar.MONTH).toString(), loadedMatch!!.date.get(Calendar.YEAR).toString(), loadedMatch!!.date.get(Calendar.HOUR_OF_DAY).toString(), loadedMatch!!.date.get(Calendar.MINUTE).toString(), loadedMatch!!.playerNames[1], loadedMatch!!.playerNames[2], (loadedMatch!!.playerNames[3] ?: ""), (loadedMatch!!.playerNames[4] ?: ""))
                 }
             }
 
@@ -85,7 +87,7 @@ class MenuActivity: AppCompatActivity() {
 
     //region Funkcje przycisków
     private fun menuContinue() {
-        Toast.makeText(this, "ok cont", Toast.LENGTH_SHORT ).show()
+        Toast.makeText(this, "ok cont", Toast.LENGTH_SHORT).show()
     }
 
     private fun menuNew() {
