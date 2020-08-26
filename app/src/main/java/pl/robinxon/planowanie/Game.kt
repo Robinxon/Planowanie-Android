@@ -9,9 +9,9 @@ class Game: Serializable {
     var player4: Player? = null
 
     var currentRound: Int = 1
-    var currentPlayer: Int = 1
+    var currentPlayer: Int? = null
     var currentCards: Int = 13
-    var toDisabling: Int = -1
+    var toDisabling: Int? = null
     var ended: Boolean = false
-    var atuts = IntArray(20) {-1}
+    var atuts = arrayOfNulls<Int>(14)
 }
