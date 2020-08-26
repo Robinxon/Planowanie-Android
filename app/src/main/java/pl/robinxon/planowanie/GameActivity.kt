@@ -35,12 +35,12 @@ class GameActivity: AppCompatActivity() {
         //przygotowanie gry
 
 
-        editTextPlayer1.setText(getString(R.string.playerNameAndPoints, match.player1Name, 0))
+        /*editTextPlayer1.setText(getString(R.string.playerNameAndPoints, match.player1Name, 0))
         editTextPlayer2.setText(getString(R.string.playerNameAndPoints, match.player2Name, 0))
         if(match.settingPlayers == 4) {
             editTextPlayer3.setText(getString(R.string.playerNameAndPoints, match.player3Name, 0))
             editTextPlayer4.setText(getString(R.string.playerNameAndPoints, match.player4Name, 0))
-        }
+        }*/
         else {
             editTextPlayer3.visibility = View.INVISIBLE
             editTextPlayer4.visibility = View.INVISIBLE
