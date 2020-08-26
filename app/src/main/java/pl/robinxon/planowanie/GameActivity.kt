@@ -116,6 +116,7 @@ class GameActivity: AppCompatActivity() {
     private fun buttonToggle() {
         if(++match.games[match.currentGame]!!.currentPlayer > match.settingPlayers!!) { match.games[match.currentGame]!!.currentPlayer = 1 }
         markActivePlayer()
+        saveToFire()
     }
     //endregion
 
@@ -181,6 +182,7 @@ class GameActivity: AppCompatActivity() {
             else -> imageViewAtut.setBackgroundResource(R.drawable.none)
         }
 
+        saveToFire()
     }
 
     private fun markActivePlayer() {
@@ -195,6 +197,11 @@ class GameActivity: AppCompatActivity() {
        val previousResID = resources.getIdentifier("textViewRound" + match.games[match.currentGame]!!.currentRound.toString() + "Player" + previousPlayer.toString(), "id", packageName)
        val previousTextView: TextView = findViewById(previousResID)
        previousTextView.setBackgroundResource(0)
+    }
+
+    private fun saveToFire() {
+        val gson = GsonBuilder().create()
+        fireMatch.setValue(gson.toJson(match))
     }
 
     /*private fun nextPlayer() {
