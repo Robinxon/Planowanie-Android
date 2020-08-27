@@ -107,7 +107,7 @@ class GameActivity: AppCompatActivity() {
 
     //region Funkcje przycisków
     private fun buttonToggle() {
-        if(++match.games[match.currentGame]!!.currentPlayer > match.settingPlayers!!) { match.games[match.currentGame]!!.currentPlayer = 1 }
+        setNextPlayer()
         saveToFire()
     }
 
@@ -136,6 +136,7 @@ class GameActivity: AppCompatActivity() {
             else {
                 match.games[match.currentGame]!!.currentRound++
                 if(match.games[match.currentGame]!!.currentCards > 1) { match.games[match.currentGame]!!.currentCards-- }
+                setNextPlayer()
                 saveToFire()
             }
         }
@@ -146,8 +147,10 @@ class GameActivity: AppCompatActivity() {
 
         if(match.games[match.currentGame]!!.players[match.games[match.currentGame]!!.currentPlayer]!!.planned[match.games[match.currentGame]!!.currentRound] == null) {
             match.games[match.currentGame]!!.players[match.games[match.currentGame]!!.currentPlayer]!!.planned[match.games[match.currentGame]!!.currentRound] = amount
+            setNextPlayer()
         } else if(match.games[match.currentGame]!!.players[match.games[match.currentGame]!!.currentPlayer]!!.taken[match.games[match.currentGame]!!.currentRound] == null) {
             match.games[match.currentGame]!!.players[match.games[match.currentGame]!!.currentPlayer]!!.taken[match.games[match.currentGame]!!.currentRound] = amount
+            setNextPlayer()
         }
 
         saveToFire()
@@ -282,6 +285,10 @@ class GameActivity: AppCompatActivity() {
                 button.isEnabled = false
             }
         }
+    }
+
+    private fun setNextPlayer() {
+        if(++match.games[match.currentGame]!!.currentPlayer > match.settingPlayers!!) { match.games[match.currentGame]!!.currentPlayer = 1 }
     }
 
     private fun decodeJsonToMatch(value: String): Match {
