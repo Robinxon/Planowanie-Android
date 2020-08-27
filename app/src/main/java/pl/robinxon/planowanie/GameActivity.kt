@@ -1,6 +1,7 @@
 package pl.robinxon.planowanie
 
 import android.content.*
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -137,7 +138,7 @@ class GameActivity: AppCompatActivity() {
         hideUselessRounds()
         setAtut()
         markActivePlayer()
-        updateText()
+        updatePlannedAndMarkGoodOrBad()
     }
 
     private fun setPlayerPointsAndNames() {
@@ -211,7 +212,7 @@ class GameActivity: AppCompatActivity() {
        previousTextView.setBackgroundResource(0)
     }
 
-    private fun updateText() {
+    private fun updatePlannedAndMarkGoodOrBad() {
         for (i in 1..match.games[match.currentGame]!!.currentRound) {
             for(player in 1..4) {
                 if(!(player > 2 && match.settingPlayers == 2)) {
@@ -219,6 +220,11 @@ class GameActivity: AppCompatActivity() {
                     val playerPlanned = match.games[match.currentGame]!!.players[player]!!.planned[i]?.toString() ?: ""
                     val playerTaken = match.games[match.currentGame]!!.players[player]!!.taken[i]?.toString() ?: ""
                     textView.text = getString(R.string.player_planned_and_taken, playerTaken, playerPlanned)
+                    when {
+                        match.games[match.currentGame]!!.players[player]!!.taken[i] == null -> { textView.setTextColor(Color.BLACK) }
+                        match.games[match.currentGame]!!.players[player]!!.taken[i]!! - match.games[match.currentGame]!!.players[player]!!.planned[i]!! == 0 -> { textView.setTextColor(Color.GREEN) }
+                        else -> {textView.setTextColor(Color.RED)}
+                    }
                 }
             }
         }
@@ -382,55 +388,7 @@ class GameActivity: AppCompatActivity() {
         }
     }*/
 
-    /*private fun markAsGoodOrBad() {
-        for (i in 1..currentGameObject.currentRound) {
-            //player 1
-            val resID1 = resources.getIdentifier("textViewRound" + i.toString() + "Player1", "id", packageName)
-            val textView1: TextView = findViewById(resID1)
-            if(currentGameObject.player1.taken[i] == -1) {
-                textView1.setTextColor(Color.BLACK)
-            } else if(currentGameObject.player1.taken[i] - currentGameObject.player1.planned[i] == 0) {
-                textView1.setTextColor(Color.GREEN)
-            } else {
-                textView1.setTextColor(Color.RED)
-            }
 
-            //player 2
-            val resID2 = resources.getIdentifier("textViewRound" + i.toString() + "Player2", "id", packageName)
-            val textView2: TextView = findViewById(resID2)
-            if(currentGameObject.player2.taken[i] == -1) {
-                textView2.setTextColor(Color.BLACK)
-            } else if(currentGameObject.player2.taken[i] - currentGameObject.player2.planned[i] == 0) {
-                textView2.setTextColor(Color.GREEN)
-            } else {
-                textView2.setTextColor(Color.RED)
-            }
-
-            if(match.settingPlayers == 4) {
-                //player 3
-                val resID3 = resources.getIdentifier("textViewRound" + i.toString() + "Player3", "id", packageName)
-                val textView3: TextView = findViewById(resID3)
-                if(currentGameObject.player3.taken[i] == -1) {
-                    textView3.setTextColor(Color.BLACK)
-                } else if(currentGameObject.player3.taken[i] - currentGameObject.player3.planned[i] == 0) {
-                    textView3.setTextColor(Color.GREEN)
-                } else {
-                    textView3.setTextColor(Color.RED)
-                }
-
-                //player 4
-                val resID4 = resources.getIdentifier("textViewRound" + i.toString() + "Player4", "id", packageName)
-                val textView4: TextView = findViewById(resID4)
-                if(currentGameObject.player4.taken[i] == -1) {
-                    textView4.setTextColor(Color.BLACK)
-                } else if(currentGameObject.player4.taken[i] - currentGameObject.player4.planned[i] == 0) {
-                    textView4.setTextColor(Color.GREEN)
-                } else {
-                    textView4.setTextColor(Color.RED)
-                }
-            }
-        }
-    }*/
 
     /*private fun clearText() {
         var roundsToClear: Int = 13
