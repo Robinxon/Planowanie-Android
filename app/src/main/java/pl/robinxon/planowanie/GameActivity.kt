@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -84,6 +85,72 @@ class GameActivity: AppCompatActivity() {
         }
         registerReceiver(broadcastReceiver, IntentFilter("finish_activity_game"))
     }
+
+    //region Menu wyboru gry
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.game_menu, menu)
+        if(match.settingGames == 1) {
+            menu.findItem(R.id.gameMenuGame2).isVisible = false
+            menu.findItem(R.id.gameMenuGame3).isVisible = false
+            menu.findItem(R.id.gameMenuGame4).isVisible = false
+        }
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.gameMenuGame1 -> {
+            if(match.games[1] != null) {
+                match.currentGame = 1
+                presetBoard()
+            } else { Toast.makeText(this, getString(R.string.game_not_started), Toast.LENGTH_SHORT).show() }
+            true
+        }
+
+        R.id.gameMenuGame2 -> {
+            if(match.games[2] != null) {
+                match.currentGame = 2
+                presetBoard()
+            } else { Toast.makeText(this, getString(R.string.game_not_started), Toast.LENGTH_SHORT).show() }
+            true
+        }
+
+        R.id.gameMenuGame3 -> {
+            if(match.games[3] != null) {
+                match.currentGame = 3
+                presetBoard()
+            } else { Toast.makeText(this, getString(R.string.game_not_started), Toast.LENGTH_SHORT).show() }
+            true
+        }
+
+        R.id.gameMenuGame4 -> {
+            if(match.games[4] != null) {
+                match.currentGame = 4
+                presetBoard()
+            } else { Toast.makeText(this, getString(R.string.game_not_started), Toast.LENGTH_SHORT).show() }
+            true
+        }
+
+        R.id.gameSummary -> {
+            val intent = Intent(this, SummaryActivity::class.java)
+            intent.putExtra("currentGame", match)
+            startActivity(intent)
+            true
+        }
+
+        R.id.gameMenuExit -> {
+            startActivity(Intent(this, MenuActivity::class.java))
+            finish()
+            true
+        }
+
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }
+    }
+    //endregion
 
     //region Potwierdzenie wyjścia z aplikacji
     private var firstBackPressAction: FirstBackPressAction = FirstBackPressAction {
@@ -356,68 +423,5 @@ class GameActivity: AppCompatActivity() {
         currentGameObject.ended = true
 
         saveIntoLocal()
-    }*/
-
-    /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.game_menu, menu)
-        if(match.settingGames == 1) {
-            menu.findItem(R.id.gameMenuGame2).isVisible = false
-            menu.findItem(R.id.gameMenuGame3).isVisible = false
-            menu.findItem(R.id.gameMenuGame4).isVisible = false
-        }
-        return true
-    }*/
-
-    /*override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.gameMenuGame1 -> {
-            saveIntoLocal()
-            match.currentGame = 1
-            gameStart()
-            true
-        }
-
-        R.id.gameMenuGame2 -> {
-            saveIntoLocal()
-            match.currentGame = 2
-            gameStart()
-            true
-        }
-
-        R.id.gameMenuGame3 -> {
-            saveIntoLocal()
-            match.currentGame = 3
-            gameStart()
-            true
-        }
-
-        R.id.gameMenuGame4 -> {
-            saveIntoLocal()
-            match.currentGame = 4
-            gameStart()
-            true
-        }
-
-        R.id.gameSummary -> {
-            saveIntoLocal()
-            val intent = Intent(this, SummaryActivity::class.java)
-            intent.putExtra("currentGame", match)
-            startActivity(intent)
-            true
-        }
-
-        R.id.gameMenuExit -> {
-            saveIntoLocal()
-            val intent = Intent(this, NewGameActivity::class.java)
-            startActivity(intent)
-            finish()
-            true
-        }
-
-        else -> {
-            // If we got here, the user's action was not recognized.
-            // Invoke the superclass to handle it.
-            super.onOptionsItemSelected(item)
-        }
     }*/
 }
