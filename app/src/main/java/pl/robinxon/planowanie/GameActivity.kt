@@ -62,6 +62,7 @@ class GameActivity: AppCompatActivity() {
 
         //ustawienie listenerów do przycisków
         buttonToggle.setOnClickListener { buttonToggle() }
+        buttonNextRound.setOnClickListener { buttonNextRound() }
         for(i in 0..13) {
             val resID = resources.getIdentifier("buttonPlan$i", "id", packageName)
             val button: Button = findViewById(resID)
@@ -80,10 +81,7 @@ class GameActivity: AppCompatActivity() {
             saveIntoLocal()
         }
 
-        buttonNextRound.setOnClickListener {
-            nextRound()
-            saveIntoLocal()
-        }
+
 
         buttonPreviousRound.setOnClickListener {
             previousRound()
@@ -117,7 +115,28 @@ class GameActivity: AppCompatActivity() {
     private fun buttonToggle() {
         if(++match.games[match.currentGame]!!.currentPlayer > match.settingPlayers!!) { match.games[match.currentGame]!!.currentPlayer = 1 }
         saveToFire()
-        markActivePlayer()
+    }
+
+    private fun buttonNextRound() {
+        if(
+            match.games[match.currentGame]!!.players[1]!!.taken[match.games[match.currentGame]!!.currentRound] == null
+            || match.games[match.currentGame]!!.players[2]!!.taken[match.games[match.currentGame]!!.currentRound] == null
+            || (match.games[match.currentGame]!!.players[3]!!.taken[match.games[match.currentGame]!!.currentRound] == null && match.settingPlayers == 4)
+            || (match.games[match.currentGame]!!.players[4]!!.taken[match.games[match.currentGame]!!.currentRound] == null && match.settingPlayers == 4)
+        ) { val t = Toast.makeText(this, getString(R.string.incompleted_round), Toast.LENGTH_SHORT).show() }
+        else {
+            //calculate points
+            //clear marked players
+            if(
+                (match.settingGames == 1 && match.games[match.currentGame]!!.currentRound >= 16)
+                || (match.settingGames == 1 && match.games[match.currentGame]!!.currentRound >= 13)
+            ) { /*endGame()*/ }
+            else {
+                match.games[match.currentGame]!!.currentRound++
+                if(match.games[match.currentGame]!!.currentCards > 1) { match.games[match.currentGame]!!.currentCards-- }
+                saveToFire()
+            }
+        }
     }
 
     private fun buttonPlanClick(it: View) {
@@ -137,7 +156,7 @@ class GameActivity: AppCompatActivity() {
         setPlayerPointsAndNames()
         hideUselessRounds()
         setAtut()
-        markActivePlayer()
+        markActivePlayerAndClearOthers()
         updatePlannedAndMarkGoodOrBad()
     }
 
@@ -198,25 +217,22 @@ class GameActivity: AppCompatActivity() {
         }
     }
 
-    private fun markActivePlayer() {
-        //zaznacz obecnego gracza
-       val resID = resources.getIdentifier("textViewRound" + match.games[match.currentGame]!!.currentRound.toString() + "Player" + match.games[match.currentGame]!!.currentPlayer.toString(), "id", packageName)
-       val textView: TextView = findViewById(resID)
-       textView.setBackgroundResource(R.drawable.tv_border)
+    private fun markActivePlayerAndClearOthers() {
+        //wyczyść obramowania wszystkich graczy
+        for (round in 1..match.roundsInGame!!) {
+            for(player in 1..4) {
+                val textView: TextView = findViewById(resources.getIdentifier("textViewRound" + round.toString() + "Player" + player.toString(), "id", packageName))
+                textView.setBackgroundResource(0)
+            }
+        }
 
-        //odznacz poprzedniego gracza
-       var previousPlayer = match.games[match.currentGame]!!.currentPlayer - 1
-       if(previousPlayer <= 0) { previousPlayer = match.settingPlayers!! }
-       val previousResID = resources.getIdentifier("textViewRound" + match.games[match.currentGame]!!.currentRound.toString() + "Player" + previousPlayer.toString(), "id", packageName)
-       val previousTextView: TextView = findViewById(previousResID)
-       previousTextView.setBackgroundResource(0)
+        //zaznacz obecnego gracza
+        val textView: TextView = findViewById(resources.getIdentifier("textViewRound" + match.games[match.currentGame]!!.currentRound.toString() + "Player" + match.games[match.currentGame]!!.currentPlayer.toString().toString(), "id", packageName))
+        textView.setBackgroundResource(R.drawable.tv_border)
     }
 
     private fun updatePlannedAndMarkGoodOrBad() {
-        var roundsInGame: Int = 13
-        if(match.settingGames == 1)  {roundsInGame = 16}
-        if(match.settingGames == 4)  {roundsInGame = 13}
-        for (round in 1..roundsInGame) {
+        for (round in 1..match.roundsInGame!!) {
             for(player in 1..4) {
                 if(!(player > 2 && match.settingPlayers == 2)) {
                     val textView: TextView = findViewById(resources.getIdentifier("textViewRound" + round.toString() + "Player" + player.toString(), "id", packageName))
@@ -238,64 +254,6 @@ class GameActivity: AppCompatActivity() {
         val gson = GsonBuilder().create()
         fireMatch.setValue(gson.toJson(match))
     }
-
-    /*private fun nextPlayer() {
-        if(++currentGameObject.currentPlayer > match.settingPlayers) {
-            currentGameObject.currentPlayer = 1
-        }
-        markActivePlayer()
-        updateText()
-        saveIntoLocal()
-    }*/
-
-
-
-    /*private fun nextRound() {
-        var warning = false
-        if(match.settingPlayers == 2) {
-            if( currentGameObject.player1.planned[currentGameObject.currentRound] == -1 || currentGameObject.player1.taken[currentGameObject.currentRound] == -1 ||
-                currentGameObject.player2.planned[currentGameObject.currentRound] == -1 || currentGameObject.player2.taken[currentGameObject.currentRound] == -1) {
-                warning = true
-            }
-        }
-        if(match.settingPlayers == 4) {
-            if( currentGameObject.player1.planned[currentGameObject.currentRound] == -1 || currentGameObject.player1.taken[currentGameObject.currentRound] == -1 ||
-                currentGameObject.player2.planned[currentGameObject.currentRound] == -1 || currentGameObject.player2.taken[currentGameObject.currentRound] == -1 ||
-                currentGameObject.player3.planned[currentGameObject.currentRound] == -1 || currentGameObject.player3.taken[currentGameObject.currentRound] == -1 ||
-                currentGameObject.player4.planned[currentGameObject.currentRound] == -1 || currentGameObject.player4.taken[currentGameObject.currentRound] == -1 ) {
-                warning = true
-            }
-        }
-        if(warning) {
-            val t = Toast.makeText(this, "Dane rundy niekompletne", Toast.LENGTH_SHORT)
-            t.setGravity(Gravity.BOTTOM, 0, 0)
-            t.show()
-        } else {
-            calculatePoints()
-            updatePoints()
-            markRoundInactive()
-            if(match.settingGames == 1) {
-                if(currentGameObject.currentRound >= 16) {
-                    endGame()
-                } else {
-                    currentGameObject.currentRound++
-                    setAtut()
-                    setPlayer()
-                }
-            } else if (match.settingGames == 4) {
-                if(currentGameObject.currentRound >= 13) {
-                    endGame()
-                } else {
-                    currentGameObject.currentRound++
-                    setAtut()
-                    setPlayer()
-                }
-            }
-            if(currentGameObject.currentCards > 1) {
-                currentGameObject.currentCards--
-            }
-        }
-    }*/
 
     /*private fun previousRound() {
         if(currentGameObject.currentRound != 1) {
