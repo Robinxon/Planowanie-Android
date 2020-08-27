@@ -123,8 +123,8 @@ class GameActivity: AppCompatActivity() {
         if(
             match.games[match.currentGame]!!.players[1]!!.taken[match.games[match.currentGame]!!.currentRound] == null
             || match.games[match.currentGame]!!.players[2]!!.taken[match.games[match.currentGame]!!.currentRound] == null
-            || (match.games[match.currentGame]!!.players[3]!!.taken[match.games[match.currentGame]!!.currentRound] == null && match.settingPlayers == 4)
-            || (match.games[match.currentGame]!!.players[4]!!.taken[match.games[match.currentGame]!!.currentRound] == null && match.settingPlayers == 4)
+            || (match.games[match.currentGame]!!.players[3]?.taken?.get(match.games[match.currentGame]!!.currentRound) == null && match.settingPlayers == 4)
+            || (match.games[match.currentGame]!!.players[4]?.taken?.get(match.games[match.currentGame]!!.currentRound) == null && match.settingPlayers == 4)
         ) { val t = Toast.makeText(this, getString(R.string.incompleted_round), Toast.LENGTH_SHORT).show() }
         else {
             //calculate points
@@ -162,6 +162,7 @@ class GameActivity: AppCompatActivity() {
         setAtut()
         markActivePlayerAndClearOthers()
         updatePlannedAndMarkGoodOrBad()
+        disableButtonToPlan()
     }
 
     private fun setPlayerPointsAndNames() {
@@ -254,6 +255,35 @@ class GameActivity: AppCompatActivity() {
         }
     }
 
+    private fun disableButtonToPlan() {
+        //odblokuj zablokowany
+        if(match.games[match.currentGame]!!.toDisabling != null) {
+            val resID = resources.getIdentifier("buttonPlan${match.games[match.currentGame]!!.toDisabling}", "id", packageName)
+            val button: Button = findViewById(resID)
+            button.isEnabled = true
+        }
+
+        //zablokuj jak jest potrzeba
+        var plannedCount = 0
+        var currentPlanned = 0
+
+        for(player in 1..4) {
+            if(match.games[match.currentGame]!!.players[player]?.planned?.get(match.games[match.currentGame]!!.currentRound) != null) {
+                currentPlanned += match.games[match.currentGame]!!.players[player]!!.planned[match.games[match.currentGame]!!.currentRound]!!
+                plannedCount++
+            }
+        }
+
+        if(plannedCount == match.settingPlayers!! - 1) {
+            match.games[match.currentGame]!!.toDisabling = match.games[match.currentGame]!!.currentCards - currentPlanned
+            if(match.games[match.currentGame]!!.toDisabling != null) {
+                val resID = resources.getIdentifier("buttonPlan${match.games[match.currentGame]!!.toDisabling}", "id", packageName)
+                val button: Button = findViewById(resID)
+                button.isEnabled = false
+            }
+        }
+    }
+
     private fun decodeJsonToMatch(value: String): Match {
         val gson = GsonBuilder().create()
         return gson.fromJson(value, Match::class.java)
@@ -291,95 +321,6 @@ class GameActivity: AppCompatActivity() {
     }*/
 
 
-
-    /*private fun buttonClick(it: View) {
-        val tag = it.tag as String
-        val planned = when(currentGameObject.currentPlayer) {
-            1 -> currentGameObject.player1.planned[currentGameObject.currentRound]
-            2 -> currentGameObject.player2.planned[currentGameObject.currentRound]
-            3 -> currentGameObject.player3.planned[currentGameObject.currentRound]
-            4 -> currentGameObject.player4.planned[currentGameObject.currentRound]
-            else -> TODO() //currentplayer błędny
-        }
-        val taken = when(currentGameObject.currentPlayer) {
-            1 -> currentGameObject.player1.taken[currentGameObject.currentRound]
-            2 -> currentGameObject.player2.taken[currentGameObject.currentRound]
-            3 -> currentGameObject.player3.taken[currentGameObject.currentRound]
-            4 -> currentGameObject.player4.taken[currentGameObject.currentRound]
-            else -> TODO() //currentplayer błędny
-        }
-
-        if(planned == -1) {
-            setPlanned(tag.toInt())
-        } else if(taken == -1) {
-            setTaken(tag.toInt())
-        }
-
-        updateText()
-        nextPlayer()
-    }*/
-
-    /*private fun markRoundInactive() {
-        for (i in 1..currentGameObject.currentRound) {
-            var resID1 = resources.getIdentifier("textViewRound" + i.toString() + "Player1", "id", packageName)
-            var textView1: TextView = findViewById(resID1)
-            textView1.setBackgroundResource(0)
-
-            var resID2 = resources.getIdentifier("textViewRound" + i.toString() + "Player2", "id", packageName)
-            var textView2: TextView = findViewById(resID2)
-            textView2.setBackgroundResource(0)
-
-            var resID3 = resources.getIdentifier("textViewRound" + i.toString() + "Player3", "id", packageName)
-            var textView3: TextView = findViewById(resID3)
-            textView3.setBackgroundResource(0)
-
-            var resID4 = resources.getIdentifier("textViewRound" + i.toString() + "Player4", "id", packageName)
-            var textView4: TextView = findViewById(resID4)
-            textView4.setBackgroundResource(0)
-        }
-    }*/
-
-    /*private fun clearPlayer() {
-
-    }*/
-
-    /*private fun calculatePlanned() {
-        if(currentGameObject.toDisabling >= 0) {
-            val resID = resources.getIdentifier("buttonPlan${currentGameObject.toDisabling}", "id", packageName)
-            val button: Button = findViewById(resID)
-            button.isEnabled = true
-        }
-
-        var plannedCount = 0
-        var currentPlanned = 0
-        if(currentGameObject.player1.planned[currentGameObject.currentRound] != -1) {
-            currentPlanned += currentGameObject.player1.planned[currentGameObject.currentRound]
-            plannedCount++
-        }
-        if(currentGameObject.player2.planned[currentGameObject.currentRound] != -1) {
-            currentPlanned += currentGameObject.player2.planned[currentGameObject.currentRound]
-            plannedCount++
-        }
-        if(match.settingPlayers == 4) {
-            if(currentGameObject.player3.planned[currentGameObject.currentRound] != -1) {
-                currentPlanned += currentGameObject.player3.planned[currentGameObject.currentRound]
-                plannedCount++
-            }
-            if(currentGameObject.player4.planned[currentGameObject.currentRound] != -1) {
-                currentPlanned += currentGameObject.player4.planned[currentGameObject.currentRound]
-                plannedCount++
-            }
-        }
-
-        if(plannedCount == match.settingPlayers - 1) {
-            currentGameObject.toDisabling = currentGameObject.currentCards - currentPlanned
-            if(currentGameObject.toDisabling >= 0) {
-                val resID = resources.getIdentifier("buttonPlan${currentGameObject.toDisabling}", "id", packageName)
-                val button: Button = findViewById(resID)
-                button.isEnabled = false
-            }
-        }
-    }*/
 
     /*private fun calculatePoints() {
         currentGameObject.player1.points = 0
