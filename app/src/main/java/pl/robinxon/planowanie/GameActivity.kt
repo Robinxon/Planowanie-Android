@@ -213,16 +213,20 @@ class GameActivity: AppCompatActivity() {
     }
 
     private fun updatePlannedAndMarkGoodOrBad() {
-        for (i in 1..match.games[match.currentGame]!!.currentRound) {
+        var roundsInGame: Int = 13
+        if(match.settingGames == 1)  {roundsInGame = 16}
+        if(match.settingGames == 4)  {roundsInGame = 13}
+        for (round in 1..roundsInGame) {
             for(player in 1..4) {
                 if(!(player > 2 && match.settingPlayers == 2)) {
-                    val textView: TextView = findViewById(resources.getIdentifier("textViewRound" + i.toString() + "Player" + player.toString(), "id", packageName))
-                    val playerPlanned = match.games[match.currentGame]!!.players[player]!!.planned[i]?.toString() ?: ""
-                    val playerTaken = match.games[match.currentGame]!!.players[player]!!.taken[i]?.toString() ?: ""
-                    textView.text = getString(R.string.player_planned_and_taken, playerTaken, playerPlanned)
+                    val textView: TextView = findViewById(resources.getIdentifier("textViewRound" + round.toString() + "Player" + player.toString(), "id", packageName))
+                    val playerPlanned = match.games[match.currentGame]!!.players[player]!!.planned[round]?.toString() ?: ""
+                    val playerTaken = match.games[match.currentGame]!!.players[player]!!.taken[round]?.toString() ?: ""
+                    if(round <= match.games[match.currentGame]!!.currentRound) { textView.text = getString(R.string.player_planned_and_taken, playerTaken, playerPlanned) }
+                    else {textView.text = ""}
                     when {
-                        match.games[match.currentGame]!!.players[player]!!.taken[i] == null -> { textView.setTextColor(Color.BLACK) }
-                        match.games[match.currentGame]!!.players[player]!!.taken[i]!! - match.games[match.currentGame]!!.players[player]!!.planned[i]!! == 0 -> { textView.setTextColor(Color.GREEN) }
+                        match.games[match.currentGame]!!.players[player]!!.taken[round] == null -> { textView.setTextColor(Color.BLACK) }
+                        match.games[match.currentGame]!!.players[player]!!.taken[round]!! - match.games[match.currentGame]!!.players[player]!!.planned[round]!! == 0 -> { textView.setTextColor(Color.GREEN) }
                         else -> {textView.setTextColor(Color.RED)}
                     }
                 }
@@ -385,83 +389,6 @@ class GameActivity: AppCompatActivity() {
             var resID4 = resources.getIdentifier("textViewRound" + i.toString() + "Player4", "id", packageName)
             var textView4: TextView = findViewById(resID4)
             textView4.setBackgroundResource(0)
-        }
-    }*/
-
-
-
-    /*private fun clearText() {
-        var roundsToClear: Int = 13
-        if(match.settingGames == 1)  {roundsToClear = 16}
-        if(match.settingGames == 4)  {roundsToClear = 13}
-        for (i in 1..roundsToClear) {
-            //player 1
-            val resID1 = resources.getIdentifier("textViewRound" + i.toString() + "Player1", "id", packageName)
-            val textView1: TextView = findViewById(resID1)
-            textView1.text = ""
-            textView1.setBackgroundResource(0)
-
-            //player 2
-            val resID2 = resources.getIdentifier("textViewRound" + i.toString() + "Player2", "id", packageName)
-            val textView2: TextView = findViewById(resID2)
-            textView2.text = ""
-            textView2.setBackgroundResource(0)
-
-            if(match.settingPlayers == 4) {
-                //player 3
-                val resID3 = resources.getIdentifier("textViewRound" + i.toString() + "Player3", "id", packageName)
-                val textView3: TextView = findViewById(resID3)
-                textView3.text = ""
-                textView3.setBackgroundResource(0)
-
-                //player 4
-                val resID4 = resources.getIdentifier("textViewRound" + i.toString() + "Player4", "id", packageName)
-                val textView4: TextView = findViewById(resID4)
-                textView4.text = ""
-                textView4.setBackgroundResource(0)
-            }
-        }
-    }*/
-
-    /*private fun updateText() {
-        for (i in 1..currentGameObject.currentRound) {
-            //player 1
-            val resID1 = resources.getIdentifier("textViewRound" + i.toString() + "Player1", "id", packageName)
-            val textView1: TextView = findViewById(resID1)
-            var player1Planned = currentGameObject.player1.planned[i].toString()
-            if(currentGameObject.player1.planned[i] == -1) {player1Planned = ""}
-            var player1Taken = currentGameObject.player1.taken[i].toString()
-            if(currentGameObject.player1.taken[i] == -1) {player1Taken = ""}
-            textView1.text = getString(R.string.playerPlannedAndTaken, player1Taken, player1Planned)
-
-            //player 2
-            val resID2 = resources.getIdentifier("textViewRound" + i.toString() + "Player2", "id", packageName)
-            val textView2: TextView = findViewById(resID2)
-            var player2Planned = currentGameObject.player2.planned[i].toString()
-            if(currentGameObject.player2.planned[i] == -1) {player2Planned = ""}
-            var player2Taken = currentGameObject.player2.taken[i].toString()
-            if(currentGameObject.player2.taken[i] == -1) {player2Taken = ""}
-            textView2.text = getString(R.string.playerPlannedAndTaken, player2Taken, player2Planned)
-
-            if(match.settingPlayers == 4) {
-                //player 3
-                val resID3 = resources.getIdentifier("textViewRound" + i.toString() + "Player3", "id", packageName)
-                val textView3: TextView = findViewById(resID3)
-                var player3Planned = currentGameObject.player3.planned[i].toString()
-                if(currentGameObject.player3.planned[i] == -1) {player3Planned = ""}
-                var player3Taken = currentGameObject.player3.taken[i].toString()
-                if(currentGameObject.player3.taken[i] == -1) {player3Taken = ""}
-                textView3.text = getString(R.string.playerPlannedAndTaken, player3Taken, player3Planned)
-
-                //player 4
-                val resID4 = resources.getIdentifier("textViewRound" + i.toString() + "Player4", "id", packageName)
-                val textView4: TextView = findViewById(resID4)
-                var player4Planned = currentGameObject.player4.planned[i].toString()
-                if(currentGameObject.player4.planned[i] == -1) {player4Planned = ""}
-                var player4Taken = currentGameObject.player4.taken[i].toString()
-                if(currentGameObject.player4.taken[i] == -1) {player4Taken = ""}
-                textView4.text = getString(R.string.playerPlannedAndTaken, player4Taken, player4Planned)
-            }
         }
     }*/
 
