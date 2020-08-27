@@ -62,6 +62,8 @@ class GameActivity: AppCompatActivity() {
 
         //ustawienie listenerów do przycisków
         buttonToggle.setOnClickListener { buttonToggle() }
+        buttonClear.setOnClickListener { buttonClear() }
+        buttonPreviousRound.setOnClickListener { buttonPreviousRound()}
         buttonNextRound.setOnClickListener { buttonNextRound() }
         for(i in 0..13) {
             val resID = resources.getIdentifier("buttonPlan$i", "id", packageName)
@@ -81,28 +83,6 @@ class GameActivity: AppCompatActivity() {
             }
         }
         registerReceiver(broadcastReceiver, IntentFilter("finish_activity_game"))
-
-        //STARY KOD
-
-
-        /*
-        buttonClear.setOnClickListener {
-            clearPlayer()
-            saveIntoLocal()
-        }
-
-
-
-        buttonPreviousRound.setOnClickListener {
-            previousRound()
-            saveIntoLocal()
-        }*/
-
-
-
-        /*
-
-        gameStart()*/
     }
 
     private fun decodeJsonToMatch(value: String): Match {
@@ -115,6 +95,10 @@ class GameActivity: AppCompatActivity() {
         if(++match.games[match.currentGame]!!.currentPlayer > match.settingPlayers!!) { match.games[match.currentGame]!!.currentPlayer = 1 }
         saveToFire()
     }
+
+    private fun buttonClear() {}
+
+    private fun buttonPreviousRound() {}
 
     private fun buttonNextRound() {
         if(
@@ -282,27 +266,7 @@ class GameActivity: AppCompatActivity() {
         }
     }*/
 
-    /*private fun gameStart() {
 
-
-        currentGameObject = when(match.currentGame) {
-            1 -> match.game1
-            2 -> match.game2
-            3 -> match.game3
-            4 -> match.game4
-            else -> TODO() //gra zakończona lub błędna
-        }
-
-        clearText()
-        setPlayer()
-        markAsGoodOrBad()
-        calculatePoints()
-        calculatePlanned()
-        updateText()
-        updatePoints()
-        setAtut()
-        saveIntoLocal()
-    }*/
 
     /*private fun buttonClick(it: View) {
         val tag = it.tag as String
