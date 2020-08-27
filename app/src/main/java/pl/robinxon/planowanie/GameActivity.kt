@@ -67,8 +67,7 @@ class GameActivity: AppCompatActivity() {
         buttonPreviousRound.setOnClickListener { buttonPreviousRound()}
         buttonNextRound.setOnClickListener { buttonNextRound() }
         for(i in 0..13) {
-            val resID = resources.getIdentifier("buttonPlan$i", "id", packageName)
-            val button: Button = findViewById(resID)
+            val button: Button = findViewById(resources.getIdentifier("buttonPlan$i", "id", packageName))
             button.setOnClickListener {
                 buttonPlanClick(it)
             }
@@ -187,6 +186,17 @@ class GameActivity: AppCompatActivity() {
     private fun buttonPreviousRound() {
         if(match.games[match.currentGame]!!.currentRound > 1) {
             if(!match.games[match.currentGame]!!.ended) {match.games[match.currentGame]!!.currentRound--}
+            if(match.games[match.currentGame]!!.ended) {
+                //odkryj przyciski
+                for(i in 0..13) {
+                    val button: Button = findViewById(resources.getIdentifier("buttonPlan$i", "id", packageName))
+                    button.visibility = View.VISIBLE
+                }
+                buttonToggle.visibility = View.VISIBLE
+                buttonClear.visibility = View.VISIBLE
+                buttonPreviousRound.visibility = View.VISIBLE
+                buttonNextRound.visibility = View.VISIBLE
+            }
             match.games[match.currentGame]!!.ended = false
             calculatePoints()
             setAtut()
@@ -206,12 +216,12 @@ class GameActivity: AppCompatActivity() {
             || (match.games[match.currentGame]!!.players[4]?.taken?.get(match.games[match.currentGame]!!.currentRound) == null && match.settingPlayers == 4)
         ) { Toast.makeText(this, getString(R.string.incompleted_round), Toast.LENGTH_SHORT).show() }
         else {
-            //calculate points
-            //clear marked players
+            calculatePoints()
+            saveToFire()
             if(
                 (match.settingGames == 1 && match.games[match.currentGame]!!.currentRound >= 16)
-                || (match.settingGames == 1 && match.games[match.currentGame]!!.currentRound >= 13)
-            ) { /*endGame()*/ }
+                || (match.settingGames == 4 && match.games[match.currentGame]!!.currentRound >= 13)
+            ) { endGame() }
             else {
                 match.games[match.currentGame]!!.currentRound++
                 setPlayerInRound()
@@ -314,9 +324,11 @@ class GameActivity: AppCompatActivity() {
             }
         }
 
-        //zaznacz obecnego gracza
-        val textView: TextView = findViewById(resources.getIdentifier("textViewRound" + match.games[match.currentGame]!!.currentRound.toString() + "Player" + match.games[match.currentGame]!!.currentPlayer.toString().toString(), "id", packageName))
-        textView.setBackgroundResource(R.drawable.tv_border)
+        //zaznacz obecnego gracza jeśli gra jest w toku
+        if(!match.games[match.currentGame]!!.ended) {
+            val textView: TextView = findViewById(resources.getIdentifier("textViewRound" + match.games[match.currentGame]!!.currentRound.toString() + "Player" + match.games[match.currentGame]!!.currentPlayer.toString().toString(), "id", packageName))
+            textView.setBackgroundResource(R.drawable.tv_border)
+        }
     }
 
     private fun updatePlannedAndMarkGoodOrBad() {
@@ -406,6 +418,27 @@ class GameActivity: AppCompatActivity() {
         if(++match.games[match.currentGame]!!.currentPlayer > match.settingPlayers!!) { match.games[match.currentGame]!!.currentPlayer = 1 }
     }
 
+    private fun endGame() {
+        //wyświetl komunikat
+        Toast.makeText(this, "Gra zakończona", Toast.LENGTH_SHORT).show()
+
+        //zamknij grę w zmiennej
+        match.games[match.currentGame]!!.ended = true
+
+        //ukryj przyciski
+        for(i in 0..13) {
+            val button: Button = findViewById(resources.getIdentifier("buttonPlan$i", "id", packageName))
+            button.visibility = View.GONE
+        }
+        buttonToggle.visibility = View.GONE
+        buttonClear.visibility = View.GONE
+        buttonPreviousRound.visibility = View.GONE
+        buttonNextRound.visibility = View.GONE
+
+        //zapisz do bazy
+        saveToFire()
+    }
+
     private fun decodeJsonToMatch(value: String): Match {
         val gson = GsonBuilder().create()
         return gson.fromJson(value, Match::class.java)
@@ -415,16 +448,4 @@ class GameActivity: AppCompatActivity() {
         val gson = GsonBuilder().create()
         fireMatch.setValue(gson.toJson(match))
     }
-
-
-
-    /*private fun endGame() {
-        val t = Toast.makeText(this, "Gra zakończona", Toast.LENGTH_SHORT)
-        t.setGravity(Gravity.BOTTOM, 0, 0)
-        t.show()
-
-        currentGameObject.ended = true
-
-        saveIntoLocal()
-    }*/
 }
