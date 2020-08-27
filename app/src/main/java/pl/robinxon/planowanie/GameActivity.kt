@@ -85,10 +85,25 @@ class GameActivity: AppCompatActivity() {
         registerReceiver(broadcastReceiver, IntentFilter("finish_activity_game"))
     }
 
-    private fun decodeJsonToMatch(value: String): Match {
-        val gson = GsonBuilder().create()
-        return gson.fromJson(value, Match::class.java)
+    //region Potwierdzenie wyjścia z aplikacji
+    private var firstBackPressAction: FirstBackPressAction = FirstBackPressAction {
+        Toast.makeText(this, getString(R.string.press_again_to_exit), Toast.LENGTH_SHORT).show()
     }
+
+    private var doubleBackPressAction = DoubleBackPressAction {
+        finish()
+        exitProcess(0)
+    }
+
+    private var doubleBackPress = DoubleBackPress()
+        .withDoublePressDuration(3000)
+        .withFirstBackPressAction(firstBackPressAction)
+        .withDoubleBackPressAction(doubleBackPressAction)
+
+    override fun onBackPressed() {
+        doubleBackPress.onBackPressed()
+    }
+    //endregion
 
     //region Funkcje przycisków
     private fun buttonToggle() {
@@ -96,7 +111,11 @@ class GameActivity: AppCompatActivity() {
         saveToFire()
     }
 
-    private fun buttonClear() {}
+    private fun buttonClear() {
+        match.games[match.currentGame]!!.players[match.games[match.currentGame]!!.currentPlayer]!!.taken[match.games[match.currentGame]!!.currentRound] = null
+        match.games[match.currentGame]!!.players[match.games[match.currentGame]!!.currentPlayer]!!.planned[match.games[match.currentGame]!!.currentRound] = null
+        saveToFire()
+    }
 
     private fun buttonPreviousRound() {}
 
@@ -235,6 +254,11 @@ class GameActivity: AppCompatActivity() {
         }
     }
 
+    private fun decodeJsonToMatch(value: String): Match {
+        val gson = GsonBuilder().create()
+        return gson.fromJson(value, Match::class.java)
+    }
+
     private fun saveToFire() {
         val gson = GsonBuilder().create()
         fireMatch.setValue(gson.toJson(match))
@@ -315,42 +339,8 @@ class GameActivity: AppCompatActivity() {
         }
     }*/
 
-    /*private fun updatePoints() {
-        editTextPlayer1.setText(getString(R.string.playerNameAndPoints, match.player1Name, currentGameObject.player1.points))
-        editTextPlayer2.setText(getString(R.string.playerNameAndPoints, match.player2Name, currentGameObject.player2.points))
-        if(match.settingPlayers == 4) {
-            editTextPlayer3.setText(getString(R.string.playerNameAndPoints, match.player3Name, currentGameObject.player3.points))
-            editTextPlayer4.setText(getString(R.string.playerNameAndPoints, match.player4Name, currentGameObject.player4.points))
-        }
-    }*/
-
     /*private fun clearPlayer() {
-        val resID = resources.getIdentifier("textViewRound" + currentGameObject.currentRound.toString() + "Player" + currentGameObject.currentPlayer.toString(), "id", packageName)
-        val textView: TextView = findViewById(resID)
-        textView.text = ""
 
-        when(currentGameObject.currentPlayer) {
-            1 -> {
-                currentGameObject.player1.taken[currentGameObject.currentRound] = -1
-                currentGameObject.player1.planned[currentGameObject.currentRound] = -1
-            }
-            2 -> {
-                currentGameObject.player2.taken[currentGameObject.currentRound] = -1
-                currentGameObject.player2.planned[currentGameObject.currentRound] = -1
-            }
-            3 -> {
-                currentGameObject.player3.taken[currentGameObject.currentRound] = -1
-                currentGameObject.player3.planned[currentGameObject.currentRound] = -1
-            }
-            4 -> {
-                currentGameObject.player4.taken[currentGameObject.currentRound] = -1
-                currentGameObject.player4.planned[currentGameObject.currentRound] = -1
-            }
-        }
-
-        calculatePlanned()
-        markActivePlayer()
-        updateText()
     }*/
 
     /*private fun calculatePlanned() {
@@ -427,27 +417,6 @@ class GameActivity: AppCompatActivity() {
         saveIntoLocal()
     }*/
 
-    /*private fun saveIntoLocal() {
-        val gson = GsonBuilder().create()
-        val database = getSharedPreferences("database", Context.MODE_PRIVATE)
-
-        when(match.currentGame) {
-            1 -> match.game1 = currentGameObject
-            2 -> match.game2 = currentGameObject
-            3 -> match.game3 = currentGameObject
-            4 -> match.game4 = currentGameObject
-        }
-
-        val json = gson.toJson(match)
-
-        database.edit().apply {
-            putString("matchJson", json)
-        }.apply()
-    }*/
-
-
-
-
     /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.game_menu, menu)
@@ -509,23 +478,5 @@ class GameActivity: AppCompatActivity() {
             // Invoke the superclass to handle it.
             super.onOptionsItemSelected(item)
         }
-    }*/
-
-    /*private var firstBackPressAction: FirstBackPressAction = FirstBackPressAction {
-        Toast.makeText(this, "Naciśnij ponownie, aby zamknąć aplikację", Toast.LENGTH_SHORT).show()
-    }
-
-    private var doubleBackPressAction = DoubleBackPressAction {
-        finish()
-        exitProcess(0)
-    }
-
-    private var doubleBackPress = DoubleBackPress()
-        .withDoublePressDuration(3000)
-        .withFirstBackPressAction(firstBackPressAction)
-        .withDoubleBackPressAction(doubleBackPressAction)
-
-    override fun onBackPressed() {
-        doubleBackPress.onBackPressed()
     }*/
 }

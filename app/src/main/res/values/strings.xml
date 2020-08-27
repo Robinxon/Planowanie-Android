@@ -73,4 +73,5 @@
     <string name="no">Nie</string>
     <string name="saved_match_description">%s-%s-%s %s:%s - %s %s %s %s</string>
     <string name="incompleted_round">Runda w toku</string>
+    <string name="press_again_to_exit">Naciśnij ponownie, aby zamknąć aplikację</string>
 </resources>
