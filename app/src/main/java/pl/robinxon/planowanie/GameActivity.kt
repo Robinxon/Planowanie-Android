@@ -184,7 +184,19 @@ class GameActivity: AppCompatActivity() {
         saveToFire()
     }
 
-    private fun buttonPreviousRound() {}
+    private fun buttonPreviousRound() {
+        if(match.games[match.currentGame]!!.currentRound > 1) {
+            if(!match.games[match.currentGame]!!.ended) {match.games[match.currentGame]!!.currentRound--}
+            match.games[match.currentGame]!!.ended = false
+            calculatePoints()
+            setAtut()
+            setPlayerInRound()
+            markActivePlayerAndClearOthers()
+            updatePlannedAndMarkGoodOrBad()
+            setPlayerPointsAndNames()
+            disableButtonToPlan()
+        }
+    }
 
     private fun buttonNextRound() {
         if(
@@ -192,7 +204,7 @@ class GameActivity: AppCompatActivity() {
             || match.games[match.currentGame]!!.players[2]!!.taken[match.games[match.currentGame]!!.currentRound] == null
             || (match.games[match.currentGame]!!.players[3]?.taken?.get(match.games[match.currentGame]!!.currentRound) == null && match.settingPlayers == 4)
             || (match.games[match.currentGame]!!.players[4]?.taken?.get(match.games[match.currentGame]!!.currentRound) == null && match.settingPlayers == 4)
-        ) { val t = Toast.makeText(this, getString(R.string.incompleted_round), Toast.LENGTH_SHORT).show() }
+        ) { Toast.makeText(this, getString(R.string.incompleted_round), Toast.LENGTH_SHORT).show() }
         else {
             //calculate points
             //clear marked players
@@ -202,8 +214,7 @@ class GameActivity: AppCompatActivity() {
             ) { /*endGame()*/ }
             else {
                 match.games[match.currentGame]!!.currentRound++
-                if(match.games[match.currentGame]!!.currentCards > 1) { match.games[match.currentGame]!!.currentCards-- }
-                setNextPlayer()
+                setPlayerInRound()
                 calculatePoints()
                 saveToFire()
             }
@@ -329,7 +340,7 @@ class GameActivity: AppCompatActivity() {
 
     private fun disableButtonToPlan() {
         //odblokuj zablokowany
-        if(match.games[match.currentGame]!!.toDisabling != null) {
+        if(match.games[match.currentGame]!!.toDisabling != null && match.games[match.currentGame]!!.toDisabling!! >= 0) {
             val resID = resources.getIdentifier("buttonPlan${match.games[match.currentGame]!!.toDisabling}", "id", packageName)
             val button: Button = findViewById(resID)
             button.isEnabled = true
@@ -347,23 +358,18 @@ class GameActivity: AppCompatActivity() {
         }
 
         if(plannedCount == match.settingPlayers!! - 1) {
-            match.games[match.currentGame]!!.toDisabling = match.games[match.currentGame]!!.currentCards - currentPlanned
-            if(match.games[match.currentGame]!!.toDisabling != null) {
-                val resID = resources.getIdentifier("buttonPlan${match.games[match.currentGame]!!.toDisabling}", "id", packageName)
-                val button: Button = findViewById(resID)
+            match.games[match.currentGame]!!.toDisabling = match.games[match.currentGame]!!.currentCards[match.games[match.currentGame]!!.currentRound] - currentPlanned
+            if(match.games[match.currentGame]!!.toDisabling != null && match.games[match.currentGame]!!.toDisabling!! >= 0) {
+                val button: Button = findViewById(resources.getIdentifier("buttonPlan${match.games[match.currentGame]!!.toDisabling}", "id", packageName))
                 button.isEnabled = false
             }
         }
     }
 
-    private fun setNextPlayer() {
-        if(++match.games[match.currentGame]!!.currentPlayer > match.settingPlayers!!) { match.games[match.currentGame]!!.currentPlayer = 1 }
-    }
-
     private fun calculatePoints() {
         for(player in 1..4) { match.games[match.currentGame]!!.players[player]?.points = 0 }
 
-        for (i in 1..match.games[match.currentGame]!!.currentRound) {
+        for (i in 1 until match.games[match.currentGame]!!.currentRound) {
             for (player in 1..4) {
                 if (
                     (match.games[match.currentGame]!!.players[player]?.taken?.get(i) != null)
@@ -375,6 +381,31 @@ class GameActivity: AppCompatActivity() {
         }
     }
 
+    private fun setPlayerInRound() {
+        when(match.settingPlayers) {
+            2 -> {
+                match.games[match.currentGame]!!.currentPlayer = when(match.games[match.currentGame]!!.currentRound % 2) {
+                    0 -> 2
+                    1 -> 1
+                    else -> 1
+                }
+            }
+            4 -> {
+                match.games[match.currentGame]!!.currentPlayer = when(match.games[match.currentGame]!!.currentRound % 4) {
+                    0 -> 4
+                    1 -> 1
+                    2 -> 2
+                    3 -> 3
+                    else -> 1
+                }
+            }
+        }
+    }
+
+    private fun setNextPlayer() {
+        if(++match.games[match.currentGame]!!.currentPlayer > match.settingPlayers!!) { match.games[match.currentGame]!!.currentPlayer = 1 }
+    }
+
     private fun decodeJsonToMatch(value: String): Match {
         val gson = GsonBuilder().create()
         return gson.fromJson(value, Match::class.java)
@@ -384,34 +415,6 @@ class GameActivity: AppCompatActivity() {
         val gson = GsonBuilder().create()
         fireMatch.setValue(gson.toJson(match))
     }
-
-    /*private fun previousRound() {
-        if(currentGameObject.currentRound != 1) {
-            markRoundInactive()
-            if(!currentGameObject.ended) {currentGameObject.currentRound--}
-            currentGameObject.ended = false
-            currentGameObject.currentCards++
-            if(currentGameObject.player1.planned[currentGameObject.currentRound] == currentGameObject.player1.taken[currentGameObject.currentRound]) {
-                currentGameObject.player1.points -= (10 + currentGameObject.player1.planned[currentGameObject.currentRound])
-            }
-            if(currentGameObject.player2.planned[currentGameObject.currentRound] == currentGameObject.player2.taken[currentGameObject.currentRound]) {
-                currentGameObject.player2.points -= (10 + currentGameObject.player2.planned[currentGameObject.currentRound])
-            }
-            if(match.settingPlayers == 4) {
-                if (currentGameObject.player3.planned[currentGameObject.currentRound] == currentGameObject.player3.taken[currentGameObject.currentRound]) {
-                    currentGameObject.player3.points -= (10 + currentGameObject.player3.planned[currentGameObject.currentRound])
-                }
-                if (currentGameObject.player4.planned[currentGameObject.currentRound] == currentGameObject.player4.taken[currentGameObject.currentRound]) {
-                    currentGameObject.player4.points -= (10 + currentGameObject.player4.planned[currentGameObject.currentRound])
-                }
-            }
-            setAtut()
-            updatePoints()
-            setPlayer()
-        }
-    }*/
-
-
 
 
 
