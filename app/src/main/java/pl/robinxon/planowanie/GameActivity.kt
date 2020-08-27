@@ -216,8 +216,8 @@ class GameActivity: AppCompatActivity() {
             for(player in 1..4) {
                 if(!(player > 2 && match.settingPlayers == 2)) {
                     val textView: TextView = findViewById(resources.getIdentifier("textViewRound" + i.toString() + "Player" + player.toString(), "id", packageName))
-                    var playerPlanned = match.games[match.currentGame]!!.players[player]!!.planned[i]?.toString() ?: ""
-                    var playerTaken = match.games[match.currentGame]!!.players[player]!!.taken[i]?.toString() ?: ""
+                    val playerPlanned = match.games[match.currentGame]!!.players[player]!!.planned[i]?.toString() ?: ""
+                    val playerTaken = match.games[match.currentGame]!!.players[player]!!.taken[i]?.toString() ?: ""
                     textView.text = getString(R.string.player_planned_and_taken, playerTaken, playerPlanned)
                 }
             }
