@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -60,7 +61,13 @@ class GameActivity: AppCompatActivity() {
 
         //ustawienie listenerów do przycisków
         buttonToggle.setOnClickListener { buttonToggle() }
-
+        for(i in 0..13) {
+            val resID = resources.getIdentifier("buttonPlan$i", "id", packageName)
+            val button: Button = findViewById(resID)
+            button.setOnClickListener {
+                buttonPlanClick(it)
+            }
+        } //przyciski planowania
 
 
         //STARY KOD
@@ -82,14 +89,7 @@ class GameActivity: AppCompatActivity() {
             saveIntoLocal()
         }*/
 
-        /*for(i in 0..13) {
-            val resID = resources.getIdentifier("buttonPlan$i", "id", packageName)
-            val button: Button = findViewById(resID)
-            button.setOnClickListener {
-                buttonClick(it)
-                saveIntoLocal()
-            }
-        }*/
+
 
         /*//nasłuchiwanie na zakończenie aktywności
         val broadcastReceiver = object : BroadcastReceiver() {
@@ -118,6 +118,18 @@ class GameActivity: AppCompatActivity() {
         saveToFire()
         markActivePlayer()
     }
+
+    private fun buttonPlanClick(it: View) {
+        val amount = Integer.parseInt(it.tag.toString())
+
+        if(match.games[match.currentGame]!!.players[match.games[match.currentGame]!!.currentPlayer]!!.planned[match.games[match.currentGame]!!.currentRound] == null) {
+            match.games[match.currentGame]!!.players[match.games[match.currentGame]!!.currentPlayer]!!.planned[match.games[match.currentGame]!!.currentRound] = amount
+        } else if(match.games[match.currentGame]!!.players[match.games[match.currentGame]!!.currentPlayer]!!.taken[match.games[match.currentGame]!!.currentRound] == null) {
+            match.games[match.currentGame]!!.players[match.games[match.currentGame]!!.currentPlayer]!!.taken[match.games[match.currentGame]!!.currentRound] = amount
+        }
+
+        saveToFire()
+    }
     //endregion
 
     private fun presetBoard() {
@@ -125,6 +137,7 @@ class GameActivity: AppCompatActivity() {
         hideUselessRounds()
         setAtut()
         markActivePlayer()
+        updateText()
     }
 
     private fun setPlayerPointsAndNames() {
@@ -196,6 +209,19 @@ class GameActivity: AppCompatActivity() {
        val previousResID = resources.getIdentifier("textViewRound" + match.games[match.currentGame]!!.currentRound.toString() + "Player" + previousPlayer.toString(), "id", packageName)
        val previousTextView: TextView = findViewById(previousResID)
        previousTextView.setBackgroundResource(0)
+    }
+
+    private fun updateText() {
+        for (i in 1..match.games[match.currentGame]!!.currentRound) {
+            for(player in 1..4) {
+                if(!(player > 2 && match.settingPlayers == 2)) {
+                    val textView: TextView = findViewById(resources.getIdentifier("textViewRound" + i.toString() + "Player" + player.toString(), "id", packageName))
+                    var playerPlanned = match.games[match.currentGame]!!.players[player]!!.planned[i]?.toString() ?: ""
+                    var playerTaken = match.games[match.currentGame]!!.players[player]!!.taken[i]?.toString() ?: ""
+                    textView.text = getString(R.string.player_planned_and_taken, playerTaken, playerPlanned)
+                }
+            }
+        }
     }
 
     private fun saveToFire() {
@@ -335,32 +361,6 @@ class GameActivity: AppCompatActivity() {
         updateText()
         nextPlayer()
     }*/
-
-
-
-    /*private fun setPlanned(plan: Int) {
-        when(currentGameObject.currentPlayer) {
-            1 -> currentGameObject.player1.planned[currentGameObject.currentRound] = plan
-            2 -> currentGameObject.player2.planned[currentGameObject.currentRound] = plan
-            3 -> currentGameObject.player3.planned[currentGameObject.currentRound] = plan
-            4 -> currentGameObject.player4.planned[currentGameObject.currentRound] = plan
-        }
-
-        calculatePlanned()
-    }*/
-
-    /*private fun setTaken(take: Int) {
-        when(currentGameObject.currentPlayer) {
-            1 -> currentGameObject.player1.taken[currentGameObject.currentRound] = take
-            2 -> currentGameObject.player2.taken[currentGameObject.currentRound] = take
-            3 -> currentGameObject.player3.taken[currentGameObject.currentRound] = take
-            4 -> currentGameObject.player4.taken[currentGameObject.currentRound] = take
-        }
-
-        markAsGoodOrBad()
-    }*/
-
-
 
     /*private fun markRoundInactive() {
         for (i in 1..currentGameObject.currentRound) {

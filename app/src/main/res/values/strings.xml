@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Planowanie</string>
     <string name="player_name_and_points">%d | %s</string>
-    <string name="playerPlannedAndTaken">%s / %s</string>
+    <string name="player_planned_and_taken">%s / %s</string>
     <string name="gameActivityTitle">Gra %d</string>
     <string name="player3Hint">Gracz 3</string>
     <string name="player1Hint">Gracz 1</string>
