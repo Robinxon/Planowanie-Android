@@ -152,6 +152,8 @@ class GameActivity: AppCompatActivity() {
     //endregion
 
     private fun presetBoard() {
+        title = getString(R.string.gameActivityTitle, match.currentGame)
+
         setPlayerPointsAndNames()
         hideUselessRounds()
         setAtut()
@@ -281,7 +283,7 @@ class GameActivity: AppCompatActivity() {
     }*/
 
     /*private fun gameStart() {
-        title = getString(R.string.gameActivityTitle, match.currentGame)
+
 
         currentGameObject = when(match.currentGame) {
             1 -> match.game1
