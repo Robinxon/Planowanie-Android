@@ -137,6 +137,7 @@ class GameActivity: AppCompatActivity() {
                 match.games[match.currentGame]!!.currentRound++
                 if(match.games[match.currentGame]!!.currentCards > 1) { match.games[match.currentGame]!!.currentCards-- }
                 setNextPlayer()
+                calculatePoints()
                 saveToFire()
             }
         }
@@ -160,20 +161,21 @@ class GameActivity: AppCompatActivity() {
     private fun presetBoard() {
         title = getString(R.string.gameActivityTitle, match.currentGame)
 
-        setPlayerPointsAndNames()
         hideUselessRounds()
         setAtut()
         markActivePlayerAndClearOthers()
         updatePlannedAndMarkGoodOrBad()
+        setPlayerPointsAndNames()
         disableButtonToPlan()
     }
 
     private fun setPlayerPointsAndNames() {
-        editTextPlayer1.setText(getString(R.string.player_name_and_points,0, match.playerNames[1]))
-        editTextPlayer2.setText(getString(R.string.player_name_and_points,0, match.playerNames[2]))
+        //wypisz punktację
+        editTextPlayer1.setText(getString(R.string.player_name_and_points, match.games[match.currentGame]!!.players[1]?.points, match.playerNames[1]))
+        editTextPlayer2.setText(getString(R.string.player_name_and_points, match.games[match.currentGame]!!.players[2]?.points, match.playerNames[2]))
         if(match.settingPlayers == 4) {
-            editTextPlayer3.setText(getString(R.string.player_name_and_points, 0, match.playerNames[3]))
-            editTextPlayer4.setText(getString(R.string.player_name_and_points, 0, match.playerNames[4]))
+            editTextPlayer3.setText(getString(R.string.player_name_and_points, match.games[match.currentGame]!!.players[3]?.points, match.playerNames[3]))
+            editTextPlayer4.setText(getString(R.string.player_name_and_points, match.games[match.currentGame]!!.players[4]?.points, match.playerNames[4]))
         }
         else {
             editTextPlayer3.visibility = View.INVISIBLE
@@ -291,6 +293,21 @@ class GameActivity: AppCompatActivity() {
         if(++match.games[match.currentGame]!!.currentPlayer > match.settingPlayers!!) { match.games[match.currentGame]!!.currentPlayer = 1 }
     }
 
+    private fun calculatePoints() {
+        for(player in 1..4) { match.games[match.currentGame]!!.players[player]?.points = 0 }
+
+        for (i in 1..match.games[match.currentGame]!!.currentRound) {
+            for (player in 1..4) {
+                if (
+                    (match.games[match.currentGame]!!.players[player]?.taken?.get(i) != null)
+                    && (match.games[match.currentGame]!!.players[player]?.planned?.get(i) == match.games[match.currentGame]!!.players[player]?.taken?.get(i))
+                ) {
+                    match.games[match.currentGame]!!.players[player]!!.points += (10 + match.games[match.currentGame]!!.players[player]!!.planned[i]!!)
+                }
+            }
+        }
+    }
+
     private fun decodeJsonToMatch(value: String): Match {
         val gson = GsonBuilder().create()
         return gson.fromJson(value, Match::class.java)
@@ -329,31 +346,7 @@ class GameActivity: AppCompatActivity() {
 
 
 
-    /*private fun calculatePoints() {
-        currentGameObject.player1.points = 0
-        currentGameObject.player2.points = 0
-        if(match.settingPlayers == 4) {
-            currentGameObject.player3.points = 0
-            currentGameObject.player4.points = 0
-        }
-        for (i in 1..currentGameObject.currentRound) {
-            if((currentGameObject.player1.planned[i] == currentGameObject.player1.taken[i]) && (currentGameObject.player1.taken[i] != -1)) {
-                currentGameObject.player1.points += (10 + currentGameObject.player1.planned[i])
-            }
-            if((currentGameObject.player2.planned[i] == currentGameObject.player2.taken[i]) && (currentGameObject.player1.taken[i] != -1)) {
-                currentGameObject.player2.points += (10 + currentGameObject.player2.planned[i])
-            }
-            if(match.settingPlayers == 4) {
-                if((currentGameObject.player3.planned[i] == currentGameObject.player3.taken[i]) && (currentGameObject.player1.taken[i] != -1)) {
-                    currentGameObject.player3.points += (10 + currentGameObject.player3.planned[i])
-                }
-                if((currentGameObject.player4.planned[i] == currentGameObject.player4.taken[i]) && (currentGameObject.player1.taken[i] != -1)) {
-                    currentGameObject.player4.points += (10 + currentGameObject.player4.planned[i])
-                }
-            }
-        }
-        updatePoints()
-    }*/
+
 
     /*private fun endGame() {
         val t = Toast.makeText(this, "Gra zakończona", Toast.LENGTH_SHORT)
