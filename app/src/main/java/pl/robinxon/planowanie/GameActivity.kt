@@ -71,6 +71,16 @@ class GameActivity: AppCompatActivity() {
             }
         } //przyciski planowania
 
+        //nasłuchiwanie na zakończenie aktywności
+        val broadcastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(arg0: Context, intent: Intent) {
+                val action = intent.action
+                if (action == "finish_activity_game") {
+                    finish()
+                }
+            }
+        }
+        registerReceiver(broadcastReceiver, IntentFilter("finish_activity_game"))
 
         //STARY KOD
 
@@ -90,18 +100,7 @@ class GameActivity: AppCompatActivity() {
 
 
 
-        /*//nasłuchiwanie na zakończenie aktywności
-        val broadcastReceiver = object : BroadcastReceiver() {
-
-            override fun onReceive(arg0: Context, intent: Intent) {
-                val action = intent.action
-                if (action == "finish_activity") {
-                    finish()
-                    // DO WHATEVER YOU WANT.
-                }
-            }
-        }
-        registerReceiver(broadcastReceiver, IntentFilter("finish_activity"))
+        /*
 
         gameStart()*/
     }
