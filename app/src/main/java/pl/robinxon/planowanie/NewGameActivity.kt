@@ -78,8 +78,14 @@ class NewGameActivity : AppCompatActivity() {
         //zapisanie liczby gier
         val radioGame: RadioButton = findViewById(radioGroupGameType.checkedRadioButtonId)
         when (resources.getResourceEntryName(radioGame.id)) {
-            "radioButton1Round" -> match.settingGames = 1
-            "radioButton4Rounds" -> match.settingGames = 4
+            "radioButton1Round" -> {
+                match.settingGames = 1
+                match.roundsInGame = 16
+            }
+            "radioButton4Rounds" -> {
+                match.settingGames = 4
+                match.roundsInGame = 13
+            }
         }
 
         //zapisanie nazw graczy
