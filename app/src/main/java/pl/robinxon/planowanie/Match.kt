@@ -12,6 +12,7 @@ class Match: Serializable {
 
     var settingPlayers: Int? = null
     var settingGames: Int? = null
+    var roundsInGame: Int? = null
 
     val date: Calendar = Calendar.getInstance()
 }
