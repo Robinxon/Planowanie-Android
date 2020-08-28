@@ -263,36 +263,38 @@ class GameActivity: AppCompatActivity() {
 
     private fun buttonNextGame() {
         //zwiększenie licznika rundy
-        if(++match.currentGame <= 4) {
-            //utworzenie gry
-            match.games[match.currentGame] = Game()
-            match.games[match.currentGame]!!.players[1] = Player()
-            match.games[match.currentGame]!!.players[2] = Player()
-            if(match.settingPlayers == 4) {
-                match.games[match.currentGame]!!.players[3] = Player()
-                match.games[match.currentGame]!!.players[4] = Player()
-            }
-
-            //ustawienie pierwszego gracza
-            when(match.settingPlayers) {
-                2 -> {
-                    match.games[match.currentGame]!!.currentPlayer = when (match.currentGame) {
-                        1 -> 1
-                        2 -> 2
-                        3 -> 1
-                        4 -> 2
-                        else -> 1
-                    }
+        if(match.settingGames != 1 && ++match.currentGame <= 4) {
+            if(match.games[match.currentGame] == null) {
+                //utworzenie gry
+                match.games[match.currentGame] = Game()
+                match.games[match.currentGame]!!.players[1] = Player()
+                match.games[match.currentGame]!!.players[2] = Player()
+                if(match.settingPlayers == 4) {
+                    match.games[match.currentGame]!!.players[3] = Player()
+                    match.games[match.currentGame]!!.players[4] = Player()
                 }
-                4 -> match.games[match.currentGame]!!.currentPlayer = match.currentGame
+
+                //ustawienie pierwszego gracza
+                when(match.settingPlayers) {
+                    2 -> {
+                        match.games[match.currentGame]!!.currentPlayer = when (match.currentGame) {
+                            1 -> 1
+                            2 -> 2
+                            3 -> 1
+                            4 -> 2
+                            else -> 1
+                        }
+                    }
+                    4 -> match.games[match.currentGame]!!.currentPlayer = match.currentGame
+                }
+
+                //ustawienie pierwszego atutu czyli braku
+                match.games[match.currentGame]!!.atuts[1] = 0
             }
-
-            //ustawienie pierwszego atutu czyli braku
-            match.games[match.currentGame]!!.atuts[1] = 0
-
             //przygotowanie planszy
             saveToFire()
         } else {
+            Toast.makeText(this, "koniec meczu placeholder", Toast.LENGTH_SHORT).show()
             //przekierowanie do podsumowania gry
         }
     }
@@ -537,7 +539,7 @@ class GameActivity: AppCompatActivity() {
         match.games[match.currentGame]!!.ended = true
 
         //ukryj przyciski gry i pokaż przyciski końca gry
-        if(match.currentGame >= 4) { buttonNextGame.text = getString(R.string.end_match) }
+        if(match.settingGames == 1 || match.currentGame >= 4) { buttonNextGame.text = getString(R.string.end_match) }
         else { buttonNextGame.text = getString(R.string.next_game) }
 
         //zapisz do bazy
