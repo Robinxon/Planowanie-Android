@@ -4,7 +4,6 @@ import android.content.*
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -19,16 +18,12 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import pl.robinxon.planowanie.R
 import com.google.gson.GsonBuilder
 import com.kaushikthedeveloper.doublebackpress.DoubleBackPress
 import com.kaushikthedeveloper.doublebackpress.helper.DoubleBackPressAction
 import com.kaushikthedeveloper.doublebackpress.helper.FirstBackPressAction
 import kotlinx.android.synthetic.main.activity_game.*
-import kotlinx.android.synthetic.main.activity_menu.*
-import java.util.*
 import kotlin.system.exitProcess
-
 
 class GameActivity: AppCompatActivity() {
     //inicjalizacja bazy danych firebase i jej zmiennych
@@ -188,14 +183,7 @@ class GameActivity: AppCompatActivity() {
             if(!match.games[match.currentGame]!!.ended) {match.games[match.currentGame]!!.currentRound--}
             if(match.games[match.currentGame]!!.ended) {
                 //odkryj przyciski
-                for(i in 0..13) {
-                    val button: Button = findViewById(resources.getIdentifier("buttonPlan$i", "id", packageName))
-                    button.visibility = View.VISIBLE
-                }
-                buttonToggle.visibility = View.VISIBLE
-                buttonClear.visibility = View.VISIBLE
-                buttonPreviousRound.visibility = View.VISIBLE
-                buttonNextRound.visibility = View.VISIBLE
+                buttonsPanel.visibility = View.VISIBLE
             }
             match.games[match.currentGame]!!.ended = false
             calculatePoints()
@@ -273,21 +261,9 @@ class GameActivity: AppCompatActivity() {
 
     private fun hideUselessRounds() {
         if(match.settingGames == 4) {
-            textViewRound14.visibility = View.GONE
-            textViewRound14Player1.visibility = View.GONE
-            textViewRound14Player2.visibility = View.GONE
-            textViewRound14Player3.visibility = View.GONE
-            textViewRound14Player4.visibility = View.GONE
-            textViewRound15.visibility = View.GONE
-            textViewRound15Player1.visibility = View.GONE
-            textViewRound15Player2.visibility = View.GONE
-            textViewRound15Player3.visibility = View.GONE
-            textViewRound15Player4.visibility = View.GONE
-            textViewRound16.visibility = View.GONE
-            textViewRound16Player1.visibility = View.GONE
-            textViewRound16Player2.visibility = View.GONE
-            textViewRound16Player3.visibility = View.GONE
-            textViewRound16Player4.visibility = View.GONE
+            round14Panel.visibility = View.GONE
+            round15Panel.visibility = View.GONE
+            round16Panel.visibility = View.GONE
         }
     }
 
@@ -426,14 +402,7 @@ class GameActivity: AppCompatActivity() {
         match.games[match.currentGame]!!.ended = true
 
         //ukryj przyciski
-        for(i in 0..13) {
-            val button: Button = findViewById(resources.getIdentifier("buttonPlan$i", "id", packageName))
-            button.visibility = View.GONE
-        }
-        buttonToggle.visibility = View.GONE
-        buttonClear.visibility = View.GONE
-        buttonPreviousRound.visibility = View.GONE
-        buttonNextRound.visibility = View.GONE
+        buttonsPanel.visibility = View.GONE
 
         //zapisz do bazy
         saveToFire()
