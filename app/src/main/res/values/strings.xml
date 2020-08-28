@@ -19,7 +19,7 @@
     <string name="game2">Gra 2</string>
     <string name="game3">Gra 3</string>
     <string name="game4">Gra 4</string>
-    <string name="exit_game">Wyjdź z gry</string>
+    <string name="exit_to_menu">Wyjdź do menu</string>
     <string name="previousRound">Poprzednia runda</string>
     <string name="nextRound">Następna runda</string>
     <string name="togglePlayer">Przełącz gracza</string>

@@ -31,6 +31,6 @@
     <item
         android:id="@+id/gameMenuExit"
         android:orderInCategory="100"
-        android:title="@string/exit_game"
+        android:title="@string/exit_to_menu"
         app:showAsAction="never" />
 </menu>
