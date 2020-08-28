@@ -3,20 +3,50 @@ package pl.robinxon.planowanie
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import pl.robinxon.planowanie.R
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_summary.*
 
 class SummaryActivity: AppCompatActivity() {
+    //inicjalizacja bazy danych firebase i jej zmiennych
+    private val fireDatabase = Firebase.database
+    private lateinit var fireMatch: DatabaseReference
+
     private lateinit var match: Match
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_summary)
-        actionBar?.setDisplayHomeAsUpEnabled(true);
+
+        //opcje bazy danych
+        fireMatch = fireDatabase.getReference("match")
+
+        //dodanie listenerów do zmiennych na serwerze
+        fireMatch.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val value = dataSnapshot
+                    .getValue<String>()
+                Log.d("database_test", "Match is: $value")
+                match = decodeJsonToMatch(value!!)
+                setSummary()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                Log.d("database_test", "Failed to read value Match.", error.toException())
+            }
+        })
+
         //match = intent.getSerializableExtra("currentGame") as Match
 
         //wypełnij nazwy graczy
@@ -53,9 +83,35 @@ class SummaryActivity: AppCompatActivity() {
         }
     }
 
+    //region Obsługa przycisku cofania
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+    //endregion
+
+    private fun setSummary() {
+        //ukrywanie przycisku wstecz jeśli mecz jest zakończony
+        when(match.settingGames) {
+            1 -> {
+                if (match.games[1]?.ended == false) {
+                    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+                } else {
+                    supportActionBar?.setHomeButtonEnabled(false) // disable the button
+                    supportActionBar?.setDisplayHomeAsUpEnabled(false) // remove the left caret
+                    supportActionBar?.setDisplayShowHomeEnabled(false) // remove the icon
+                }
+            }
+            4 -> {
+                if (match.games[1]?.ended == false || match.games[2]?.ended == false || match.games[3]?.ended == false || match.games[4]?.ended == false) {
+                    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+                } else {
+                    supportActionBar?.setHomeButtonEnabled(false) // disable the button
+                    supportActionBar?.setDisplayHomeAsUpEnabled(false) // remove the left caret
+                    supportActionBar?.setDisplayShowHomeEnabled(false) // remove the icon
+                }
+            }
+        }
     }
 
     private fun saveAndEndGame() {
@@ -84,5 +140,10 @@ class SummaryActivity: AppCompatActivity() {
         val intent = Intent(this, NewGameActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    private fun decodeJsonToMatch(value: String): Match {
+        val gson = GsonBuilder().create()
+        return gson.fromJson(value, Match::class.java)
     }
 }

@@ -293,6 +293,7 @@ class GameActivity: AppCompatActivity() {
             saveToFire()
         } else {
             startActivity(Intent(this, SummaryActivity::class.java))
+            finish()
         }
     }
     //endregion
@@ -355,6 +356,9 @@ class GameActivity: AppCompatActivity() {
             buttonsPanel.visibility = View.VISIBLE
             buttonsEndPanel.visibility = View.GONE
         }
+
+        if(match.settingGames == 1 || match.currentGame >= 4) { buttonNextGame.text = getString(R.string.end_match) }
+        else { buttonNextGame.text = getString(R.string.next_game) }
     }
 
     private fun hideUselessRounds() {
@@ -534,10 +538,6 @@ class GameActivity: AppCompatActivity() {
     private fun endGame() {
         //zamknij grę w zmiennej
         match.games[match.currentGame]!!.ended = true
-
-        //ukryj przyciski gry i pokaż przyciski końca gry
-        if(match.settingGames == 1 || match.currentGame >= 4) { buttonNextGame.text = getString(R.string.end_match) }
-        else { buttonNextGame.text = getString(R.string.next_game) }
 
         //zapisz do bazy
         saveToFire()
