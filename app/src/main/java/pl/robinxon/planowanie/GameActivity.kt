@@ -300,6 +300,9 @@ class GameActivity: AppCompatActivity() {
     private fun presetBoard() {
         title = getString(R.string.gameActivityTitle, match.currentGame)
 
+        //wyłap jesli gra się skończyła na innym urządzeniu
+        if(match.ended) { finish() }
+
         setButtonsVisibility()
         hideUselessRounds()
         setAtut()
