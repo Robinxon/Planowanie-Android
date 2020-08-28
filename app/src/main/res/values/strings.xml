@@ -20,10 +20,10 @@
     <string name="game3">Gra 3</string>
     <string name="game4">Gra 4</string>
     <string name="exit_game">Wyjdź z gry</string>
-    <string name="previousRound">Poprzednia</string>
-    <string name="nextRound">Następna</string>
-    <string name="togglePlayer">Przełącz</string>
-    <string name="deleteAction">Kasuj</string>
+    <string name="previousRound">Poprzednia runda</string>
+    <string name="nextRound">Następna runda</string>
+    <string name="togglePlayer">Przełącz gracza</string>
+    <string name="deleteAction">Kasuj gracza</string>
     <string name="_3">3</string>
     <string name="_0">0</string>
     <string name="_7">7</string>
