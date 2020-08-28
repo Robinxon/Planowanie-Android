@@ -292,6 +292,8 @@ class GameActivity: AppCompatActivity() {
             //przygotowanie planszy
             saveToFire()
         } else {
+            match.ended = true
+            saveToFire()
             startActivity(Intent(this, SummaryActivity::class.java))
             finish()
         }

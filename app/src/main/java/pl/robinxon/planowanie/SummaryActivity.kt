@@ -91,27 +91,17 @@ class SummaryActivity: AppCompatActivity() {
     //endregion
 
     private fun setSummary() {
+        setBackButton()
+
+    }
+
+    private fun setBackButton() {
         //ukrywanie przycisku wstecz jeśli mecz jest zakończony
-        when(match.settingGames) {
-            1 -> {
-                if (match.games[1]?.ended == false) {
-                    supportActionBar?.setDisplayHomeAsUpEnabled(true)
-                } else {
-                    supportActionBar?.setHomeButtonEnabled(false) // disable the button
-                    supportActionBar?.setDisplayHomeAsUpEnabled(false) // remove the left caret
-                    supportActionBar?.setDisplayShowHomeEnabled(false) // remove the icon
-                }
-            }
-            4 -> {
-                if (match.games[1]?.ended == false || match.games[2]?.ended == false || match.games[3]?.ended == false || match.games[4]?.ended == false) {
-                    supportActionBar?.setDisplayHomeAsUpEnabled(true)
-                } else {
-                    supportActionBar?.setHomeButtonEnabled(false) // disable the button
-                    supportActionBar?.setDisplayHomeAsUpEnabled(false) // remove the left caret
-                    supportActionBar?.setDisplayShowHomeEnabled(false) // remove the icon
-                }
-            }
-        }
+        if(match.ended) {
+            supportActionBar?.setHomeButtonEnabled(false) // disable the button
+            supportActionBar?.setDisplayHomeAsUpEnabled(false) // remove the left caret
+            supportActionBar?.setDisplayShowHomeEnabled(false) // remove the icon
+        } else { supportActionBar?.setDisplayHomeAsUpEnabled(true) }
     }
 
     private fun saveAndEndGame() {
