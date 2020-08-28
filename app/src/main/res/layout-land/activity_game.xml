@@ -1084,4 +1084,28 @@
         </LinearLayout> <!-- 0-13 -->
 
     </LinearLayout> <!-- buttons -->
+
+    <LinearLayout
+        android:id="@+id/buttonsEndPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/buttonBackToGame"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/back_to_game"
+            android:textSize="12sp"/>
+
+        <Button
+            android:id="@+id/buttonNextGame"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/next_game"
+            android:textSize="12sp"/>
+    </LinearLayout> <!-- buttons end -->
 </RelativeLayout>
