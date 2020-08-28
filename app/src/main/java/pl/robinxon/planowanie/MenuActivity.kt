@@ -19,6 +19,7 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_menu.*
+import java.lang.Exception
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -37,7 +38,8 @@ class MenuActivity: AppCompatActivity() {
         setContentView(R.layout.activity_menu)
 
         //opcje bazy danych
-        Firebase.database.setPersistenceEnabled(true)
+        try { Firebase.database.setPersistenceEnabled(true) }
+        catch (e: Exception) { Log.d("database", "persistence already enabled")}
         fireMatch = fireDatabase.getReference("match")
 
         //dodanie obrysów do przycisków
