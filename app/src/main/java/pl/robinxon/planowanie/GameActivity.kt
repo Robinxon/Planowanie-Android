@@ -144,9 +144,7 @@ class GameActivity: AppCompatActivity() {
         }
 
         R.id.gameSummary -> {
-            val intent = Intent(this, SummaryActivity::class.java)
-            intent.putExtra("currentGame", match)
-            startActivity(intent)
+            startActivity(Intent(this, SummaryActivity::class.java))
             true
         }
 
@@ -294,8 +292,7 @@ class GameActivity: AppCompatActivity() {
             //przygotowanie planszy
             saveToFire()
         } else {
-            Toast.makeText(this, "koniec meczu placeholder", Toast.LENGTH_SHORT).show()
-            //przekierowanie do podsumowania gry
+            startActivity(Intent(this, SummaryActivity::class.java))
         }
     }
     //endregion
