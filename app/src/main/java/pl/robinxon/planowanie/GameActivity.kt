@@ -459,12 +459,7 @@ class GameActivity: AppCompatActivity() {
     private fun disableButtonToPlan() {
         //odblokuj zablokowany
         if(match.games[match.currentGame]!!.toDisabling != null && match.games[match.currentGame]!!.toDisabling!! >= 0) {
-            val resID = resources.getIdentifier(
-                "buttonPlan${match.games[match.currentGame]!!.toDisabling}",
-                "id",
-                packageName
-            )
-            val button: Button = findViewById(resID)
+            val button: Button = findViewById(resources.getIdentifier("buttonPlan${match.games[match.currentGame]!!.toDisabling}", "id", packageName))
             button.isEnabled = true
         }
 
