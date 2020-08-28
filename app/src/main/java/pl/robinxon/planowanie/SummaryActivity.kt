@@ -21,8 +21,10 @@ class SummaryActivity: AppCompatActivity() {
     //inicjalizacja bazy danych firebase i jej zmiennych
     private val fireDatabase = Firebase.database
     private lateinit var fireMatch: DatabaseReference
+    private lateinit var fireHistory: DatabaseReference
 
     private lateinit var match: Match
+    private var listMatch = listOf<Match>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,20 +32,21 @@ class SummaryActivity: AppCompatActivity() {
 
         //opcje bazy danych
         fireMatch = fireDatabase.getReference("match")
+        fireHistory = fireDatabase.getReference("history")
 
         //dodanie listenerów do zmiennych na serwerze
         fireMatch.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val value = dataSnapshot
                     .getValue<String>()
-                Log.d("database_test", "Match is: $value")
+                Log.d("database_match", "Match is: $value")
                 match = decodeJsonToMatch(value!!)
                 setSummary()
             }
 
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
-                Log.d("database_test", "Failed to read value Match.", error.toException())
+                Log.d("database_match", "Failed to read value Match.", error.toException())
             }
         })
 
@@ -77,10 +80,6 @@ class SummaryActivity: AppCompatActivity() {
             }
         }*/
 
-        //listener
-        buttonEndGame.setOnClickListener {
-            saveAndEndGame()
-        }
     }
 
     //region Obsługa przycisku cofania
@@ -92,7 +91,17 @@ class SummaryActivity: AppCompatActivity() {
 
     private fun setSummary() {
         setBackButton()
+        if(match.ended) {
+            loadHistoryFromFire()
+            listMatch = listMatch + match
+            saveHistoryToFire()
+        }
 
+        //wypełnianie tekstu
+        playerName1.setText(match.playerNames[1] ?: "")
+        playerName2.setText(match.playerNames[2] ?: "")
+        playerName3.setText(match.playerNames[3] ?: "")
+        playerName4.setText(match.playerNames[4] ?: "")
     }
 
     private fun setBackButton() {
@@ -104,36 +113,33 @@ class SummaryActivity: AppCompatActivity() {
         } else { supportActionBar?.setDisplayHomeAsUpEnabled(true) }
     }
 
-    private fun saveAndEndGame() {
+    private fun loadHistoryFromFire() {
+        fireHistory.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val value = dataSnapshot.getValue<String>()
+                Log.d("database_history", "History is: $value")
+                if(value != null) { listMatch = decodeJsonToHistory(value!!) }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                Log.d("database_history", "Failed to read value Match.", error.toException())
+            }
+        })
+    }
+
+    private fun saveHistoryToFire() {
         val gson = GsonBuilder().create()
-        val database = getSharedPreferences("database", Context.MODE_PRIVATE)
-
-        var listMatch = listOf<Match>()
-        val listMatchString = database.getString("historyJson", null)
-        val matchType = object : TypeToken<List<Match>>() {}.type
-        if(listMatchString != null) {
-            listMatch = gson.fromJson<List<Match>>(listMatchString, matchType)
-        }
-
-        listMatch = listMatch + match
-
-        val json = gson.toJson(listMatch)
-
-        database.edit().apply {
-            putString("historyJson", json)
-        }.apply()
-
-        database.edit().remove("matchJson").apply()
-        Toast.makeText(this, "Gra zapisana pomyślnie!", Toast.LENGTH_SHORT).show()
-        val intentToClose = Intent("finish_activity")
-        sendBroadcast(intentToClose)
-        val intent = Intent(this, NewGameActivity::class.java)
-        startActivity(intent)
-        finish()
+        fireHistory.setValue(gson.toJson(listMatch))
     }
 
     private fun decodeJsonToMatch(value: String): Match {
         val gson = GsonBuilder().create()
         return gson.fromJson(value, Match::class.java)
+    }
+
+    private fun decodeJsonToHistory(value: String): List<Match> {
+        val gson = GsonBuilder().create()
+        return gson.fromJson<List<Match>>(value, object : TypeToken<List<Match>>() {}.type)
     }
 }
