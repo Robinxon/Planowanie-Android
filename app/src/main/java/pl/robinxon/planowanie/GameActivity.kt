@@ -231,6 +231,7 @@ class GameActivity: AppCompatActivity() {
             else {
                 match.games[match.currentGame]!!.currentRound++
                 setPlayerInRound()
+                randomAtut()
                 calculatePoints()
                 saveToFire()
             }
@@ -371,7 +372,7 @@ class GameActivity: AppCompatActivity() {
         }
     }
 
-    private fun setAtut() {
+    private fun randomAtut() {
         //jeśli brak atutu to losuj i przydziel
         if(match.games[match.currentGame]!!.atuts[match.games[match.currentGame]!!.currentRound] == null) {
             match.games[match.currentGame]!!.atuts[match.games[match.currentGame]!!.currentRound] = when((1..4).random()) {
@@ -381,9 +382,10 @@ class GameActivity: AppCompatActivity() {
                 4 -> 4
                 else -> 0
             }
-            saveToFire()
         }
+    }
 
+    private fun setAtut() {
         //wyświetl atut
         when(match.games[match.currentGame]!!.atuts[match.games[match.currentGame]!!.currentRound]) {
             0 -> imageViewAtut.setBackgroundResource(R.drawable.none)
