@@ -1,111 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/playerName1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:singleLine="true"
-            android:autofillHints="0"
-            android:gravity="center"
-            android:inputType="none"
-            tools:text="Robinxon"/>
-
-        <EditText
-            android:id="@+id/playerName2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:autofillHints="0"
-            android:gravity="center"
-            android:singleLine="true"
-            android:inputType="none"
-            tools:text="Robinxon2"/>
-
-        <EditText
-            android:id="@+id/playerName3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:autofillHints="0"
-            android:gravity="center"
-            android:singleLine="true"
-            android:inputType="none"
-            tools:text="Robinxon213"/>
-
-        <EditText
-            android:id="@+id/playerName4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:autofillHints="0"
-            android:gravity="center"
-            android:singleLine="true"
-            android:inputType="none"
-            tools:text="MMMMMMMM"/>
-
-    </LinearLayout>
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/player1Panel"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvSummaryPoints1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            tools:text="145"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvSummaryPoints2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            tools:text="145"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvSummaryPoints3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            tools:text="145"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvSummaryPoints4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            tools:text="145"/>
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/player3Panel"
+        app:layout_constraintEnd_toStartOf="@+id/player2Panel"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/player2Panel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/player4Panel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/player1Panel"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/buttonEndGame"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:text="@string/endGame"
-            android:textColor="#FFFFFF" />
     </LinearLayout>
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/player3Panel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/player4Panel"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/player1Panel">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/player4Panel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/player3Panel"
+        app:layout_constraintTop_toBottomOf="@+id/player2Panel">
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
