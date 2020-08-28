@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -14,9 +15,9 @@
             android:id="@+id/imageViewAtut"
             android:layout_width="34dp"
             android:layout_height="40dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="12dp"
             android:contentDescription="@string/atut"
             android:scaleType="fitCenter" />
 
@@ -96,9 +97,13 @@
                     android:id="@+id/textViewRound1"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/_1_13"
                     android:textAlignment="textEnd"
-                    android:textSize="18sp" />
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/textViewRound1Player1"
@@ -147,9 +152,13 @@
                     android:id="@+id/textViewRound2"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/_2_12"
                     android:textAlignment="textEnd"
-                    android:textSize="18sp" />
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/textViewRound2Player1"
@@ -198,9 +207,13 @@
                     android:id="@+id/textViewRound3"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/_3_11"
                     android:textAlignment="textEnd"
-                    android:textSize="18sp" />
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/textViewRound3Player1"
@@ -249,9 +262,13 @@
                     android:id="@+id/textViewRound4"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/_4_10"
                     android:textAlignment="textEnd"
-                    android:textSize="18sp" />
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/textViewRound4Player1"
@@ -300,9 +317,13 @@
                     android:id="@+id/textViewRound5"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/_5_9"
                     android:textAlignment="textEnd"
-                    android:textSize="18sp" />
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/textViewRound5Player1"
@@ -351,9 +372,13 @@
                     android:id="@+id/textViewRound6"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/_6_8"
                     android:textAlignment="textEnd"
-                    android:textSize="18sp" />
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/textViewRound6Player1"
@@ -402,9 +427,13 @@
                     android:id="@+id/textViewRound7"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/_7_7"
                     android:textAlignment="textEnd"
-                    android:textSize="18sp" />
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/textViewRound7Player1"
@@ -453,9 +482,13 @@
                     android:id="@+id/textViewRound8"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/_8_6"
                     android:textAlignment="textEnd"
-                    android:textSize="18sp" />
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/textViewRound8Player1"
@@ -504,9 +537,13 @@
                     android:id="@+id/textViewRound9"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/_9_5"
                     android:textAlignment="textEnd"
-                    android:textSize="18sp" />
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/textViewRound9Player1"
@@ -555,9 +592,13 @@
                     android:id="@+id/textViewRound10"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/_10_4"
                     android:textAlignment="textEnd"
-                    android:textSize="18sp" />
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/textViewRound10Player1"
@@ -606,9 +647,13 @@
                     android:id="@+id/textViewRound11"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/_11_3"
                     android:textAlignment="textEnd"
-                    android:textSize="18sp" />
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/textViewRound11Player1"
@@ -657,9 +702,13 @@
                     android:id="@+id/textViewRound12"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/_12_2"
                     android:textAlignment="textEnd"
-                    android:textSize="18sp" />
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/textViewRound12Player1"
@@ -708,9 +757,13 @@
                     android:id="@+id/textViewRound13"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/_13_1"
                     android:textAlignment="textEnd"
-                    android:textSize="18sp" />
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/textViewRound13Player1"
@@ -759,9 +812,13 @@
                     android:id="@+id/textViewRound14"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/_14_1"
                     android:textAlignment="textEnd"
-                    android:textSize="18sp" />
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/textViewRound14Player1"
@@ -810,9 +867,13 @@
                     android:id="@+id/textViewRound15"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/_15_1"
                     android:textAlignment="textEnd"
-                    android:textSize="18sp" />
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/textViewRound15Player1"
@@ -861,9 +922,13 @@
                     android:id="@+id/textViewRound16"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/_16_1"
                     android:textAlignment="textEnd"
-                    android:textSize="18sp" />
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/textViewRound16Player1"
