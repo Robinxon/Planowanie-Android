@@ -96,7 +96,7 @@ class NewGameActivity : AppCompatActivity() {
             match.playerNames[4] = editTextPlayer4Name.text?.toString()
         }
 
-        //utworzenie gier
+        //utworzenie gry
         match.games[1] = Game()
         match.games[1]!!.players[1] = Player()
         match.games[1]!!.players[2] = Player()

@@ -61,6 +61,8 @@ class GameActivity: AppCompatActivity() {
         buttonClear.setOnClickListener { buttonClear() }
         buttonPreviousRound.setOnClickListener { buttonPreviousRound()}
         buttonNextRound.setOnClickListener { buttonNextRound() }
+        buttonBackToGame.setOnClickListener { buttonBackToGame() }
+        buttonNextGame.setOnClickListener { buttonNextGame() }
         for(i in 0..13) {
             val button: Button = findViewById(resources.getIdentifier("buttonPlan$i", "id", packageName))
             button.setOnClickListener {
@@ -181,11 +183,6 @@ class GameActivity: AppCompatActivity() {
     private fun buttonPreviousRound() {
         if(match.games[match.currentGame]!!.currentRound > 1) {
             if(!match.games[match.currentGame]!!.ended) {match.games[match.currentGame]!!.currentRound--}
-            if(match.games[match.currentGame]!!.ended) {
-                //odkryj przyciski
-                buttonsPanel.visibility = View.VISIBLE
-            }
-            match.games[match.currentGame]!!.ended = false
             calculatePoints()
             setAtut()
             setPlayerInRound()
@@ -232,10 +229,62 @@ class GameActivity: AppCompatActivity() {
 
         saveToFire()
     }
+
+    private fun buttonBackToGame() {
+        //ukryj przyciski końca gry i pokaż przyciski gry
+        buttonsEndPanel.visibility = View.GONE
+        buttonsPanel.visibility = View.VISIBLE
+        match.games[match.currentGame]!!.ended = false
+        presetBoard()
+    }
+
+    private fun buttonNextGame() {
+        //zwiększenie licznika rundy
+        if(++match.currentGame <= 4) {
+            //utworzenie gry
+            match.games[match.currentGame] = Game()
+            match.games[match.currentGame]!!.players[1] = Player()
+            match.games[match.currentGame]!!.players[2] = Player()
+            if(match.settingPlayers == 4) {
+                match.games[match.currentGame]!!.players[3] = Player()
+                match.games[match.currentGame]!!.players[4] = Player()
+            }
+
+            //ustawienie pierwszego gracza
+            when(match.settingPlayers) {
+                2 -> {
+                    match.games[match.currentGame]!!.currentPlayer = when(match.currentGame) {
+                        1 -> 1
+                        2 -> 2
+                        3 -> 1
+                        4 -> 2
+                        else -> 1
+                    }
+                }
+                4 -> match.games[match.currentGame]!!.currentPlayer = match.currentGame
+            }
+
+            //ustawienie pierwszego atutu czyli braku
+            match.games[match.currentGame]!!.atuts[1] = 0
+
+            //przygotowanie planszy
+            presetBoard()
+        } else {
+            //przekierowanie do podsumowania gry
+        }
+    }
     //endregion
 
     private fun presetBoard() {
         title = getString(R.string.gameActivityTitle, match.currentGame)
+
+        if(match.games[match.currentGame]!!.ended) {
+            buttonsPanel.visibility = View.GONE
+            buttonsEndPanel.visibility = View.VISIBLE
+        } else {
+            buttonsPanel.visibility = View.VISIBLE
+            buttonsEndPanel.visibility = View.GONE
+        }
 
         hideUselessRounds()
         setAtut()
@@ -395,14 +444,12 @@ class GameActivity: AppCompatActivity() {
     }
 
     private fun endGame() {
-        //wyświetl komunikat
-        Toast.makeText(this, "Gra zakończona", Toast.LENGTH_SHORT).show()
-
         //zamknij grę w zmiennej
         match.games[match.currentGame]!!.ended = true
 
-        //ukryj przyciski
-        buttonsPanel.visibility = View.GONE
+        //ukryj przyciski gry i pokaż przyciski końca gry
+        if(match.currentGame >= 4) { buttonNextGame.text = getString(R.string.end_match) }
+        else { buttonNextGame.text = getString(R.string.next_game) }
 
         //zapisz do bazy
         saveToFire()

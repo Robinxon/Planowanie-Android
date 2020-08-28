@@ -77,4 +77,5 @@
     <string name="game_not_started">Gra się jeszcze nie rozpoczęła</string>
     <string name="back_to_game">Wróć do gry</string>
     <string name="next_game">Następna gra</string>
+    <string name="end_match">Zakończ mecz</string>
 </resources>
