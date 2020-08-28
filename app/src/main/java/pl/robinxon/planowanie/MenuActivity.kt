@@ -66,7 +66,7 @@ class MenuActivity: AppCompatActivity() {
                     loadedMatch = decodeJsonToMatch(value)
                     if(!loadedMatch!!.ended) {
                         menuContinue.visibility = View.VISIBLE
-                        menuContinueDescription.text = getString(R.string.saved_match_description, loadedMatch!!.date.get(Calendar.DAY_OF_MONTH).toString(), loadedMatch!!.date.get(Calendar.MONTH).toString(), loadedMatch!!.date.get(Calendar.YEAR).toString(), loadedMatch!!.date.get(Calendar.HOUR_OF_DAY).toString(), loadedMatch!!.date.get(Calendar.MINUTE).toString(), loadedMatch!!.playerNames[1], loadedMatch!!.playerNames[2], (loadedMatch!!.playerNames[3] ?: ""), (loadedMatch!!.playerNames[4] ?: ""))
+                        menuContinueDescription.text = getString(R.string.saved_match_description, loadedMatch!!.date.get(Calendar.DAY_OF_MONTH).toString(), loadedMatch!!.date.get(Calendar.MONTH).toString(), loadedMatch!!.date.get(Calendar.YEAR).toString(), loadedMatch!!.date.get(Calendar.HOUR_OF_DAY).toString(), String.format("%02d", loadedMatch!!.date.get(Calendar.MINUTE)), loadedMatch!!.playerNames[1], loadedMatch!!.playerNames[2], (loadedMatch!!.playerNames[3] ?: ""), (loadedMatch!!.playerNames[4] ?: ""))
                     } else {
                         menuContinue.visibility = View.GONE
                     }
