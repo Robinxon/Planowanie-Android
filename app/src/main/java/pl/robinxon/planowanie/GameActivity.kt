@@ -205,12 +205,8 @@ class GameActivity: AppCompatActivity() {
         if(match.games[match.currentGame]!!.currentRound > 1) {
             if(!match.games[match.currentGame]!!.ended) {match.games[match.currentGame]!!.currentRound--}
             calculatePoints()
-            setAtut()
             setPlayerInRound()
-            markActivePlayerAndClearOthers()
-            updatePlannedAndMarkGoodOrBad()
-            setPlayerPointsAndNames()
-            disableButtonToPlan()
+            saveToFire()
         }
     }
 
