@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
@@ -50,16 +52,6 @@ class SummaryActivity: AppCompatActivity() {
                 Log.d("database_match", "Failed to read value Match.", error.toException())
             }
         })
-
-        //match = intent.getSerializableExtra("currentGame") as Match
-
-        //wypełnij nazwy graczy
-        /*playerName1.setText(match.player1Name)
-        playerName2.setText(match.player2Name)
-        if(match.settingPlayers == 4) {
-            playerName3.setText(match.player3Name)
-            playerName4.setText(match.player4Name)
-        }*/
 
         //wypełnij punkty
         /*when(match.settingGames) {
@@ -109,6 +101,13 @@ class SummaryActivity: AppCompatActivity() {
         player2Name.setText(match.playerNames[2] ?: "")
         player3Name.setText(match.playerNames[3] ?: "")
         player4Name.setText(match.playerNames[4] ?: "")
+
+        //wyliczenie punktów
+        for (player in 1..4) {
+            var calculate = (match.games[1]?.players?.get(player)?.points ?: 0) + (match.games[2]?.players?.get(player)?.points ?: 0) + (match.games[3]?.players?.get(player)?.points ?: 0) + (match.games[4]?.players?.get(player)?.points ?: 0)
+            val textView: TextView = findViewById(resources.getIdentifier("player${player}Points", "id", packageName))
+            textView.text = calculate.toString()
+        }
     }
 
     private fun setBackButton() {

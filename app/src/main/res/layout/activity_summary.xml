@@ -24,6 +24,14 @@
             android:textAlignment="center"
             android:enabled="false"
             android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/player1Points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textSize="18sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -46,6 +54,14 @@
             android:textAlignment="center"
             android:enabled="false"
             android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/player2Points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textSize="18sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -68,6 +84,14 @@
             android:textAlignment="center"
             android:enabled="false"
             android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/player3Points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textSize="18sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -90,6 +114,14 @@
             android:textAlignment="center"
             android:enabled="false"
             android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/player4Points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textSize="18sp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
