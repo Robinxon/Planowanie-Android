@@ -1,13 +1,9 @@
 package pl.robinxon.planowanie
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -53,26 +49,8 @@ class SummaryActivity: AppCompatActivity() {
             }
         })
 
-        //wypełnij punkty
-        /*when(match.settingGames) {
-            1 -> {
-                tvSummaryPoints1.text = match.game1.player1.points.toString()
-                tvSummaryPoints2.text = match.game1.player2.points.toString()
-                if(match.settingPlayers == 4) {
-                    tvSummaryPoints3.text = match.game1.player3.points.toString()
-                    tvSummaryPoints4.text = match.game1.player4.points.toString()
-                }
-            }
-            4 -> {
-                tvSummaryPoints1.text = (match.game1.player1.points + match.game2.player1.points + match.game3.player1.points + match.game4.player1.points).toString()
-                tvSummaryPoints2.text = (match.game1.player2.points + match.game2.player2.points + match.game3.player2.points + match.game4.player2.points).toString()
-                if(match.settingPlayers == 4) {
-                    tvSummaryPoints3.text = (match.game1.player3.points + match.game2.player3.points + match.game3.player3.points + match.game4.player3.points).toString()
-                    tvSummaryPoints4.text = (match.game1.player4.points + match.game2.player4.points + match.game3.player4.points + match.game4.player4.points).toString()
-                }
-            }
-        }*/
-
+        //listenery do przycisków
+        exitToMenu.setOnClickListener{ exitToMenu() }
     }
 
     //region Obsługa przycisku cofania
@@ -82,12 +60,17 @@ class SummaryActivity: AppCompatActivity() {
     }
     //endregion
 
+    private fun exitToMenu() {
+        finish()
+    }
+
     private fun setSummary() {
         setBackButton()
         if(match.ended) {
             loadHistoryFromFire()
             listMatch = listMatch + match
             saveHistoryToFire()
+            buttonsPanel.visibility = View.VISIBLE
         }
 
         //ukrycie zbędnych graczy
@@ -104,7 +87,7 @@ class SummaryActivity: AppCompatActivity() {
 
         //wyliczenie punktów
         for (player in 1..4) {
-            var calculate = (match.games[1]?.players?.get(player)?.points ?: 0) + (match.games[2]?.players?.get(player)?.points ?: 0) + (match.games[3]?.players?.get(player)?.points ?: 0) + (match.games[4]?.players?.get(player)?.points ?: 0)
+            val calculate = (match.games[1]?.players?.get(player)?.points ?: 0) + (match.games[2]?.players?.get(player)?.points ?: 0) + (match.games[3]?.players?.get(player)?.points ?: 0) + (match.games[4]?.players?.get(player)?.points ?: 0)
             val textView: TextView = findViewById(resources.getIdentifier("player${player}Points", "id", packageName))
             textView.text = calculate.toString()
         }
@@ -124,7 +107,7 @@ class SummaryActivity: AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val value = dataSnapshot.getValue<String>()
                 Log.d("database_history", "History is: $value")
-                if(value != null) { listMatch = decodeJsonToHistory(value!!) }
+                if(value != null) { listMatch = decodeJsonToHistory(value) }
             }
 
             override fun onCancelled(error: DatabaseError) {
