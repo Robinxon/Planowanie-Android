@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
@@ -97,11 +98,17 @@ class SummaryActivity: AppCompatActivity() {
             saveHistoryToFire()
         }
 
+        //ukrycie zbędnych graczy
+        if(match.settingPlayers == 2){
+            player3Panel.visibility = View.INVISIBLE
+            player4Panel.visibility = View.INVISIBLE
+        }
+
         //wypełnianie tekstu
-        playerName1.setText(match.playerNames[1] ?: "")
-        playerName2.setText(match.playerNames[2] ?: "")
-        playerName3.setText(match.playerNames[3] ?: "")
-        playerName4.setText(match.playerNames[4] ?: "")
+        player1Name.setText(match.playerNames[1] ?: "")
+        player2Name.setText(match.playerNames[2] ?: "")
+        player3Name.setText(match.playerNames[3] ?: "")
+        player4Name.setText(match.playerNames[4] ?: "")
     }
 
     private fun setBackButton() {

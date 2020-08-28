@@ -15,6 +15,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <EditText
+            android:id="@+id/player1Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:enabled="false"
+            android:textColor="#000000"/>
     </LinearLayout>
 
     <LinearLayout
@@ -28,6 +37,15 @@
         app:layout_constraintStart_toEndOf="@+id/player1Panel"
         app:layout_constraintTop_toTopOf="parent">
 
+        <EditText
+            android:id="@+id/player2Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:enabled="false"
+            android:textColor="#000000"/>
     </LinearLayout>
 
     <LinearLayout
@@ -41,6 +59,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player1Panel">
 
+        <EditText
+            android:id="@+id/player3Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:enabled="false"
+            android:textColor="#000000"/>
     </LinearLayout>
 
     <LinearLayout
@@ -54,6 +81,15 @@
         app:layout_constraintStart_toEndOf="@+id/player3Panel"
         app:layout_constraintTop_toBottomOf="@+id/player2Panel">
 
+        <EditText
+            android:id="@+id/player4Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:enabled="false"
+            android:textColor="#000000"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
