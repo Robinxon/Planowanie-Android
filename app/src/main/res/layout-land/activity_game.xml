@@ -1,0 +1,1087 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/playersPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageViewAtut"
+            android:layout_width="34dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/atut"
+            android:scaleType="fitCenter" />
+
+        <EditText
+            android:id="@+id/editTextPlayer1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:hint="@string/player1Hint"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextPlayer2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:hint="@string/player2Hint"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextPlayer3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:hint="@string/player3Hint"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextPlayer4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:hint="@string/player4Hint"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+    </LinearLayout> <!-- players -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonsPanel"
+        android:layout_below="@+id/playersPanel">
+
+        <LinearLayout
+            android:id="@+id/roundsPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/round1Panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/textViewRound1"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_1_13"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound1Player1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound1Player2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound1Player3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound1Player4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout> <!-- round 1 -->
+            <LinearLayout
+                android:id="@+id/round2Panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/textViewRound2"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_2_12"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound2Player1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound2Player2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound2Player3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound2Player4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout> <!-- round 2 -->
+            <LinearLayout
+                android:id="@+id/round3Panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/textViewRound3"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_3_11"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound3Player1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound3Player2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound3Player3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound3Player4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout> <!-- round 3 -->
+            <LinearLayout
+                android:id="@+id/round4Panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/textViewRound4"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_4_10"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound4Player1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound4Player2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound4Player3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound4Player4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout> <!-- round 4 -->
+            <LinearLayout
+                android:id="@+id/round5Panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/textViewRound5"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_5_9"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound5Player1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound5Player2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound5Player3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound5Player4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout> <!-- round 5 -->
+            <LinearLayout
+                android:id="@+id/round6Panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/textViewRound6"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_6_8"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound6Player1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound6Player2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound6Player3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound6Player4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout> <!-- round 6 -->
+            <LinearLayout
+                android:id="@+id/round7Panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/textViewRound7"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_7_7"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound7Player1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound7Player2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound7Player3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound7Player4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout> <!-- round 7 -->
+            <LinearLayout
+                android:id="@+id/round8Panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/textViewRound8"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_8_6"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound8Player1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound8Player2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound8Player3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound8Player4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout> <!-- round 8 -->
+            <LinearLayout
+                android:id="@+id/round9Panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/textViewRound9"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_9_5"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound9Player1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound9Player2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound9Player3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound9Player4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout> <!-- round 9 -->
+            <LinearLayout
+                android:id="@+id/round10Panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/textViewRound10"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_10_4"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound10Player1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound10Player2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound10Player3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound10Player4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout> <!-- round 10 -->
+            <LinearLayout
+                android:id="@+id/round11Panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/textViewRound11"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_11_3"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound11Player1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound11Player2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound11Player3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound11Player4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout> <!-- round 11 -->
+            <LinearLayout
+                android:id="@+id/round12Panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/textViewRound12"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_12_2"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound12Player1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound12Player2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound12Player3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound12Player4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout> <!-- round 12 -->
+            <LinearLayout
+                android:id="@+id/round13Panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/textViewRound13"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_13_1"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound13Player1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound13Player2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound13Player3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound13Player4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout> <!-- round 13 -->
+            <LinearLayout
+                android:id="@+id/round14Panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/textViewRound14"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_14_1"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound14Player1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound14Player2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound14Player3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound14Player4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout> <!-- round 14 -->
+            <LinearLayout
+                android:id="@+id/round15Panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/textViewRound15"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_15_1"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound15Player1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound15Player2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound15Player3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound15Player4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout> <!-- round 15 -->
+            <LinearLayout
+                android:id="@+id/round16Panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/textViewRound16"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_16_1"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound16Player1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound16Player2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound16Player3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewRound16Player4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout> <!-- round 16 -->
+        </LinearLayout> <!-- rounds -->
+    </ScrollView> <!-- board -->
+
+    <LinearLayout
+        android:id="@+id/buttonsPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonToggle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/togglePlayer"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/buttonClear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/deleteAction"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/buttonPreviousRound"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/previousRound"
+                android:textSize="12sp"/>
+
+            <Button
+                android:id="@+id/buttonNextRound"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/nextRound"
+                android:textSize="12sp" />
+
+        </LinearLayout> <!-- toggle-clear-previous-next -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonPlan0"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="0"
+                android:text="@string/_0"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonPlan1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="1"
+                android:text="@string/_1"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonPlan2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="2"
+                android:text="@string/_2"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonPlan3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="3"
+                android:text="@string/_3"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonPlan4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="4"
+                android:text="@string/_4"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonPlan5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="5"
+                android:text="@string/_5"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonPlan6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="6"
+                android:text="@string/_6"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonPlan7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="7"
+                android:text="@string/_7"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonPlan8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="8"
+                android:text="@string/_8"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonPlan9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="9"
+                android:text="@string/_9"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonPlan10"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="10"
+                android:text="@string/_10"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonPlan11"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="11"
+                android:text="@string/_11"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonPlan12"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="12"
+                android:text="@string/_12"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonPlan13"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="13"
+                android:text="@string/_13"
+                android:textSize="18sp" />
+
+        </LinearLayout> <!-- 0-13 -->
+
+    </LinearLayout> <!-- buttons -->
+</RelativeLayout>
