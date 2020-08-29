@@ -1,5 +1,6 @@
 package pl.robinxon.planowanie
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -62,6 +63,7 @@ class SummaryActivity: AppCompatActivity() {
     //endregion
 
     private fun exitToMenu() {
+        startActivity(Intent(this, MenuActivity::class.java))
         finish()
     }
 
