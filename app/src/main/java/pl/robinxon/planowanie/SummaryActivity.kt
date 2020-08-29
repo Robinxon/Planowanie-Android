@@ -66,7 +66,7 @@ class SummaryActivity: AppCompatActivity() {
     }
 
     private fun setSummary() {
-        setBackButton()
+        setButtons()
         if(match.ended) {
             loadHistoryFromFire()
             listMatch = listMatch + match
@@ -129,13 +129,17 @@ class SummaryActivity: AppCompatActivity() {
         }
     }
 
-    private fun setBackButton() {
+    private fun setButtons() {
         //ukrywanie przycisku wstecz jeśli mecz jest zakończony
         if(match.ended) {
             supportActionBar?.setHomeButtonEnabled(false) // disable the button
             supportActionBar?.setDisplayHomeAsUpEnabled(false) // remove the left caret
             supportActionBar?.setDisplayShowHomeEnabled(false) // remove the icon
         } else { supportActionBar?.setDisplayHomeAsUpEnabled(true) }
+
+        //ukrywanie przycisku wyjścia z gry jeśli gra w toku
+        if(match.ended) { exitToMenu.visibility = View.VISIBLE }
+        else{ exitToMenu.visibility = View.GONE }
     }
 
     private fun loadHistoryFromFire() {
