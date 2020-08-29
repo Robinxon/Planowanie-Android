@@ -28,6 +28,7 @@ class SummaryActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_summary)
+        title = "Podsumowanie"
 
         //opcje bazy danych
         fireMatch = fireDatabase.getReference("match")
@@ -75,8 +76,12 @@ class SummaryActivity: AppCompatActivity() {
 
         //ukrycie zbędnych graczy
         if(match.settingPlayers == 2){
-            player3Panel.visibility = View.INVISIBLE
-            player4Panel.visibility = View.INVISIBLE
+            player3Name.visibility = View.INVISIBLE
+            player4Name.visibility = View.INVISIBLE
+            player3Points.visibility = View.INVISIBLE
+            player4Points.visibility = View.INVISIBLE
+            player3GoodPlanned.visibility = View.INVISIBLE
+            player4GoodPlanned.visibility = View.INVISIBLE
         }
 
         //wypełnianie tekstu
@@ -119,7 +124,7 @@ class SummaryActivity: AppCompatActivity() {
 
         //wypełnij tekst wziętych a planowanych
         for (player in 1..4) {
-            val textView: TextView = findViewById(resources.getIdentifier("player${player}Planned", "id", packageName))
+            val textView: TextView = findViewById(resources.getIdentifier("player${player}GoodPlanned", "id", packageName))
             textView.text = "${takenGood[player]} / $calculateRounds"
         }
     }

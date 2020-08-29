@@ -78,4 +78,6 @@
     <string name="back_to_game">Wróć do gry</string>
     <string name="next_game">Następna gra</string>
     <string name="end_match">Zakończ mecz</string>
+    <string name="points_label">Punkty</string>
+    <string name="planned_good_label">Planowanie</string>
 </resources>
