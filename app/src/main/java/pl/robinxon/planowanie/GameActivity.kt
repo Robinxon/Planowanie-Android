@@ -457,9 +457,9 @@ class GameActivity: AppCompatActivity() {
     }
 
     private fun disableButtonToPlan() {
-        //odblokuj zablokowany
-        if(match.games[match.currentGame]!!.toDisabling != null && match.games[match.currentGame]!!.toDisabling!! >= 0) {
-            val button: Button = findViewById(resources.getIdentifier("buttonPlan${match.games[match.currentGame]!!.toDisabling}", "id", packageName))
+        //odblokuj wszystkie
+        for(i in 0..13) {
+            val button: Button = findViewById(resources.getIdentifier("buttonPlan$i","id", packageName))
             button.isEnabled = true
         }
 
@@ -475,11 +475,11 @@ class GameActivity: AppCompatActivity() {
         }
 
         if(plannedCount == match.settingPlayers!! - 1) {
-            match.games[match.currentGame]!!.toDisabling = match.games[match.currentGame]!!.currentCards[match.games[match.currentGame]!!.currentRound] - currentPlanned
-            if(match.games[match.currentGame]!!.toDisabling != null && match.games[match.currentGame]!!.toDisabling!! >= 0) {
+            val toDisabling = match.games[match.currentGame]!!.currentCards[match.games[match.currentGame]!!.currentRound] - currentPlanned
+            if(toDisabling >= 0) {
                 val button: Button = findViewById(
                     resources.getIdentifier(
-                        "buttonPlan${match.games[match.currentGame]!!.toDisabling}",
+                        "buttonPlan${toDisabling}",
                         "id",
                         packageName
                     )
