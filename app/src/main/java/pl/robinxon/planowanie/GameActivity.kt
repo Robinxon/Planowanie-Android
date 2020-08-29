@@ -496,9 +496,7 @@ class GameActivity: AppCompatActivity() {
             for (player in 1..4) {
                 if (
                     (match.games[match.currentGame]!!.players[player]?.taken?.get(i) != null)
-                    && (match.games[match.currentGame]!!.players[player]?.planned?.get(i) == match.games[match.currentGame]!!.players[player]?.taken?.get(
-                        i
-                    ))
+                    && (match.games[match.currentGame]!!.players[player]?.planned?.get(i) == match.games[match.currentGame]!!.players[player]?.taken?.get(i))
                 ) {
                     match.games[match.currentGame]!!.players[player]!!.points += (10 + match.games[match.currentGame]!!.players[player]!!.planned[i]!!)
                 }
