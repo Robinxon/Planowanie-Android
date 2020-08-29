@@ -98,7 +98,7 @@ class SummaryActivity: AppCompatActivity() {
         }
 
         //wyliczenie pełnych minionych rund
-        var takenGood = intArrayOf(0, 0, 0, 0, 0)
+        val takenGood = intArrayOf(0, 0, 0, 0, 0)
         var calculateRounds = 0
         for(game in 1..4) {
             if(match.games[game] != null) {
