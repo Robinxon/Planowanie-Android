@@ -91,6 +91,37 @@ class SummaryActivity: AppCompatActivity() {
             val textView: TextView = findViewById(resources.getIdentifier("player${player}Points", "id", packageName))
             textView.text = calculate.toString()
         }
+
+        //wyliczenie pełnych minionych rund
+        var takenGood = intArrayOf(0, 0, 0, 0, 0)
+        var calculateRounds = 0
+        for(game in 1..4) {
+            if(match.games[game] != null) {
+                //wyliczenie minionych rund
+                calculateRounds += match.games[game]?.currentRound!!
+                if(!match.games[game]?.ended!!) {
+                    calculateRounds--
+                }
+
+                //wyliczenie kto planował dobrze
+                for (player in 1..4) {
+                    for(round in 1..16) {
+                        if (
+                            (match.games[game]?.players?.get(player)?.taken?.get(round) != null)
+                            && (match.games[game]!!.players[player]?.planned?.get(round) == match.games[game]!!.players[player]?.taken?.get(round))
+                        ) {
+                            takenGood[player]++
+                        }
+                    }
+                }
+            }
+        }
+
+        //wypełnij tekst wziętych a planowanych
+        for (player in 1..4) {
+            val textView: TextView = findViewById(resources.getIdentifier("player${player}Planned", "id", packageName))
+            textView.text = "${takenGood[player]} / $calculateRounds"
+        }
     }
 
     private fun setBackButton() {

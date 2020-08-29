@@ -39,6 +39,14 @@
                 android:layout_gravity="center"
                 android:textAlignment="center"
                 android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/player1Planned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textSize="18sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -64,6 +72,14 @@
 
             <TextView
                 android:id="@+id/player2Points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/player2Planned"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -99,6 +115,14 @@
                 android:layout_gravity="center"
                 android:textAlignment="center"
                 android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/player3Planned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textSize="18sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -124,6 +148,14 @@
 
             <TextView
                 android:id="@+id/player4Points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/player4Planned"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
