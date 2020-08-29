@@ -28,7 +28,7 @@ class SummaryActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_summary)
-        title = "Podsumowanie"
+        title = getString(R.string.summary)
 
         //opcje bazy danych
         fireMatch = fireDatabase.getReference("match")
