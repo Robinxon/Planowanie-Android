@@ -5,8 +5,6 @@ import android.util.TypedValue
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import pl.robinxon.planowanie.R
-import kotlinx.android.synthetic.main.activity_stats.*
 
 class StatsActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,8 +41,8 @@ class StatsActivity: AppCompatActivity() {
             textPlayerName.text = "test"
 
             //dadanie do layoutu głównego
-            player1Layout.addView(textPlayerName)
-            usersStats.addView(player1Layout)
+            //player1Layout.addView(textPlayerName)
+            //usersStats.addView(player1Layout)
         }
     }
 
