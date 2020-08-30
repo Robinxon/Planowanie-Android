@@ -56,17 +56,19 @@
             android:id="@+id/menuPlayers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:orientation="vertical"
             android:padding="16dp"
-            android:layout_marginBottom="8dp">
+            android:visibility="gone">
+
             <TextView
                 android:id="@+id/menuPlayersTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="16sp"
+                android:text="@string/list_of_registered_players"
                 android:textColor="@color/black"
-                android:text="@string/list_of_registered_players"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -74,17 +76,19 @@
             android:id="@+id/menuStats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:orientation="vertical"
             android:padding="16dp"
-            android:layout_marginBottom="8dp">
+            android:visibility="gone">
+
             <TextView
                 android:id="@+id/menuStatsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="16sp"
+                android:text="@string/game_stats"
                 android:textColor="@color/black"
-                android:text="@string/game_stats"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -92,17 +96,19 @@
             android:id="@+id/menuHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:orientation="vertical"
             android:padding="16dp"
-            android:layout_marginBottom="8dp">
+            android:visibility="gone">
+
             <TextView
                 android:id="@+id/menuHistoryTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="16sp"
+                android:text="@string/game_history"
                 android:textColor="@color/black"
-                android:text="@string/game_history"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
     </LinearLayout>
