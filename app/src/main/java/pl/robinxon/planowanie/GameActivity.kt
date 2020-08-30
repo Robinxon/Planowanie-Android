@@ -283,8 +283,8 @@ class GameActivity: AppCompatActivity() {
                     4 -> match.games[match.currentGame]!!.currentPlayer = match.currentGame
                 }
 
-                //ustawienie pierwszego atutu czyli braku
-                match.games[match.currentGame]!!.atuts[1] = 0
+                //ustawienie pierwszego atutu
+                randomAtut()
             }
             //przygotowanie planszy
             saveToFire()
@@ -374,12 +374,16 @@ class GameActivity: AppCompatActivity() {
     private fun randomAtut() {
         //jeśli brak atutu to losuj i przydziel
         if(match.games[match.currentGame]!!.atuts[match.games[match.currentGame]!!.currentRound] == null) {
-            match.games[match.currentGame]!!.atuts[match.games[match.currentGame]!!.currentRound] = when((1..4).random()) {
-                1 -> 1
-                2 -> 2
-                3 -> 3
-                4 -> 4
-                else -> 0
+            if(match.settingPlayers == 2 || match.games[match.currentGame]!!.currentRound != 1) {
+                match.games[match.currentGame]!!.atuts[match.games[match.currentGame]!!.currentRound] = when((1..4).random()) {
+                    1 -> 1
+                    2 -> 2
+                    3 -> 3
+                    4 -> 4
+                    else -> 0
+                }
+            } else {
+                match.games[match.currentGame]!!.atuts[match.games[match.currentGame]!!.currentRound] = 0
             }
         }
     }

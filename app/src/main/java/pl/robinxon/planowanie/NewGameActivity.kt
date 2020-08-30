@@ -108,8 +108,20 @@ class NewGameActivity : AppCompatActivity() {
         //ustawienie pierwszego gracza
         match.games[1]!!.currentPlayer = 1
 
-        //ustawienie pierwszego atutu czyli braku
-        match.games[1]!!.atuts[1] = 0
+        //ustawienie wstępnego atutu
+        match.games[1]!!.atuts[1] = when(match.settingPlayers) {
+            2 -> {
+                when((1..4).random()) {
+                    1 -> 1
+                    2 -> 2
+                    3 -> 3
+                    4 -> 4
+                    else -> 0
+                }
+            }
+            4 -> 0
+            else -> 0
+        }
 
         //przekonwertowanie meczu do json i zapisanie w bazie
         val gson = GsonBuilder().create()
