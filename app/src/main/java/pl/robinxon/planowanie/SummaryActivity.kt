@@ -69,12 +69,7 @@ class SummaryActivity: AppCompatActivity() {
 
     private fun setSummary() {
         setButtons()
-        if(match.ended) {
-            loadHistoryFromFire()
-            listMatch = listMatch + match
-            saveHistoryToFire()
-            buttonsPanel.visibility = View.VISIBLE
-        }
+        if(match.ended && !match.saved) { loadHistoryFromFire() }
 
         //ukrycie zbędnych graczy
         if(match.settingPlayers == 2){
@@ -149,7 +144,12 @@ class SummaryActivity: AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val value = dataSnapshot.getValue<String>()
                 Log.d("database_history", "History is: $value")
-                if(value != null) { listMatch = decodeJsonToHistory(value) }
+                if(value != null) {
+                    listMatch = decodeJsonToHistory(value)
+                    listMatch = listMatch + match
+                    saveHistoryToFire()
+                    buttonsPanel.visibility = View.VISIBLE
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -162,6 +162,7 @@ class SummaryActivity: AppCompatActivity() {
     private fun saveHistoryToFire() {
         val gson = GsonBuilder().create()
         fireHistory.setValue(gson.toJson(listMatch))
+        match.saved = true
     }
 
     private fun decodeJsonToMatch(value: String): Match {
