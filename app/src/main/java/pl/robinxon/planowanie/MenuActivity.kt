@@ -40,7 +40,7 @@ class MenuActivity: AppCompatActivity() {
         //opcje bazy danych
         try { Firebase.database.setPersistenceEnabled(true) }
         catch (e: Exception) { Log.d("database", "persistence already enabled")}
-        fireMatch = fireDatabase.getReference("match")
+        fireMatch = fireDatabase.getReference(Constants.FIRE_MATCH)
 
         //dodanie obrysów do przycisków
         menuContinue.setBackgroundResource(R.drawable.tv_border)

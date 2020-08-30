@@ -42,7 +42,7 @@ class GameActivity: AppCompatActivity() {
         setContentView(R.layout.activity_game)
 
         //opcje bazy danych
-        fireMatch = fireDatabase.getReference("match")
+        fireMatch = fireDatabase.getReference(Constants.FIRE_MATCH)
 
         //dodanie listenerów do zmiennych na serwerze
         fireMatch.addValueEventListener(object : ValueEventListener {

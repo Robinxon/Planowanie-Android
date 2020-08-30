@@ -32,8 +32,8 @@ class SummaryActivity: AppCompatActivity() {
         title = getString(R.string.summary)
 
         //opcje bazy danych
-        fireMatch = fireDatabase.getReference("match")
-        fireHistory = fireDatabase.getReference("history")
+        fireMatch = fireDatabase.getReference(Constants.FIRE_MATCH)
+        fireHistory = fireDatabase.getReference(Constants.FIRE_HISTORY)
 
         //dodanie listenerów do zmiennych na serwerze
         fireMatch.addValueEventListener(object : ValueEventListener {

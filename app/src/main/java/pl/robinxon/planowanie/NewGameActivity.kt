@@ -25,7 +25,7 @@ class NewGameActivity : AppCompatActivity() {
         actionBar?.setDisplayHomeAsUpEnabled(true);
 
         //opcje bazy danych
-        fireMatch = fireDatabase.getReference("match")
+        fireMatch = fireDatabase.getReference(Constants.FIRE_MATCH)
 
         //ustawienie listenera dla radio buttonów
         radioGroupPlayerCount.setOnCheckedChangeListener { _, checkedId ->
