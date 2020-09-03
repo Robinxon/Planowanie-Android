@@ -228,7 +228,6 @@ class GameActivity: AppCompatActivity() {
                 match.games[match.currentGame]!!.currentRound++
                 setPlayerInRound()
                 randomAtut()
-                calculatePoints()
                 saveToFire()
             }
         }
@@ -496,7 +495,7 @@ class GameActivity: AppCompatActivity() {
     private fun calculatePoints() {
         for(player in 1..4) { match.games[match.currentGame]!!.players[player]?.points = 0 }
 
-        for (i in 1 until match.games[match.currentGame]!!.currentRound) {
+        for (i in 1..match.games[match.currentGame]!!.currentRound) {
             for (player in 1..4) {
                 if (
                     (match.games[match.currentGame]!!.players[player]?.taken?.get(i) != null)
