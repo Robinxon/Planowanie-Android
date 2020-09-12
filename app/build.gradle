@@ -11,8 +11,8 @@ android {
         applicationId 'pl.robinxon.planowanie'
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 3
-        versionName "1.0.0-rc.3"
+        versionCode 4
+        versionName "1.0.0-rc.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
