@@ -36,6 +36,7 @@ class MenuActivity: AppCompatActivity() {
         //inicjalizacja widoku
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+        menuVersionTitle.text = Constants.VERSION
 
         //opcje bazy danych
         try { Firebase.database.setPersistenceEnabled(true) }
