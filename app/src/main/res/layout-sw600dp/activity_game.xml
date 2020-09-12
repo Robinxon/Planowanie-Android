@@ -1448,7 +1448,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/back_to_game"
-            android:textSize="12sp"/>
+            android:textSize="18sp"/>
 
         <Button
             android:id="@+id/buttonNextGame"
@@ -1456,6 +1456,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/next_game"
-            android:textSize="12sp"/>
+            android:textSize="18sp"/>
     </LinearLayout> <!-- buttons end -->
 </RelativeLayout>
