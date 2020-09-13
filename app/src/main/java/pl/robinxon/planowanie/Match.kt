@@ -3,11 +3,11 @@ package pl.robinxon.planowanie
 import java.util.*
 
 class Match {
-    var games: MutableList<Game> = ArrayList<Game>(Collections.nCopies(5, null))
+    var games: MutableList<Game>? = ArrayList<Game>(Collections.nCopies(5, null))
 
     var currentGame: Int = 1
 
-    var playerNames: MutableList<String> = ArrayList<String>(Collections.nCopies(5, null))
+    var playerNames: MutableList<String>? = ArrayList<String>(Collections.nCopies(5, null))
 
     var settingPlayers: Int? = null
     var settingGames: Int? = null
@@ -15,5 +15,5 @@ class Match {
     var ended: Boolean = false
     var saved: Boolean = false
 
-    //lateinit var date: Calendar
+    var date: String? = null
 }

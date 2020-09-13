@@ -6,11 +6,9 @@ import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import pl.robinxon.planowanie.R
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_new_game.*
 import java.util.*
 
@@ -63,7 +61,11 @@ class NewGameActivity : AppCompatActivity() {
             || (editTextPlayer3Name.visibility == View.VISIBLE && editTextPlayer3Name.text.toString() == "")
             || (editTextPlayer4Name.visibility == View.VISIBLE && editTextPlayer4Name.text.toString() == "")
         ) {
-            Toast.makeText(this, resources.getString(R.string.input_all_player_names), Toast.LENGTH_SHORT ).show()
+            Toast.makeText(
+                this,
+                resources.getString(R.string.input_all_player_names),
+                Toast.LENGTH_SHORT
+            ).show()
             return
         }
         //utworzenie obiektu meczu
@@ -90,42 +92,47 @@ class NewGameActivity : AppCompatActivity() {
         }
 
         //zapisanie nazw graczy
-        match.playerNames[1] = editTextPlayer1Name.text.toString()
-        match.playerNames[2] = editTextPlayer2Name.text.toString()
+        match.playerNames?.set(1, editTextPlayer1Name.text.toString())
+        match.playerNames?.set(2, editTextPlayer2Name.text.toString())
         if(match.settingPlayers == 4) {
-            match.playerNames[3] = editTextPlayer3Name.text.toString()
-            match.playerNames[4] = editTextPlayer4Name.text.toString()
+            match.playerNames?.set(3, editTextPlayer3Name.text.toString())
+            match.playerNames?.set(4, editTextPlayer4Name.text.toString())
         }
 
         //utworzenie gry
-        match.games[1] = Game()
-        match.games[1]!!.players[1] = Player()
-        match.games[1]!!.players[2] = Player()
+        match.games?.set(1, Game())
+        match.games?.get(1)!!.players?.set(1, Player())
+        match.games!![1].players?.set(2, Player())
         if(match.settingPlayers == 4) {
-            match.games[1]!!.players[3] = Player()
-            match.games[1]!!.players[4] = Player()
+            match.games!![1].players?.set(3, Player())
+            match.games!![1].players?.set(4, Player())
         }
 
         //ustawienie pierwszego gracza
-        match.games[1]!!.currentPlayer = 1
+        match.games!![1].currentPlayer = 1
 
         //ustawienie wstępnego atutu
-        match.games[1]!!.atuts[1] = when(match.settingPlayers) {
-            2 -> {
-                when((1..4).random()) {
-                    1 -> 1
-                    2 -> 2
-                    3 -> 3
-                    4 -> 4
-                    else -> 0
+        match.games!![1].atuts?.set(
+            1, when (match.settingPlayers) {
+                2 -> {
+                    when ((1..4).random()) {
+                        1 -> 1
+                        2 -> 2
+                        3 -> 3
+                        4 -> 4
+                        else -> 0
+                    }
                 }
+                4 -> 0
+                else -> 0
             }
-            4 -> 0
-            else -> 0
-        }
+        )
 
         //ustawienie daty startu gry
-        //match.date = Calendar.getInstance()
+        val calendar: Calendar = GregorianCalendar()
+        val trialTime = Date()
+        calendar.time = trialTime
+        match.date = String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH)) + "-" + String.format("%02d", calendar.get(Calendar.MONTH)+1) + "-" + calendar.get(Calendar.YEAR).toString() + " " + String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY)) + ":" + String.format("%02d", calendar.get(Calendar.MINUTE))
 
         //przekonwertowanie meczu do json i zapisanie w bazie
         fireMatch.setValue(match)

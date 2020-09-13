@@ -83,14 +83,14 @@ class SummaryActivity: AppCompatActivity() {
         }
 
         //wypełnianie tekstu
-        player1Name.setText(match.playerNames[1] ?: "")
-        player2Name.setText(match.playerNames[2] ?: "")
-        player3Name.setText(match.playerNames[3] ?: "")
-        player4Name.setText(match.playerNames[4] ?: "")
+        player1Name.setText(match.playerNames?.get(1) ?: "")
+        player2Name.setText(match.playerNames?.get(2) ?: "")
+        player3Name.setText(match.playerNames?.getOrNull(3) ?: "")
+        player4Name.setText(match.playerNames?.getOrNull(4) ?: "")
 
         //wyliczenie punktów
         for (player in 1..4) {
-            val calculate = (match.games[1]?.players?.get(player)?.points ?: 0) + (match.games[2]?.players?.get(player)?.points ?: 0) + (match.games[3]?.players?.get(player)?.points ?: 0) + (match.games[4]?.players?.get(player)?.points ?: 0)
+            val calculate = (match.games?.getOrNull(1)?.players?.getOrNull(player)?.points ?: 0) + (match.games?.getOrNull(2)?.players?.getOrNull(player)?.points ?: 0) + (match.games?.getOrNull(3)?.players?.getOrNull(player)?.points ?: 0) + (match.games?.getOrNull(4)?.players?.getOrNull(player)?.points ?: 0)
             val textView: TextView = findViewById(resources.getIdentifier("player${player}Points", "id", packageName))
             textView.text = calculate.toString()
         }
@@ -99,10 +99,10 @@ class SummaryActivity: AppCompatActivity() {
         val takenGood = intArrayOf(0, 0, 0, 0, 0)
         var calculateRounds = 0
         for(game in 1..4) {
-            if(match.games[game] != null) {
+            if(match.games?.getOrNull(game) != null) {
                 //wyliczenie minionych rund
-                calculateRounds += match.games[game]?.currentRound!!
-                if(!match.games[game]?.ended!!) {
+                calculateRounds += match.games!![game].currentRound
+                if(!match.games!![game].ended) {
                     calculateRounds--
                 }
 
@@ -110,8 +110,8 @@ class SummaryActivity: AppCompatActivity() {
                 for (player in 1..4) {
                     for(round in 1..16) {
                         if (
-                            (match.games[game]?.players?.get(player)?.taken?.get(round) != null)
-                            && (match.games[game]!!.players[player]?.planned?.get(round) == match.games[game]!!.players[player]?.taken?.get(round))
+                            (match.games!![game].players?.getOrNull(player)?.taken?.getOrNull(round) != null)
+                            && (match.games!![game].players?.get(player)?.planned?.get(round) == match.games!![game].players?.get(player)?.taken?.get(round))
                         ) {
                             takenGood[player]++
                         }
@@ -147,6 +147,10 @@ class SummaryActivity: AppCompatActivity() {
                 Log.d("database_history", "History is: $value")
                 if(value != null) {
                     listMatch = value
+                    listMatch = listMatch + match
+                    saveHistoryToFire()
+                    buttonsPanel.visibility = View.VISIBLE
+                } else {
                     listMatch = listMatch + match
                     saveHistoryToFire()
                     buttonsPanel.visibility = View.VISIBLE

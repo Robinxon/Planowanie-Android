@@ -62,11 +62,11 @@ class GameActivity: AppCompatActivity() {
 
         //ustawienie listenerów do przycisków
         buttonToggle.setOnClickListener { buttonToggle() }
-        /*buttonClear.setOnClickListener { buttonClear() }
+        buttonClear.setOnClickListener { buttonClear() }
         buttonPreviousRound.setOnClickListener { buttonPreviousRound()}
         buttonNextRound.setOnClickListener { buttonNextRound() }
         buttonBackToGame.setOnClickListener { buttonBackToGame() }
-        buttonNextGame.setOnClickListener { buttonNextGame() }*/
+        buttonNextGame.setOnClickListener { buttonNextGame() }
         for(i in 0..13) {
             val button: Button = findViewById(resources.getIdentifier("buttonPlan$i","id", packageName))
             button.setOnClickListener { buttonPlanClick(i) }
@@ -84,20 +84,6 @@ class GameActivity: AppCompatActivity() {
         registerReceiver(broadcastReceiver, IntentFilter("finish_activity_game"))
     }
 
-    /*override fun onClick(p0: View?) {
-        val amount = Integer.parseInt(p0?.tag.toString())
-
-        if(match.games[match.currentGame].players[match.games[match.currentGame].currentPlayer].planned[match.games[match.currentGame].currentRound].equals(null)) {
-            match.games[match.currentGame].players[match.games[match.currentGame].currentPlayer].planned[match.games[match.currentGame].currentRound] = amount
-            setNextPlayer()
-        } else if(match.games[match.currentGame].players[match.games[match.currentGame].currentPlayer].taken[match.games[match.currentGame].currentRound].equals(null)) {
-            match.games[match.currentGame].players[match.games[match.currentGame].currentPlayer].taken[match.games[match.currentGame].currentRound] = amount
-            setNextPlayer()
-        }
-
-        saveToFire()
-    }*/
-
     //region Menu wyboru gry
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -112,7 +98,7 @@ class GameActivity: AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.gameMenuGame1 -> {
-            if (!match.games[1].equals(null)) {
+            if (match.games?.getOrNull(1) != null) {
                 match.currentGame = 1
                 saveToFire()
             } else {
@@ -123,7 +109,7 @@ class GameActivity: AppCompatActivity() {
         }
 
         R.id.gameMenuGame2 -> {
-            if (!match.games[2].equals(null)) {
+            if (match.games?.getOrNull(2) != null) {
                 match.currentGame = 2
                 saveToFire()
             } else {
@@ -134,7 +120,7 @@ class GameActivity: AppCompatActivity() {
         }
 
         R.id.gameMenuGame3 -> {
-            if (!match.games[3].equals(null)) {
+            if (match.games?.getOrNull(3) != null) {
                 match.currentGame = 3
                 saveToFire()
             } else {
@@ -145,7 +131,7 @@ class GameActivity: AppCompatActivity() {
         }
 
         R.id.gameMenuGame4 -> {
-            if (!match.games[4].equals(null)) {
+            if (match.games?.getOrNull(4) != null) {
                 match.currentGame = 4
                 saveToFire()
             } else {
@@ -207,17 +193,15 @@ class GameActivity: AppCompatActivity() {
         saveToFire()
     }
 
-    /*private fun buttonClear() {
-        //match.games[match.currentGame]!!.players[match.games[match.currentGame]!!.currentPlayer]!!.taken[match.games[match.currentGame]!!.currentRound] = null
-        match.games[match.currentGame]!!.players[match.games[match.currentGame]!!.currentPlayer]!!.taken.removeAt(match.games[match.currentGame]!!.currentRound)
-        //match.games[match.currentGame]!!.players[match.games[match.currentGame]!!.currentPlayer]!!.planned[match.games[match.currentGame]!!.currentRound] = null
-        match.games[match.currentGame]!!.players[match.games[match.currentGame]!!.currentPlayer]!!.planned.removeAt(match.games[match.currentGame]!!.currentRound)
+    private fun buttonClear() {
+        match.games!![match.currentGame].players?.get(match.games!![match.currentGame].currentPlayer)!!.taken?.removeAt(match.games!![match.currentGame].currentRound)
+        match.games!![match.currentGame].players?.get(match.games!![match.currentGame].currentPlayer)!!.planned?.removeAt(match.games!![match.currentGame].currentRound)
         saveToFire()
     }
 
     private fun buttonPreviousRound() {
-        if(match.games[match.currentGame]!!.currentRound > 1) {
-            if(!match.games[match.currentGame]!!.ended) {match.games[match.currentGame]!!.currentRound--}
+        if(match.games!![match.currentGame].currentRound > 1) {
+            if(!match.games!![match.currentGame].ended) {match.games!![match.currentGame].currentRound--}
             calculatePoints()
             setPlayerInRound()
             saveToFire()
@@ -226,64 +210,70 @@ class GameActivity: AppCompatActivity() {
 
     private fun buttonNextRound() {
         if(
-            match.games[match.currentGame]!!.players[1]!!.taken[match.games[match.currentGame]!!.currentRound] == null
-            || match.games[match.currentGame]!!.players[2]!!.taken[match.games[match.currentGame]!!.currentRound] == null
-            || (match.games[match.currentGame]!!.players[3]?.taken?.get(match.games[match.currentGame]!!.currentRound) == null && match.settingPlayers == 4)
-            || (match.games[match.currentGame]!!.players[4]?.taken?.get(match.games[match.currentGame]!!.currentRound) == null && match.settingPlayers == 4)
+            match.games!![match.currentGame].players?.get(1)!!.taken?.get(match.games!![match.currentGame].currentRound)  == null
+            || match.games!![match.currentGame].players?.get(2)!!.taken?.get(match.games!![match.currentGame].currentRound)  == null
+            || (match.games!![match.currentGame].players?.getOrNull(3)?.taken?.getOrNull(match.games!![match.currentGame].currentRound) == null && match.settingGames == 4)
+            || (match.games!![match.currentGame].players?.getOrNull(4)?.taken?.getOrNull(match.games!![match.currentGame].currentRound) == null && match.settingGames == 4)
         ) { Toast.makeText(this, getString(R.string.incompleted_round), Toast.LENGTH_SHORT).show() }
         else {
             calculatePoints()
             saveToFire()
             if(
-                (match.settingGames == 1 && match.games[match.currentGame]!!.currentRound >= 16)
-                || (match.settingGames == 4 && match.games[match.currentGame]!!.currentRound >= 13)
+                (match.settingGames == 1 && match.games!![match.currentGame].currentRound >= 16)
+                || (match.settingGames == 4 && match.games!![match.currentGame].currentRound >= 13)
             ) { endGame() }
             else {
-                match.games[match.currentGame]!!.currentRound++
+                match.games!![match.currentGame].currentRound++
                 setPlayerInRound()
                 randomAtut()
                 saveToFire()
             }
         }
-    }*/
+    }
 
     private fun buttonPlanClick(amount: Int) {
-        if(match.games[match.currentGame].players[match.games[match.currentGame].currentPlayer].planned[match.games[match.currentGame].currentRound].equals(null)) {
-            match.games[match.currentGame].players[match.games[match.currentGame].currentPlayer].planned[match.games[match.currentGame].currentRound] = amount
+        if(match.games?.getOrNull(match.currentGame)?.players?.getOrNull(match.games!![match.currentGame].currentPlayer)?.planned?.getOrNull(match.games!![match.currentGame].currentRound) == null) {
+            match.games?.get(match.currentGame)?.players?.get(match.games!![match.currentGame].currentPlayer)?.planned?.add(
+                match.games!![match.currentGame].currentRound,
+                amount
+            )
             setNextPlayer()
-        } else if(match.games[match.currentGame].players[match.games[match.currentGame].currentPlayer].taken[match.games[match.currentGame].currentRound].equals(null)) {
-            match.games[match.currentGame].players[match.games[match.currentGame].currentPlayer].taken[match.games[match.currentGame].currentRound] = amount
+        } else if(match.games!![match.currentGame].players?.getOrNull(match.games!![match.currentGame].currentPlayer)?.taken?.getOrNull(match.games!![match.currentGame].currentRound) == null) {
+            match.games!![match.currentGame].players?.get(match.games!![match.currentGame].currentPlayer)?.taken?.add(
+                match.games!![match.currentGame].currentRound,
+                amount
+            )
             setNextPlayer()
         }
 
         saveToFire()
     }
-/*
+
     private fun buttonBackToGame() {
         //ukryj przyciski końca gry i pokaż przyciski gry
         buttonsEndPanel.visibility = View.GONE
         buttonsPanel.visibility = View.VISIBLE
-        match.games[match.currentGame]!!.ended = false
+        match.games!![match.currentGame].ended = false
         saveToFire()
     }
 
     private fun buttonNextGame() {
         //zwiększenie licznika rundy
         if(match.settingGames != 1 && ++match.currentGame <= 4) {
-            if(match.games[match.currentGame] == null) {
+            if(match.games?.getOrNull(match.currentGame) == null) {
                 //utworzenie gry
-                match.games[match.currentGame] = Game()
-                match.games[match.currentGame]!!.players[1] = Player()
-                match.games[match.currentGame]!!.players[2] = Player()
+                match.games?.add(match.currentGame, Game())
+                match.games!![match.currentGame].players?.add(1, Player())
+                match.games!![match.currentGame].players?.add(2, Player())
                 if(match.settingPlayers == 4) {
-                    match.games[match.currentGame]!!.players[3] = Player()
-                    match.games[match.currentGame]!!.players[4] = Player()
+                    match.games!![match.currentGame].players?.add(3, Player())
+                    match.games!![match.currentGame].players?.add(4, Player())
                 }
 
                 //ustawienie pierwszego gracza
                 when(match.settingPlayers) {
                     2 -> {
-                        match.games[match.currentGame]!!.currentPlayer = when (match.currentGame) {
+                        match.games!![match.currentGame].currentPlayer = when (match.currentGame) {
                             1 -> 1
                             2 -> 2
                             3 -> 1
@@ -291,7 +281,7 @@ class GameActivity: AppCompatActivity() {
                             else -> 1
                         }
                     }
-                    4 -> match.games[match.currentGame]!!.currentPlayer = match.currentGame
+                    4 -> match.games!![match.currentGame].currentPlayer = match.currentGame
                 }
 
                 //ustawienie pierwszego atutu
@@ -307,7 +297,7 @@ class GameActivity: AppCompatActivity() {
         }
     }
     //endregion
-    */
+
     private fun presetBoard() {
         title = getString(R.string.gameActivityTitle, match.currentGame)
 
@@ -317,10 +307,10 @@ class GameActivity: AppCompatActivity() {
         setButtonsVisibility()
         hideUselessRounds()
         setAtut()
-        //markActivePlayerAndClearOthers()
-        //updatePlannedAndMarkGoodOrBad()
+        markActivePlayerAndClearOthers()
+        updatePlannedAndMarkGoodOrBad()
         setPlayerPointsAndNames()
-        //disableButtonToPlan()
+        disableButtonToPlan()
     }
 
     private fun setPlayerPointsAndNames() {
@@ -328,30 +318,30 @@ class GameActivity: AppCompatActivity() {
         editTextPlayer1.setText(
             getString(
                 R.string.player_name_and_points,
-                match.games[match.currentGame].players[1].points,
-                match.playerNames[1]
+                match.games?.get(match.currentGame)?.players?.get(1)?.points,
+                match.playerNames?.get(1)
             )
         )
         editTextPlayer2.setText(
             getString(
                 R.string.player_name_and_points,
-                match.games[match.currentGame].players[2].points,
-                match.playerNames[2]
+                match.games?.get(match.currentGame)?.players?.get(2)?.points,
+                match.playerNames?.get(2)
             )
         )
         if(match.settingPlayers == 4) {
             editTextPlayer3.setText(
                 getString(
                     R.string.player_name_and_points,
-                    match.games[match.currentGame].players[3].points,
-                    match.playerNames[3]
+                    match.games?.get(match.currentGame)?.players?.get(3)?.points,
+                    match.playerNames?.get(3)
                 )
             )
             editTextPlayer4.setText(
                 getString(
                     R.string.player_name_and_points,
-                    match.games[match.currentGame].players[4].points,
-                    match.playerNames[4]
+                    match.games?.get(match.currentGame)?.players?.get(4)?.points,
+                    match.playerNames?.get(4)
                 )
             )
         }
@@ -362,7 +352,7 @@ class GameActivity: AppCompatActivity() {
     }
 
     private fun setButtonsVisibility() {
-        if(match.games[match.currentGame].ended) {
+        if(match.games?.get(match.currentGame)?.ended!!) {
             buttonsPanel.visibility = View.GONE
             buttonsEndPanel.visibility = View.VISIBLE
         } else {
@@ -382,26 +372,28 @@ class GameActivity: AppCompatActivity() {
         }
     }
 
-    /*private fun randomAtut() {
+    private fun randomAtut() {
         //jeśli brak atutu to losuj i przydziel
-        if(match.games[match.currentGame]!!.atuts[match.games[match.currentGame]!!.currentRound] == null) {
-            if(match.settingPlayers == 2 || match.games[match.currentGame]!!.currentRound != 1) {
-                match.games[match.currentGame]!!.atuts[match.games[match.currentGame]!!.currentRound] = when((1..4).random()) {
-                    1 -> 1
-                    2 -> 2
-                    3 -> 3
-                    4 -> 4
-                    else -> 0
-                }
+        if(match.games?.get(match.currentGame)!!.atuts?.getOrNull(match.games!![match.currentGame].currentRound) == null) {
+            if(match.settingPlayers == 2 || match.games!![match.currentGame].currentRound != 1) {
+                match.games!![match.currentGame].atuts?.add(match.games!![match.currentGame].currentRound,
+                    when((1..4).random()) {
+                        1 -> 1
+                        2 -> 2
+                        3 -> 3
+                        4 -> 4
+                        else -> 0
+                    }
+                )
             } else {
-                match.games[match.currentGame]!!.atuts[match.games[match.currentGame]!!.currentRound] = 0
+                match.games!![match.currentGame].atuts?.add(match.games!![match.currentGame].currentRound, 0)
             }
         }
-    }*/
+    }
 
     private fun setAtut() {
         //wyświetl atut
-        when(match.games[match.currentGame].atuts[match.games[match.currentGame].currentRound]) {
+        when(match.games?.get(match.currentGame)?.atuts?.get(match.games!![match.currentGame].currentRound)) {
             0 -> imageViewAtut.setBackgroundResource(R.drawable.none)
             1 -> imageViewAtut.setBackgroundResource(R.drawable.karo)
             2 -> imageViewAtut.setBackgroundResource(R.drawable.kier)
@@ -410,7 +402,7 @@ class GameActivity: AppCompatActivity() {
             else -> imageViewAtut.setBackgroundResource(R.drawable.none)
         }
     }
-/*
+
     private fun markActivePlayerAndClearOthers() {
         //wyczyść obramowania wszystkich graczy
         for (round in 1..match.roundsInGame!!) {
@@ -427,12 +419,9 @@ class GameActivity: AppCompatActivity() {
         }
 
         //zaznacz obecnego gracza jeśli gra jest w toku
-        if(!match.games[match.currentGame]!!.ended) {
+        if(!match.games?.get(match.currentGame)!!.ended) {
             val textView: TextView = findViewById(
-                resources.getIdentifier(
-                    "textViewRound" + match.games[match.currentGame]!!.currentRound.toString() + "Player" + match.games[match.currentGame]!!.currentPlayer.toString()
-                        .toString(), "id", packageName
-                )
+                resources.getIdentifier("textViewRound" + match.games!![match.currentGame]!!.currentRound.toString() + "Player" + match.games!![match.currentGame]!!.currentPlayer.toString(), "id", packageName)
             )
             textView.setBackgroundResource(R.drawable.tv_border)
         }
@@ -442,29 +431,24 @@ class GameActivity: AppCompatActivity() {
         for (round in 1..match.roundsInGame!!) {
             for(player in 1..4) {
                 if(!(player > 2 && match.settingPlayers == 2)) {
-                    val textView: TextView = findViewById(
-                        resources.getIdentifier(
-                            "textViewRound" + round.toString() + "Player" + player.toString(),
-                            "id",
-                            packageName
-                        )
-                    )
-                    val playerPlanned = match.games[match.currentGame]!!.players[player]!!.planned[round]?.toString() ?: ""
-                    val playerTaken = match.games[match.currentGame]!!.players[player]!!.taken[round]?.toString() ?: ""
-                    if(round <= match.games[match.currentGame]!!.currentRound) { textView.text = getString(
-                        R.string.player_planned_and_taken,
-                        playerTaken,
-                        playerPlanned
-                    ) }
-                    else {textView.text = ""}
-                    when {
-                        match.games[match.currentGame]!!.players[player]!!.taken[round].equals(null) -> { textView.setTextColor(
-                            Color.BLACK
-                        ) }
-                        match.games[match.currentGame]!!.players[player]!!.taken[round]!! - match.games[match.currentGame]!!.players[player]!!.planned[round]!! == 0 -> { textView.setTextColor(
-                            Color.GREEN
-                        ) }
-                        else -> {textView.setTextColor(Color.RED)}
+                    val textView: TextView = findViewById(resources.getIdentifier("textViewRound" + round.toString() + "Player" + player.toString(), "id", packageName))
+                    if(round <= match.games!![match.currentGame].currentRound) {
+                        val playerPlanned = match.games!![match.currentGame].players?.getOrNull(player)?.planned?.getOrNull(round)?.toString() ?: ""
+                        val playerTaken = match.games!![match.currentGame].players?.getOrNull(player)?.taken?.getOrNull(round)?.toString() ?: ""
+                        textView.text = getString(R.string.player_planned_and_taken, playerTaken, playerPlanned)
+                        when {
+                            match.games!![match.currentGame].players?.getOrNull(player)!!.taken?.getOrNull(round) == null -> {
+                                textView.setTextColor(Color.BLACK)
+                            }
+                            match.games!![match.currentGame].players?.get(player)!!.taken?.get(round)!! - match.games!![match.currentGame].players?.get(player)!!.planned?.get(round)!! == 0 -> {
+                                textView.setTextColor(Color.GREEN)
+                            }
+                            else -> {textView.setTextColor(Color.RED)}
+                        }
+                    }
+                    else {
+                        textView.text = ""
+                        textView.setTextColor(Color.BLACK)
                     }
                 }
             }
@@ -483,37 +467,38 @@ class GameActivity: AppCompatActivity() {
         var currentPlanned = 0
 
         for(player in 1..4) {
-            if(match.games[match.currentGame]!!.players[player]?.planned?.get(match.games[match.currentGame]!!.currentRound) != null) {
-                currentPlanned += match.games[match.currentGame]!!.players[player]!!.planned[match.games[match.currentGame]!!.currentRound]!!
+            if(match.games?.getOrNull(match.currentGame)!!.players?.getOrNull(player)?.planned?.getOrNull(match.games!![match.currentGame].currentRound) != null) {
+                currentPlanned += match.games!![match.currentGame].players?.get(player)!!.planned?.get(match.games!![match.currentGame].currentRound)!!
                 plannedCount++
             }
         }
 
         if(plannedCount == match.settingPlayers!! - 1) {
-            val toDisabling = match.games[match.currentGame]!!.currentCards[match.games[match.currentGame]!!.currentRound] - currentPlanned
+            val toDisabling = match.games?.get(match.currentGame)!!.currentCards[match.games!![match.currentGame].currentRound] - currentPlanned
             if(toDisabling >= 0) {
-                val button: Button = findViewById(
-                    resources.getIdentifier(
-                        "buttonPlan${toDisabling}",
-                        "id",
-                        packageName
-                    )
-                )
+                val button: Button = findViewById(resources.getIdentifier("buttonPlan${toDisabling}", "id", packageName))
                 button.isEnabled = false
             }
         }
     }
 
-    private fun calculatePoints() {
-        for(player in 1..4) { match.games[match.currentGame]!!.players[player]?.points = 0 }
 
-        for (i in 1..match.games[match.currentGame]!!.currentRound) {
+    private fun calculatePoints() {
+        for(player in 1..4) {
+            if(!(player > 2 && match.settingPlayers == 2)) {
+                match.games!![match.currentGame].players?.get(player)?.points = 0
+            }
+        }
+
+        for (i in 1..match.games?.get(match.currentGame)!!.currentRound) {
             for (player in 1..4) {
-                if (
-                    (match.games[match.currentGame]!!.players[player]?.taken?.get(i) != null)
-                    && (match.games[match.currentGame]!!.players[player]?.planned?.get(i) == match.games[match.currentGame]!!.players[player]?.taken?.get(i))
-                ) {
-                    match.games[match.currentGame]!!.players[player]!!.points += (10 + match.games[match.currentGame]!!.players[player]!!.planned[i]!!)
+                if(!(player > 2 && match.settingPlayers == 2)) {
+                    if (
+                        (match.games!![match.currentGame].players?.get(player)?.taken?.get(i) != null)
+                        && (match.games!![match.currentGame].players?.get(player)?.planned?.get(i) == match.games!![match.currentGame].players?.get(player)?.taken?.get(i))
+                    ) {
+                        match.games!![match.currentGame].players?.get(player)!!.points += (10 + match.games!![match.currentGame].players?.get(player)!!.planned?.get(i)!!)
+                    }
                 }
             }
         }
@@ -522,16 +507,16 @@ class GameActivity: AppCompatActivity() {
     private fun setPlayerInRound() {
         when(match.settingPlayers) {
             2 -> {
-                match.games[match.currentGame]!!.currentPlayer =
-                    when (match.games[match.currentGame]!!.currentRound % 2) {
+                match.games?.get(match.currentGame)!!.currentPlayer =
+                    when (match.games!![match.currentGame].currentRound % 2) {
                         0 -> 2
                         1 -> 1
                         else -> 1
                     }
             }
             4 -> {
-                match.games[match.currentGame]!!.currentPlayer =
-                    when (match.games[match.currentGame]!!.currentRound % 4) {
+                match.games?.get(match.currentGame)!!.currentPlayer =
+                    when (match.games!![match.currentGame].currentRound % 4) {
                         0 -> 4
                         1 -> 1
                         2 -> 2
@@ -540,19 +525,19 @@ class GameActivity: AppCompatActivity() {
                     }
             }
         }
-    }*/
+    }
 
     private fun setNextPlayer() {
-        if(++match.games[match.currentGame].currentPlayer > match.settingPlayers!!) { match.games[match.currentGame].currentPlayer = 1 }
+        if(++match.games!![match.currentGame].currentPlayer > match.settingPlayers!!) { match.games!![match.currentGame].currentPlayer = 1 }
     }
-/*
+
     private fun endGame() {
         //zamknij grę w zmiennej
-        match.games[match.currentGame]!!.ended = true
+        match.games!![match.currentGame].ended = true
 
         //zapisz do bazy
         saveToFire()
-    }*/
+    }
 
     private fun saveToFire() {
         fireMatch.setValue(match)
