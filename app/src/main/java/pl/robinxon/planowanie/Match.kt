@@ -1,14 +1,13 @@
 package pl.robinxon.planowanie
 
-import java.io.Serializable
 import java.util.*
 
-class Match: Serializable {
-    var games = arrayOfNulls<Game>(5)
+class Match {
+    var games: MutableList<Game> = ArrayList<Game>(Collections.nCopies(5, null))
 
     var currentGame: Int = 1
 
-    var playerNames = arrayOfNulls<String>(5)
+    var playerNames: MutableList<String> = ArrayList<String>(Collections.nCopies(5, null))
 
     var settingPlayers: Int? = null
     var settingGames: Int? = null
@@ -16,5 +15,5 @@ class Match: Serializable {
     var ended: Boolean = false
     var saved: Boolean = false
 
-    val date: Calendar = Calendar.getInstance()
+    //lateinit var date: Calendar
 }

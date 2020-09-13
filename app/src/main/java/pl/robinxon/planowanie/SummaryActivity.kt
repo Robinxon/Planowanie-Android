@@ -38,10 +38,11 @@ class SummaryActivity: AppCompatActivity() {
         //dodanie listenerów do zmiennych na serwerze
         fireMatch.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val value = dataSnapshot
-                    .getValue<String>()
+                val value = dataSnapshot.getValue<Match>()
                 Log.d("database_match", "Match is: $value")
-                match = decodeJsonToMatch(value!!)
+                if (value != null) {
+                    match = value
+                }
                 setSummary()
             }
 
@@ -142,10 +143,10 @@ class SummaryActivity: AppCompatActivity() {
     private fun loadHistoryFromFire() {
         fireHistory.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val value = dataSnapshot.getValue<String>()
+                val value = dataSnapshot.getValue<List<Match>>()
                 Log.d("database_history", "History is: $value")
                 if(value != null) {
-                    listMatch = decodeJsonToHistory(value)
+                    listMatch = value
                     listMatch = listMatch + match
                     saveHistoryToFire()
                     buttonsPanel.visibility = View.VISIBLE
@@ -160,18 +161,7 @@ class SummaryActivity: AppCompatActivity() {
     }
 
     private fun saveHistoryToFire() {
-        val gson = GsonBuilder().create()
-        fireHistory.setValue(gson.toJson(listMatch))
+        fireHistory.setValue(listMatch)
         match.saved = true
-    }
-
-    private fun decodeJsonToMatch(value: String): Match {
-        val gson = GsonBuilder().create()
-        return gson.fromJson(value, Match::class.java)
-    }
-
-    private fun decodeJsonToHistory(value: String): List<Match> {
-        val gson = GsonBuilder().create()
-        return gson.fromJson<List<Match>>(value, object : TypeToken<List<Match>>() {}.type)
     }
 }

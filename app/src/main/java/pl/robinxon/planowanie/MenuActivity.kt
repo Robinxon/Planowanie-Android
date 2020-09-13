@@ -60,14 +60,13 @@ class MenuActivity: AppCompatActivity() {
         //dodanie listenerów do zmiennych na serwerze
         fireMatch.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val value = dataSnapshot
-                    .getValue<String>()
+                val value = dataSnapshot.getValue<Match>()
                 Log.d("database_test", "Match is: $value")
-                if (!value.isNullOrEmpty()) {
-                    loadedMatch = decodeJsonToMatch(value)
+                if (value != null) {
+                    loadedMatch = value
                     if(!loadedMatch!!.ended) {
                         menuContinue.visibility = View.VISIBLE
-                        menuContinueDescription.text = getString(R.string.saved_match_description, loadedMatch!!.date.get(Calendar.DAY_OF_MONTH).toString(), loadedMatch!!.date.get(Calendar.MONTH).toString(), loadedMatch!!.date.get(Calendar.YEAR).toString(), loadedMatch!!.date.get(Calendar.HOUR_OF_DAY).toString(), String.format("%02d", loadedMatch!!.date.get(Calendar.MINUTE)), loadedMatch!!.playerNames[1], loadedMatch!!.playerNames[2], (loadedMatch!!.playerNames[3] ?: ""), (loadedMatch!!.playerNames[4] ?: ""))
+                       //menuContinueDescription.text = getString(R.string.saved_match_description, loadedMatch!!.date.get(Calendar.DAY_OF_MONTH).toString(), loadedMatch!!.date.get(Calendar.MONTH).toString(), loadedMatch!!.date.get(Calendar.YEAR).toString(), loadedMatch!!.date.get(Calendar.HOUR_OF_DAY).toString(), String.format("%02d", loadedMatch!!.date.get(Calendar.MINUTE)), loadedMatch!!.playerNames[1], loadedMatch!!.playerNames[2], (loadedMatch!!.playerNames[3] ?: ""), (loadedMatch!!.playerNames[4] ?: ""))
                     } else {
                         menuContinue.visibility = View.GONE
                     }
@@ -129,9 +128,4 @@ class MenuActivity: AppCompatActivity() {
         //startActivity(Intent(this, HistoryActivity::class.java))
     }
     //endregion
-
-    private fun decodeJsonToMatch(value: String): Match {
-        val gson = GsonBuilder().create()
-        return gson.fromJson(value, Match::class.java)
-    }
 }

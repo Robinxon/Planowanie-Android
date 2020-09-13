@@ -1,9 +1,9 @@
 package pl.robinxon.planowanie
 
-import java.io.Serializable
+import java.util.*
 
-class Player: Serializable {
+class Player {
     var points: Int = 0
-    var planned = arrayOfNulls<Int>(17)
-    var taken = arrayOfNulls<Int>(17)
+    var planned: MutableList<Int> = ArrayList<Int>(Collections.nCopies(17, null))
+    var taken: MutableList<Int> = ArrayList<Int>(Collections.nCopies(17, null))
 }

@@ -12,6 +12,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_new_game.*
+import java.util.*
 
 class NewGameActivity : AppCompatActivity() {
     //inicjalizacja bazy danych firebase i jej zmiennych
@@ -65,7 +66,7 @@ class NewGameActivity : AppCompatActivity() {
             Toast.makeText(this, resources.getString(R.string.input_all_player_names), Toast.LENGTH_SHORT ).show()
             return
         }
-        //utworzenie klasy meczu
+        //utworzenie obiektu meczu
         val match = Match()
 
         //zapisanie liczby graczy
@@ -89,11 +90,11 @@ class NewGameActivity : AppCompatActivity() {
         }
 
         //zapisanie nazw graczy
-        match.playerNames[1] = editTextPlayer1Name.text?.toString()
-        match.playerNames[2] = editTextPlayer2Name.text?.toString()
+        match.playerNames[1] = editTextPlayer1Name.text.toString()
+        match.playerNames[2] = editTextPlayer2Name.text.toString()
         if(match.settingPlayers == 4) {
-            match.playerNames[3] = editTextPlayer3Name.text?.toString()
-            match.playerNames[4] = editTextPlayer4Name.text?.toString()
+            match.playerNames[3] = editTextPlayer3Name.text.toString()
+            match.playerNames[4] = editTextPlayer4Name.text.toString()
         }
 
         //utworzenie gry
@@ -123,9 +124,11 @@ class NewGameActivity : AppCompatActivity() {
             else -> 0
         }
 
+        //ustawienie daty startu gry
+        //match.date = Calendar.getInstance()
+
         //przekonwertowanie meczu do json i zapisanie w bazie
-        val gson = GsonBuilder().create()
-        fireMatch.setValue(gson.toJson(match))
+        fireMatch.setValue(match)
 
         //otwarcie aktywności gry i zamknięcie poprzednich
         startActivity(Intent(this, GameActivity::class.java))
